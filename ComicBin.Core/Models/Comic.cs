@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using ComicBin.Core.Services;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
