@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComicBin.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ComicBin.Data;
 
 public partial class ComicBinContext : DbContext
 {
+  public DbSet<Comic> Comics { get; set; }
+  public DbSet<Setting> Settings { get; set; }
+
   public ComicBinContext()
   {
   }
