@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\ComicBin.Desktop.WPF\ComicBin.Desktop.WPF.csproj" />
 	  <ProjectReference Include="..\ComicBin.Desktop\ComicBin.Desktop.csproj" />
 	</ItemGroup>
 

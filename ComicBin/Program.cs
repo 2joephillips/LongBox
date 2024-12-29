@@ -8,7 +8,7 @@
         Thread uiThread = new Thread(() =>
         {
             //Initialize the WPF App from UIDesktopApp1
-            var wpfApp = new ComicBin.Desktop.App();
+            var wpfApp = new ComicBin.Desktop.WPF.App();
             wpfApp.InitializeComponent(); // Load App.xaml
             wpfApp.Run(); // Start the WPF app
         })
