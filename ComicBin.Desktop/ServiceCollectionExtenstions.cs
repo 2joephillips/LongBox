@@ -3,8 +3,58 @@ using Microsoft.EntityFrameworkCore;
 using ComicBin.Data;
 using ComicBin.Core;
 using ComicBin.Core.Services;
+using System.Configuration;
+using ComicBin.Desktop.Views;
+using System.Windows.Navigation;
+using System.Windows.Controls;
 
 namespace ComicBin.Desktop;
+
+public interface INavigationService
+{
+  Task NavigateAsync(Type pageType);
+  Task NavigateAsync(Type pageType, object parameter);
+  Task GoBackAsync();
+  bool CanGoBack { get; }
+}
+
+public class NavigationService : INavigationService
+{
+  private readonly Frame _frame;
+
+  public NavigationService(Frame frame)
+  {
+    _frame = frame ?? throw new ArgumentNullException(nameof(frame));
+  }
+
+  public bool CanGoBack => _frame.CanGoBack;
+
+  public async Task NavigateAsync(Type pageType)
+  {
+    if (pageType == null)
+      throw new ArgumentNullException(nameof(pageType));
+
+    var pageInstance = Activator.CreateInstance(pageType);
+    _frame.Navigate(pageInstance);
+  }
+
+  public async Task NavigateAsync(Type pageType, object parameter)
+  {
+    if (pageType == null)
+      throw new ArgumentNullException(nameof(pageType));
+
+    var pageInstance = Activator.CreateInstance(pageType);
+    _frame.Navigate(pageInstance, parameter);
+  }
+
+  public async Task GoBackAsync()
+  {
+    if (CanGoBack)
+    {
+      _frame.GoBack();
+    }
+  }
+}
 
 public static class ServiceCollectionExtenstions
 {
@@ -38,7 +88,18 @@ public static class ServiceCollectionExtenstions
     //services.AddSingleton<MainWindowViewModel>();
     //services.AddTransient<Reader>();
     //services.AddSingleton<ReaderViewModel>();
+    // Register views
 
+
+    services.AddSingleton<INavigationService, NavigationService>(static provider => {
+      var mainWindow = provider.GetRequiredService<MainWindow>();
+      return new NavigationService(mainWindow.MainFrame);
+    });
+    services.AddSingleton<MainWindow>();
+    services.AddTransient<MainWindowViewModel>();
+    services.AddTransient<Home>();
+    services.AddTransient<Settings>();
+    services.AddTransient<About>();
     //services.AddSingleton<StartUpPage>();
     //services.AddSingleton<StartUpViewModel>();
     return services;

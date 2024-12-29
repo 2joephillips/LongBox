@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using ComicBin.Desktop.Views;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +17,24 @@ namespace ComicBin.Desktop
   /// </summary>
   public partial class MainWindow : Window
   {
-    public MainWindow()
+    public MainWindow(MainWindowViewModel viewModel)
     {
       InitializeComponent();
+      //_navigation = navigation;
+    }
+    private void HomePage_Click(object sender, RoutedEventArgs e)
+    {
+      //_navigation.NavigateAsync(typeof(Home));
+    }
+
+    private void SettingsPage_Click(object sender, RoutedEventArgs e)
+    {
+      //_navigation.NavigateAsync(typeof(Settings));
+    }
+
+    private void AboutPage_Click(object sender, RoutedEventArgs e)
+    {
+      //_navigation.NavigateAsync(typeof(About));
     }
   }
 }

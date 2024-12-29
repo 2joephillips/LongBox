@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using System.Configuration;
 using System.IO;
 using System.Reflection;
-using System.Reflection.PortableExecutable;
 
 namespace ComicBin.Desktop;
 

@@ -1,7 +1,7 @@
 ﻿using ComicBin.Core;
 using ComicBin.Data;
+using ComicBin.Desktop.Views;
 using Microsoft.Extensions.Hosting;
-using System.Windows;
 using System.Windows.Navigation;
 
 namespace ComicBin.Desktop
@@ -10,14 +10,13 @@ namespace ComicBin.Desktop
   {
     private readonly IServiceProvider _serviceProvider;
     private readonly DatabaseIntializer _database;
-    //private readonly INavigationWindow _navigationWindow;
+    private readonly INavigationService _navigationService;
 
-    public ApplicationHostService(IServiceProvider serviceProvider, DatabaseIntializer databaseIntializer)
-      //, INavigationWindow navigationWindow)
+    public ApplicationHostService(IServiceProvider serviceProvider, DatabaseIntializer databaseIntializer, INavigationService _navigation)
     {
       _serviceProvider = serviceProvider;
       _database = databaseIntializer;
-      //_navigationWindow = navigationWindow;
+      _navigationService = _navigation;
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
@@ -29,8 +28,6 @@ namespace ComicBin.Desktop
 
     private async Task HandleActivationAsync()
     {
-      var mainWindow = Application.Current.Windows.OfType<MainWindow>();
-
       ApplicationSettings.EnsureAppDataFolderExists();
 
       _database.EnsureCreated();
@@ -45,7 +42,10 @@ namespace ComicBin.Desktop
       //    )!;
 
       //_navigationWindow!.ShowWindow();
-      mainWindow.First().Show();
+      _navigationService.NavigateAsync(typeof(Home));
+      var mainWindow = _serviceProvider.GetService(typeof(MainWindow)) as MainWindow;
+      mainWindow.Show();
+
       //if (ApplicationSettings.IsSetUpComplete)
       //  _navigationWindow.Navigate(typeof(DashboardPage));
       //else

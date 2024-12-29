@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
+        <StackPanel Grid.Column="0" Background="Red">
+            <Button Content="Home"
+                    Click="HomePage_Click" />
+            <Button Content="Settings"
+                    Click="SettingsPage_Click" />
+            <Button Content="About"
+                    Click="AboutPage_Click" />
+        </StackPanel>
+
+        <Frame Grid.Column="1"
+               x:Name="MainFrame" />
     </Grid>
 </Window>
