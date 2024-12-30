@@ -7,6 +7,8 @@ using System.Configuration;
 using ComicBin.Desktop.Views;
 using System.Windows.Navigation;
 using System.Windows.Controls;
+using ComicBin.Desktop.Navigation;
+using ComicBin.Desktop.ViewModels;
 
 namespace ComicBin.Desktop;
 
@@ -90,18 +92,12 @@ public static class ServiceCollectionExtenstions
     //services.AddSingleton<ReaderViewModel>();
     // Register views
 
-
-    services.AddSingleton<INavigationService, NavigationService>(static provider => {
-      var mainWindow = provider.GetRequiredService<MainWindow>();
-      return new NavigationService(mainWindow.MainFrame);
-    });
     services.AddSingleton<MainWindow>();
-    services.AddTransient<MainWindowViewModel>();
-    services.AddTransient<Home>();
-    services.AddTransient<Settings>();
-    services.AddTransient<About>();
-    //services.AddSingleton<StartUpPage>();
-    //services.AddSingleton<StartUpViewModel>();
+    services.AddSingleton<NavigationStore>();
+    services.AddTransient<HomePageViewModel>();
+    services.AddTransient<HomePage>();
+    services.AddTransient<SettingsPageViewModel>();
+    services.AddTransient<SettingsPage>();
     return services;
   }
 

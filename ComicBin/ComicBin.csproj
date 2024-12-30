@@ -8,8 +8,4 @@
 		<AssemblyName>ComicBin</AssemblyName>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\ComicBin.Desktop\ComicBin.Desktop.csproj" />
-	</ItemGroup>
-
 </Project>

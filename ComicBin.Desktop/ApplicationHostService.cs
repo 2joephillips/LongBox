@@ -1,6 +1,9 @@
 ﻿using ComicBin.Core;
 using ComicBin.Data;
+using ComicBin.Desktop.Navigation;
+using ComicBin.Desktop.ViewModels;
 using ComicBin.Desktop.Views;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows.Navigation;
 
@@ -10,13 +13,13 @@ namespace ComicBin.Desktop
   {
     private readonly IServiceProvider _serviceProvider;
     private readonly DatabaseIntializer _database;
-    private readonly INavigationService _navigationService;
+    private readonly NavigationStore _navigationStore;
 
-    public ApplicationHostService(IServiceProvider serviceProvider, DatabaseIntializer databaseIntializer, INavigationService _navigation)
+    public ApplicationHostService(IServiceProvider serviceProvider, DatabaseIntializer databaseIntializer, NavigationStore navigationStore)
     {
       _serviceProvider = serviceProvider;
       _database = databaseIntializer;
-      _navigationService = _navigation;
+      _navigationStore = navigationStore;
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
@@ -37,15 +40,9 @@ namespace ComicBin.Desktop
 
       //ApplicationThemeManager.Apply(ApplicationSettings.CurrentTheme);
 
-      //var _navigationWindow = (
-      //        _serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow
-      //    )!;
-
-      //_navigationWindow!.ShowWindow();
-      _navigationService.NavigateAsync(typeof(Home));
-      var mainWindow = _serviceProvider.GetService(typeof(MainWindow)) as MainWindow;
+      var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
       mainWindow.Show();
-
+      _navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<HomePageViewModel>();
       //if (ApplicationSettings.IsSetUpComplete)
       //  _navigationWindow.Navigate(typeof(DashboardPage));
       //else
