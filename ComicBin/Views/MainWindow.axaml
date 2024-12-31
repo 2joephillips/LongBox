@@ -30,7 +30,7 @@
 							<Label>Home</Label>
 						</StackPanel>
 					</Button>
-					<Button Content="Reading" />
+					<Button Content="Reading" Command="{Binding OpenReaderCommand}" />
 					<Button Content="Library" />
 					<Button Command="{Binding NavigatePreviousCommand}" Content="Back" />
 					<Button Command="{Binding NavigateNextCommand}" Content="Next" />
