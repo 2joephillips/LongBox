@@ -1,0 +1,46 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+		<Border Padding="20"
+				CornerRadius="15" BorderThickness="5"
+				Height="800" Width="1024" Background="{DynamicResource BlackBrush}">
+			
+			<!-- Add Controls for Previewer Here -->
+			<!--<StackPanel Orientation="Horizontal" Spacing="5">
+
+				<TextBlock Text="Hello World" />
+				<Button Content="Hello World" />
+			</StackPanel>-->
+		</Border>
+	</Design.PreviewWith>
+	
+  <!-- Add Resources Here -->
+	<!-- Solid Colors -->
+
+	<Color x:Key="White">#FBFFFE</Color>
+	<Color x:Key="Gray">#7C7C7C</Color>
+	<Color x:Key="Black">#1B1B1E</Color>
+	<Color x:Key="Primary">#4F5D75</Color>
+	<Color x:Key="Secondary">#EF8354</Color>
+
+	<!-- Brushes -->
+	
+	<SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
+	<SolidColorBrush x:Key="GrayBrush" Color="{StaticResource Gray}" />
+	<SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}" />
+	<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}" />
+	<SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}" />
+
+
+	<!-- Gradients -->
+	<LinearGradientBrush x:Key="GradientTop" StartPoint="0%,0%" EndPoint="0%,20%">
+		<GradientStop Color="{StaticResource Black}" Offset="0" />
+		<GradientStop Color="{StaticResource Primary}" Offset="1" />
+	</LinearGradientBrush>
+
+	<RadialGradientBrush x:Key="GradientRadialBlackToSecondary">
+		<GradientStop Color="{StaticResource Black}" Offset="0" />
+		<GradientStop Color="{StaticResource Secondary}" Offset="1" />
+	</RadialGradientBrush>
+
+</ResourceDictionary>
