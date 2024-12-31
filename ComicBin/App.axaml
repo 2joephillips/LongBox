@@ -1,7 +1,7 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:ComicBin"
-             RequestedThemeVariant="Light"
+             RequestedThemeVariant="Dark"
              x:Class="ComicBin.App">
 	<Application.DataTemplates>
 		<local:ViewLocator/>
@@ -16,6 +16,7 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="/Assets/Resources/Colors.axaml"/>
+				<ResourceInclude Source="/Assets/Resources/Fonts.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
