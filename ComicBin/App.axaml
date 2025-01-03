@@ -10,6 +10,7 @@
 	<Application.Styles>
 		<FluentTheme />
 		<StyleInclude Source="/Styles/DefaultStyles.axaml"/>
+		<StyleInclude Source="/Styles/DefaultButtonStyles.axaml"/>
 	</Application.Styles>
 
 	<Application.Resources>

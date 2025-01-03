@@ -11,6 +11,8 @@
 				<Label Content="Body Font" FontFamily="{DynamicResource BodyFont}" FontSize="18"/>
 				<Label Content="Caption Font"  FontFamily="{DynamicResource CaptionFont}" FontSize="14"/>
 				<Label Content="Mono Font" FontFamily="{DynamicResource MonoFont}" FontSize="16"/>
+				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFont}" FontSize="16"/>
+				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFillFont}" FontSize="16"/>
 			</StackPanel>
 		</Border>
 	</Design.PreviewWith>
@@ -20,7 +22,6 @@
 	<FontFamily x:Key="HeaderFont">/Assets/Fonts/Poppins-SemiBold.ttf#Poppins SemiBold</FontFamily>
 	<FontFamily x:Key="BodyFont">/Assets/Fonts/Poppins-Regular.ttf#Poppins</FontFamily>
 	<FontFamily x:Key="CaptionFont">/Assets/Fonts/Poppins-Thin.ttf#Poppins Thin</FontFamily>
-		
-	
-	
+	<FontFamily x:Key="IconFont">/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
+	<FontFamily x:Key="IconFillFont">/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
 </ResourceDictionary>

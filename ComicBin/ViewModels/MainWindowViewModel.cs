@@ -1,12 +1,15 @@
 using DynamicData;
 using ReactiveUI;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reactive.Linq;
 using System.Windows.Input;
 
 namespace ComicBin.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+  
+
+  public class MainWindowViewModel : ViewModelBase
 {
   public Interaction<MainWindowViewModel, ReaderViewModel?> ShowDialog { get; }
   public ICommand OpenReaderCommand { get; }
@@ -15,6 +18,7 @@ public class MainWindowViewModel : ViewModelBase
   {
     // Set current page to first on start up
     _CurrentPage = Pages[0];
+
     // Create Observables which will activate to deactivate our commands based on CurrentPage state
     var canNavNext = this.WhenAnyValue(x => x.CurrentPage.CanNavigateNext);
     var canNavPrev = this.WhenAnyValue(x => x.CurrentPage.CanNavigatePrevious);
@@ -35,7 +39,7 @@ public class MainWindowViewModel : ViewModelBase
           new HomePageViewModel(),
           new SettingsPageViewModel(),
           new AboutPageViewModel()
-      };
+  };
 
   // The default is the first page
   private PageViewModelBase _CurrentPage;
