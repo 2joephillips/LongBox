@@ -1,3 +1,4 @@
+using ComicBin.Data;
 using DynamicData;
 using ReactiveUI;
 using System.Linq;
@@ -7,15 +8,22 @@ using System.Windows.Input;
 
 namespace ComicBin.ViewModels;
 
-  
 
-  public class MainWindowViewModel : ViewModelBase
+
+
+public class MainWindowViewModel : ViewModelBase
 {
   public Interaction<MainWindowViewModel, ReaderViewModel?> ShowDialog { get; }
   public ICommand OpenReaderCommand { get; }
 
-  public MainWindowViewModel()
+  private readonly IDatabaseHelper _databaseHelper;
+
+  public MainWindowViewModel(IDatabaseHelper databaseHelper)
   {
+
+    _databaseHelper = databaseHelper;
+    _databaseHelper.InitializeDatabase();
+
     // Set current page to first on start up
     _CurrentPage = Pages[0];
 
