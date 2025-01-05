@@ -35,8 +35,16 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.3" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.3" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.11" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ComicBin.Data\ComicBin.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Update="Assets\Resources\Fonts.axaml">
@@ -44,10 +52,10 @@
     </AvaloniaResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\HomePageView.axaml.cs">
+    <Compile Update="Views\Pages\HomePageView.axaml.cs">
       <DependentUpon>HomePageView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SettingsPageView.axaml.cs">
+    <Compile Update="Views\Pages\SettingsPageView.axaml.cs">
       <DependentUpon>SettingsPageView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>

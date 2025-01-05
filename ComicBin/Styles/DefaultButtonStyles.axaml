@@ -3,7 +3,7 @@
 	<Design.PreviewWith>
 		<Border Width="200" Height="500">
 			<!-- Add Controls for Previewer Here -->
-			
+
 			<StackPanel Orientation="Vertical">
 				<Button Content="Home"/>
 				<Button Content="Reading" IsEnabled="False"/>
@@ -24,9 +24,9 @@
 					</StackPanel>
 				</Button>
 				<Button Classes="icon-only">
-						<Label
-							Content="&#xE270;"
-							FontFamily="{DynamicResource IconFillFont}" />
+					<Label
+						Content="&#xE270;"
+						FontFamily="{DynamicResource IconFillFont}" />
 				</Button>
 			</StackPanel>
 		</Border>
@@ -38,27 +38,27 @@
 		<Setter Property="VerticalAlignment" Value="Center"/>
 		<Setter Property="HorizontalAlignment" Value="Center"/>
 		<Setter Property="FontFamily" Value="{DynamicResource BodyFont}"/>
+		<Setter Property="Background" Value="{DynamicResource BlackBrush}"/>
 		<Setter Property="CornerRadius" Value="10"/>
+		
+		<Style Selector="^ /template/ ContentPresenter" >
+			<Setter Property="RenderTransform" Value="scale(1)"/>
+
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.1"></BrushTransition>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"></TransformOperationsTransition>
+				</Transitions>
+			</Setter>
+		</Style>
+	</Style>
+
+	<Style Selector="Button:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
 	</Style>
 	
-	<Style Selector="Button /template/ ContentPresenter" >
-		<Setter Property="RenderTransform" Value="scale(1)"/>
-		
-		<Setter Property="Transitions">
-			<Transitions>
-				<BrushTransition Property="Background" Duration="0:0:0.1"></BrushTransition>
-				<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"></TransformOperationsTransition>
-			</Transitions>
-		</Setter>
-	</Style>
-
 	<Style Selector="Button Label /template/ ContentPresenter">
 		<Setter	Property="VerticalAlignment" Value="Center"/>
-	</Style>
-
-	<Style Selector="Button:pointerover">
-		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
-		<Setter Property="Foreground" Value="{DynamicResource WhiteBrush}" />
 	</Style>
 
 	<Style Selector="Button.icon-only /template/ ContentPresenter">
@@ -71,5 +71,5 @@
 		<Setter Property="RenderTransform" Value="scale(1.2)"/>
 		<Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}"> </Setter>
 	</Style>
-	
+
 </Styles>

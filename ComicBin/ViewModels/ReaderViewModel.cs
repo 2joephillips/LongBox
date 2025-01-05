@@ -1,7 +1,8 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
-using ComicBin.Domain;
+using ComicBin.Core.Models;
+using ComicBin.Core.Services;
 using ReactiveUI;
 using System.Collections.Generic;
 using System.IO;
@@ -13,8 +14,8 @@ namespace ComicBin.ViewModels
   public class ReaderViewModel : ViewModelBase
   {
 
-    private Avalonia.Media.Imaging.Bitmap _sourceImage;
-    public Avalonia.Media.Imaging.Bitmap SourceImage
+    private Bitmap _sourceImage;
+    public Bitmap SourceImage
     {
       get => _sourceImage;
       set => this.RaiseAndSetIfChanged(ref _sourceImage, value);
@@ -29,7 +30,7 @@ namespace ComicBin.ViewModels
         var toplevel = TopLevel.GetTopLevel(new ReaderWindow());
         IReadOnlyList<IStorageFile> pickedComic = await toplevel?.StorageProvider?.OpenFilePickerAsync(new FilePickerOpenOptions());
         var comicPath = pickedComic.FirstOrDefault()?.TryGetLocalPath();
-        var comic = new Comic(comicPath);
+        var comic = new Comic(comicPath, new ComicMetadataExtractor(new SystemStorage()));
         var bitmap = CreateImage(comic.CoverImagePaths.HighResPath);
         SourceImage = bitmap;
       });
