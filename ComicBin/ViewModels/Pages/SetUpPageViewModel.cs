@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Platform.Storage;
+using ComicBin.Core;
+using ComicBin.Data;
 using ComicBin.Views;
 using ReactiveUI;
 using System;
@@ -11,18 +13,21 @@ namespace ComicBin.ViewModels.Pages
 {
   public class SetUpPageViewModel : PageViewModelBase
   {
+    private const string FOLDER_NOT_SELECTED = "Folder Not Selected";
+
     public ICommand SelectFolderCommand { get; }
+    public ICommand SaveRootFolder { get; }
 
-
-    private string _rootFolder = "No Root Folder Selected";
+    private string _rootFolder = string.Empty;
     public string RootFolder
   {
       get => _rootFolder;
       set => this.RaiseAndSetIfChanged(ref _rootFolder, value);
     }
 
-    public SetUpPageViewModel()
+    public SetUpPageViewModel(ISettingsRepository settingsRepository)
     {
+      RootFolder = ApplicationSettings.RootFolder ?? FOLDER_NOT_SELECTED;
       SelectFolderCommand = ReactiveCommand.CreateFromTask(async () =>
       {
         var toplevel = TopLevel.GetTopLevel(new MainWindow());
@@ -33,6 +38,12 @@ namespace ComicBin.ViewModels.Pages
         //var comic = new Comic(comicPath, new ComicMetadataExtractor(new SystemStorage()));
         //var bitmap = CreateImage(comic.CoverImagePaths.HighResPath);
         //SourceImage = bitmap;
+      });
+
+      SaveRootFolder = ReactiveCommand.CreateFromTask(async () =>
+      {
+        settingsRepository.InsertOrUpdateSetting(ApplicationSettingKey.RootFolder, RootFolder);
+        ApplicationSettings.UpdateRootFolder(RootFolder);
       });
     }
 

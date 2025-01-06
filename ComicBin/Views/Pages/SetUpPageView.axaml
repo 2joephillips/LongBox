@@ -82,7 +82,8 @@
 						</StackPanel>
 					</Button>
 					<Button Classes="icon-only"
-							ToolTip.Tip="Save Root Folder">
+							ToolTip.Tip="Save Root Folder"
+							Command="{Binding SaveRootFolder}">
 						<Label Content="&#xE248;" FontFamily="{DynamicResource IconFillFont}"/>
 					</Button>
 				</StackPanel>

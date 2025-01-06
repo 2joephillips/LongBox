@@ -48,5 +48,10 @@ public static class ApplicationSettings
       // Optional: Log error details to a log file
     }
   }
+
+  public static void UpdateRootFolder(string newRootFolder)
+  {
+    RootFolder = newRootFolder;
+  }
 }
 
