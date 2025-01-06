@@ -1,10 +1,13 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl
+	 x:Class="ComicBin.Views.Pages.SetUpPageView"
+	xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			xmlns:t="http://schemas.microsoft.com/winfx/2006/xaml/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:vm="using:ComicBin.ViewModels.Pages"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ComicBin.SetUpView">
+            >
 	<Design.DataContext>
 		<vm:SettingsPageViewModel />
 	</Design.DataContext>
@@ -52,7 +55,7 @@
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
-                
+
 				<!--Label, pick button and save button for Root Folder-->
 				<StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Stretch"
@@ -60,26 +63,31 @@
                             Margin="5">
 					<TextBlock
                                   Text="Root Folder: "
-                                  Margin="0,0,15,0"
                                   Width="100"
                                   IsEnabled="False" />
 					<TextBlock Name="SelectedFolderText"
-                                  IsEnabled="False" />
+							   Text="{Binding RootFolder, Mode=OneWay, FallbackValue='C:\\DesignTime\\ExampleFolder'}"
+							   IsEnabled="False" />
 				</StackPanel>
 				<StackPanel Grid.Row="0"
 					Grid.Column="1"
 					Orientation="Horizontal"
 					Margin="5">
 
-					<Button Content="Browse"
-                             
-                               Margin="0,0,10,0" />
-					<Button Content="Save">
-
+					<Button Classes="icon-only"
+							ToolTip.Tip="Select Root Folder"
+							Command="{Binding SelectFolderCommand}">
+						<StackPanel Orientation="Horizontal">
+							<Label Content="&#xE256;" FontFamily="{DynamicResource IconFillFont}"/>
+						</StackPanel>
+					</Button>
+					<Button Classes="icon-only"
+							ToolTip.Tip="Save Root Folder">
+						<Label Content="&#xE248;" FontFamily="{DynamicResource IconFillFont}"/>
 					</Button>
 				</StackPanel>
-				
-				
+
+
 				<!--Configure ComicVine API-->
 				<Button Content="Config Comic-Vine Api"
 					   Grid.Row="1"
@@ -103,13 +111,13 @@
                                   IsEnabled="False" />
 				</StackPanel>
 
-				<Button Content="Start Scanning Files" 
+				<Button Content="Start Scanning Files"
 						HorizontalAlignment="Left"
                         Grid.Row="2"
                         Grid.Column="1" />
 
 
-			
+
 			</Grid>
 		</Border>
 

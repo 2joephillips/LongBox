@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace ComicBin.Views;
+namespace ComicBin.Views.Pages;
 
   public partial class HomePageView : UserControl
   {

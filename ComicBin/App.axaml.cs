@@ -2,22 +2,18 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using ComicBin.Core;
-using ComicBin.Core.Services;
 using ComicBin.Data;
 using ComicBin.Extensions;
 using ComicBin.ViewModels;
-using ComicBin.ViewModels.Pages;
 using ComicBin.Views;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Threading.Tasks;
 
 namespace ComicBin;
 
-public partial class App : Application
+public class App : Application
 {
-  public IServiceProvider Services { get; private set; }
+  private IServiceProvider Services { get; set; } = null!;
 
   public override void Initialize()
   {

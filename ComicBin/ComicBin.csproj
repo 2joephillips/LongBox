@@ -58,5 +58,8 @@
     <Compile Update="Views\Pages\SettingsPageView.axaml.cs">
       <DependentUpon>SettingsPageView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Pages\SetUpPageView.axaml.cs">
+      <DependentUpon>SetUpPageView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

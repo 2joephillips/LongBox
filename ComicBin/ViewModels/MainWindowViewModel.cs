@@ -1,7 +1,9 @@
 using ComicBin.Core;
 using ComicBin.ViewModels.Pages;
 using DynamicData;
+using DynamicData.Kernel;
 using ReactiveUI;
+using System.Linq;
 using System.Windows.Input;
 
 namespace ComicBin.ViewModels;
@@ -16,18 +18,14 @@ public class MainWindowViewModel : ViewModelBase
 
   public MainWindowViewModel(HomePageViewModel homePageViewModel,
                              SettingsPageViewModel settingsPageViewModel,
-                             AboutPageViewModel aboutPageViewModel)
+                             AboutPageViewModel aboutPageViewModel,
+                              SetUpPageViewModel setUpPageViewModel)
   {
     var isSetUpComplete = ApplicationSettings.IsSetUpComplete;
 
-    Pages =
-    [
-            homePageViewModel,
-                settingsPageViewModel,
-                aboutPageViewModel
-    ];
+    Pages = [homePageViewModel, settingsPageViewModel, aboutPageViewModel, setUpPageViewModel];
 
-    _CurrentPage = Pages[0];
+    _CurrentPage = isSetUpComplete ? Pages.First(): Pages.LastOrDefault();
 
     var canNavNext = this.WhenAnyValue(x => x.CurrentPage.CanNavigateNext);
     var canNavPrev = this.WhenAnyValue(x => x.CurrentPage.CanNavigatePrevious);

@@ -29,10 +29,11 @@ public static class ServiceCollectionExtensions
   }
   public static IServiceCollection AddViewModels(this IServiceCollection services)
   {
-    services.AddSingleton<SetUpViewModel>();
+
     services.AddSingleton<HomePageViewModel>();
     services.AddSingleton<SettingsPageViewModel>();
     services.AddSingleton<AboutPageViewModel>();
+    services.AddSingleton<SetUpPageViewModel>();
     services.AddTransient<MainWindowViewModel>();
     return services;
   }

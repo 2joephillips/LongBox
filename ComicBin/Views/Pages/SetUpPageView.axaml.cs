@@ -2,11 +2,11 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace ComicBin;
+namespace ComicBin.Views.Pages;
 
-public partial class SetUpView : UserControl
+public partial class SetUpPageView : UserControl
 {
-    public SetUpView()
+    public SetUpPageView()
     {
         InitializeComponent();
     }
