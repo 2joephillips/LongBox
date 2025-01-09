@@ -12,8 +12,8 @@ namespace ComicBin.Core.Models
 
     public int Id { get; private set; }
     public Guid Guid { get; private set; }
-    public string FilePath { get; private set; }
-    public string FileName { get; private set; }
+    public string FilePath { get;  set; }
+    public string FileName { get;  set; }
     public bool UnableToOpen { get; private set; }
     public bool NeedsMetaData { get; private set; }
     public int? PageCount { get; private set; }
@@ -26,6 +26,7 @@ namespace ComicBin.Core.Models
     public string Title => string.IsNullOrEmpty(MetaData?.Title) ? "Unknown" : MetaData.Title;
     public Bitmap ThumbNailImage => string.IsNullOrEmpty(CoverImagePaths.ThumbnailPath) ? new Bitmap(ImageHandler.DefaultThumbNailImageLocation) : new Bitmap(CoverImagePaths.ThumbnailPath);
 
+    public Comic() { }
     public Comic(string filePath, IComicMetadataExtractor metadataExtractor)
     {
       if (string.IsNullOrEmpty(filePath))

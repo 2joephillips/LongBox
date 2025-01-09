@@ -1,18 +1,25 @@
 <UserControl
-	 x:Class="ComicBin.Views.Pages.SetUpPageView"
+	x:Class="ComicBin.Views.Pages.SetUpPageView"
 	xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			xmlns:t="http://schemas.microsoft.com/winfx/2006/xaml/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            xmlns:vm="using:ComicBin.ViewModels.Pages"
-		xmlns:core="using:ComicBin.Core.Services"
-	 xmlns:models="using:ComicBin.Core.Models"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:t="http://schemas.microsoft.com/winfx/2006/xaml/design"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:vm="using:ComicBin.ViewModels.Pages"
+	xmlns:core="using:ComicBin.Core.Services"
+	xmlns:models="using:ComicBin.Core.Models"
+	mc:Ignorable="d"
+	d:DesignWidth="1440"
+	d:DesignHeight="1024"
             >
 	<Design.DataContext>
 		<vm:SettingsPageViewModel />
 	</Design.DataContext>
+
+	<UserControl.Resources>
+		<Bitmap  x:Key="DefaultImage">/Assets/Resources/default_highres.jpg</Bitmap>
+		<Bitmap  x:Key="DefaultThumbnailImage">/Assets/Resources/default_thumbnail.jpg</Bitmap>
+	</UserControl.Resources>
 
 	<Grid VerticalAlignment="Top" Margin="20">
 		<Grid.RowDefinitions>
@@ -126,25 +133,30 @@
 		</Border>
 
 		<!--  Current Comic Image -->
-		<Border ClipToBounds="True" CornerRadius="10"  Grid.Row="2" Grid.Column="0"  Background="Gainsboro" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+		<Border ClipToBounds="True" CornerRadius="10"  Grid.Row="2" Grid.Column="0"
+				Background="Gainsboro" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				>
 			<Image
                   Stretch="UniformToFill"
                   Grid.Column="0"
                   MaxHeight="600"
                   VerticalAlignment="Top"
-				  Source="{Binding CurrentImagePath, FallbackValue=ares:\Assets\Resources\default_highres.jpg}">
+				  Source="{Binding CurrentImagePath, FallbackValue={StaticResource DefaultImage}}">
 			</Image>
 		</Border>
 
 
 		<!--  Comics List -->
-
-		<ListBox ItemsSource="{Binding ComicCollection}"
-				 Grid.Row="2"
-                 Grid.Column="1"
-                 HorizontalAlignment="Stretch"
-				 SelectionMode="Single"
-				 MaxHeight="600">
+		<ListBox
+			ItemsSource="{Binding ComicCollection, FallbackValue={x:Null}}"
+			Grid.Row="2"
+			Grid.Column="1"
+			HorizontalAlignment="Stretch"
+			SelectionMode="Single"
+			MaxHeight="600">
+			<ListBox.Items>
+				<models:Comic FileName="Batman" FilePath="DC Comics" />
+			</ListBox.Items>
 			<ListBox.ItemTemplate>
 				<DataTemplate DataType="models:Comic">
 					<Grid Margin="8,0">
@@ -157,35 +169,34 @@
 							<ColumnDefinition Width="350" />
 							<ColumnDefinition Width="1*" />
 						</Grid.ColumnDefinitions>
-						<Border Width="40" 
+						<Border Width="40"
 								Height="40"
-								Background="Gainsboro" 		  
+								Background="Gainsboro"
 								Grid.RowSpan="2">
-							<Image
-							 Stretch="UniformToFill"
-							  VerticalAlignment="Stretch"
-							  HorizontalAlignment="Stretch"
-							 
-							  Source="{Binding ThumbNailImage}" />
-						  </Border>
+							<Image Stretch="UniformToFill"
+								   VerticalAlignment="Stretch"
+								   HorizontalAlignment="Stretch"
+								   Source="{Binding ThumbNailImage, FallbackValue={StaticResource DefaultThumbnailImage}}" />
+						</Border>
 
 						<TextBlock Grid.Row="0"
-                                   Grid.Column="1"
-                                   Margin="12,6,0,0"
-                                   FontWeight="Bold"
-                                   Text="{Binding Title, Mode=OneWay, FallbackValue='Comic Title'}" />
+								   Grid.Column="1"
+								   Margin="12,6,0,0"
+								   FontWeight="Bold"
+								   Text="{Binding Title, Mode=OneWay, FallbackValue='Comic Title'}" />
 						<TextBlock Grid.Row="1"
 								   Grid.Column="1"
 								   Margin="12,0,0,6"
 								   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
 						<Button Grid.RowSpan="2"
-                                   Grid.ColumnSpan="2"
-                                   Grid.Column="2"
-                                   Width="50"
-                                   Height="30"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center">
-						</Button>
+								Grid.ColumnSpan="2"
+								Grid.Column="2"
+								Width="150"
+								Height="30"
+								HorizontalAlignment="Right"
+								VerticalAlignment="Center"
+								Content="Details"
+								Command="{Binding DetailsCommand}" />
 					</Grid>
 				</DataTemplate>
 			</ListBox.ItemTemplate>

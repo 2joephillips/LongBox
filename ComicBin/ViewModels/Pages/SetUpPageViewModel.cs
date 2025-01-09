@@ -42,7 +42,11 @@ public class SetUpPageViewModel : PageViewModelBase
 {
   private const string FOLDER_NOT_SELECTED = "Folder Not Selected";
 
-  public ObservableCollection<Comic> ComicCollection { get; } = new ObservableCollection<Comic>();
+  public ObservableCollection<Comic> ComicCollection { get; } = new ObservableCollection<Comic>
+    {
+        new Comic { FileName = "Batman", FilePath = "DC Comics" },
+        new Comic { FileName = "Spider-Man", FilePath = "Marvel Comics" }
+    };
 
   public ICommand SelectFolderCommand { get; }
   public ICommand ScanFolderCommand { get; }
