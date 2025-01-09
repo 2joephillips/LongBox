@@ -1,0 +1,25 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+	  <Border Width="500" Height="500">
+      <!-- Add Controls for Previewer Here -->
+
+			<StackPanel Orientation="Horizontal" Classes="input-button" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+				<TextBox />
+				<Button Classes="icon-only" ToolTip.Tip="Start Scanning Comics"
+					HorizontalAlignment="Left">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+						<Label Content="&#xE1FE;" FontFamily="{DynamicResource IconFont}"/>
+					</StackPanel>
+				</Button>
+			</StackPanel>
+    </Border>
+  </Design.PreviewWith>
+
+  <!-- Add Styles Here -->
+	<Style Selector="StackPanel.input-button /template/ ContentPresenter">
+		<Setter Property="Background" Value="Red"/>
+		<Setter Property="MaxHeight" Value="50"/>
+		<Setter Property="MaxWidth" Value="250"/>
+	</Style>
+</Styles>
