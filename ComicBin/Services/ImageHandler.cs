@@ -1,6 +1,11 @@
-﻿using System.Drawing;
+﻿
+using Avalonia.Media.Imaging;
+using System;
+using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 
 namespace ComicBin.Core.Services;
@@ -11,7 +16,7 @@ public static class ImageHandler
   public static string DefaultMediumResImageLocation { get; internal set; }
   public static string DefaultHighResImageLocation { get; internal set; }
 
-  public static Bitmap DefaultHighResImage => new  Bitmap(DefaultHighResImageLocation);
+  public static Avalonia.Media.Imaging.Bitmap DefaultHighResImage => new  Avalonia.Media.Imaging.Bitmap(DefaultHighResImageLocation);
 
   public static ImageCodecInfo GetEncoder(ImageFormat format) => ImageCodecInfo.GetImageDecoders().FirstOrDefault(codec => codec.FormatID == format.Guid);
 
@@ -34,7 +39,7 @@ public static class ImageHandler
       newHeight = (int)(image.Height * scale);
     }
 
-    var resizedImage = new Bitmap(newWidth, newHeight);
+    var resizedImage = new System.Drawing.Bitmap(newWidth, newHeight);
     using (var graphics = Graphics.FromImage(resizedImage))
     {
       graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
@@ -83,7 +88,7 @@ public static class ImageHandler
 
   private static void CreatePlaceholderImage(int width, int height, Color backgroundColor, string text, string filePath)
   {
-    using var bitmap = new Bitmap(width, height);
+    using var bitmap = new System.Drawing.Bitmap(width, height);
     using var graphics = Graphics.FromImage(bitmap);
 
     // Fill the background

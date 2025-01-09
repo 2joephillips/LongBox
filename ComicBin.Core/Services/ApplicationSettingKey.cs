@@ -1,4 +1,4 @@
-﻿namespace ComicBin.Core;
+﻿namespace ComicBin.Core.Services;
 
 public enum ApplicationSettingKey
 {

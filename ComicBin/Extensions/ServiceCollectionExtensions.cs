@@ -1,5 +1,4 @@
-﻿using ComicBin.Core;
-using ComicBin.Core.Services;
+﻿using ComicBin.Core.Services;
 using ComicBin.Data;
 using ComicBin.ViewModels;
 using ComicBin.ViewModels.Pages;

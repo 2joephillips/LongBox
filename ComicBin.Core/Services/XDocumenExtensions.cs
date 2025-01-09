@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace ComicBin.Core;
+namespace ComicBin.Core.Services;
 
 public static class XDocumenExtensions
 {

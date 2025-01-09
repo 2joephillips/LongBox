@@ -1,4 +1,5 @@
 ﻿using ComicBin.Core.Models;
+using System.Linq;
 
 namespace ComicBin.Data;
 

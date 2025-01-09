@@ -1,6 +1,5 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Platform.Storage;
-using ComicBin.Core;
 using ComicBin.Core.Models;
 using ComicBin.Core.Services;
 using ComicBin.Data;
@@ -43,7 +42,7 @@ public class SetUpPageViewModel : PageViewModelBase
 {
   private const string FOLDER_NOT_SELECTED = "Folder Not Selected";
 
-  public ObservableCollection<Comic> ComicCollection { get; }
+  public ObservableCollection<Comic> ComicCollection { get; } = new ObservableCollection<Comic>();
 
   public ICommand SelectFolderCommand { get; }
   public ICommand ScanFolderCommand { get; }
@@ -84,10 +83,6 @@ public class SetUpPageViewModel : PageViewModelBase
       IReadOnlyList<IStorageFolder> pickedFolder = await toplevel?.StorageProvider?.OpenFolderPickerAsync(new FolderPickerOpenOptions() { AllowMultiple = false });
       var folderPath = pickedFolder.FirstOrDefault()?.TryGetLocalPath();
       RootFolder = folderPath;
-      //var comicPath = pickedComic.FirstOrDefault()?.TryGetLocalPath();
-      //var comic = new Comic(comicPath, new ComicMetadataExtractor(new SystemStorage()));
-      //var bitmap = CreateImage(comic.CoverImagePaths.HighResPath);
-      //SourceImage = bitmap;
     });
 
     SaveRootFolder = ReactiveCommand.CreateFromTask(async () =>

@@ -1,4 +1,4 @@
-using ComicBin.Core;
+using ComicBin.Core.Services;
 using ComicBin.ViewModels.Pages;
 using DynamicData;
 using DynamicData.Kernel;

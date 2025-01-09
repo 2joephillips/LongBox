@@ -1,6 +1,11 @@
 ﻿using ComicBin.Core.Models;
+using ComicBin.Data;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
-namespace ComicBin.Core;
+namespace ComicBin.Core.Services;
 
 public static class ApplicationSettings
 {
@@ -24,7 +29,7 @@ public static class ApplicationSettings
   /// Applies settings from a list of key-value pairs.
   /// </summary>
   /// <param name="settings">A list of settings to apply.</param>
-  public static void Apply(List<Setting> settings)
+  public static void Apply(List<SettingEntity> settings)
   {
     if (settings == null || settings.Count == 0)
     {

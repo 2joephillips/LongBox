@@ -6,7 +6,8 @@
 			xmlns:t="http://schemas.microsoft.com/winfx/2006/xaml/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:vm="using:ComicBin.ViewModels.Pages"
-			xmlns:models="using:ComicBin.Core.Models"
+		xmlns:core="using:ComicBin.Core.Services"
+	 xmlns:models="using:ComicBin.Core.Models"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
             >
 	<Design.DataContext>
@@ -45,7 +46,8 @@
                 CornerRadius="15"
                 BorderBrush="{DynamicResource PrimaryBrush}"
 			    BorderThickness="1.7"
-				Padding="10">
+				Padding="10"
+				Margin="0,10">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="1*" />
@@ -124,13 +126,14 @@
 		</Border>
 
 		<!--  Current Comic Image -->
-		<Border ClipToBounds="True" CornerRadius="10"  Grid.Row="2">
+		<Border ClipToBounds="True" CornerRadius="10"  Grid.Row="2" Grid.Column="0"  Background="Gainsboro" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 			<Image
-				  Stretch="UniformToFill"
-				  Grid.Column="0"
-				  Source="{Binding CurrentImagePath, FallbackValue='C:\Users\Josep\AppData\Local\ComicRack\5fb0c83f-ce38-4ac8-a1b4-8269d1c91ec2_highres.jpg'}"
-				  MaxHeight="600"
-				  VerticalAlignment="Top" />
+                  Stretch="UniformToFill"
+                  Grid.Column="0"
+                  MaxHeight="600"
+                  VerticalAlignment="Top"
+				  Source="{Binding CurrentImagePath, FallbackValue=ares:\Assets\Resources\default_highres.jpg}">
+			</Image>
 		</Border>
 
 
@@ -154,13 +157,18 @@
 							<ColumnDefinition Width="350" />
 							<ColumnDefinition Width="1*" />
 						</Grid.ColumnDefinitions>
-						<Image
-                                  Width="40"
-                                  Height="40"
-                                  Stretch="Fill"
-                                  Grid.RowSpan="2"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center" />
+						<Border Width="40" 
+								Height="40"
+								Background="Gainsboro" 		  
+								Grid.RowSpan="2">
+							<Image
+							 Stretch="UniformToFill"
+							  VerticalAlignment="Stretch"
+							  HorizontalAlignment="Stretch"
+							 
+							  Source="{Binding ThumbNailImage}" />
+						  </Border>
+
 						<TextBlock Grid.Row="0"
                                    Grid.Column="1"
                                    Margin="12,6,0,0"

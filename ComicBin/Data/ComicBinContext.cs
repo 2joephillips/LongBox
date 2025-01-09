@@ -1,6 +1,8 @@
 ﻿using ComicBin.Core.Models;
 using ComicBin.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
 
 namespace ComicBin.Data;
 

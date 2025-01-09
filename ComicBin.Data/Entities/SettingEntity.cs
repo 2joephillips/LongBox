@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ComicBin.Data;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ComicBin.Core.Models;
 
 [Table("Settings")]
-public class Setting
+public class SettingEntity
 {
   [Key]
   [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

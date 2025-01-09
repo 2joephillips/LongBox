@@ -1,7 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using ComicBin.Core;
+using ComicBin.Core.Services;
 using ComicBin.Data;
 using ComicBin.Extensions;
 using ComicBin.ViewModels;
@@ -24,7 +24,6 @@ public class App : Application
       .AddDatabase()
       .AddServices()
       .AddViewModels();
-
     Services = servicesCollection.BuildServiceProvider();
   }
 
@@ -37,7 +36,7 @@ public class App : Application
       databaseHandler.EnsureCreated();
       var settings = databaseHandler.InitializeSettings().Result;
       ApplicationSettings.Apply(settings);
-
+      ImageHandler.CreateDefaultImages(ApplicationSettings.AppDataPath);
       desktop.MainWindow = new MainWindow
       {
         DataContext = Services.GetRequiredService<MainWindowViewModel>()
