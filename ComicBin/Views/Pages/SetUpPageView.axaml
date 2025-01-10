@@ -28,10 +28,6 @@
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="1*" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
 
 		<!--Header-->
 		<StackPanel Orientation="Vertical"
@@ -47,7 +43,7 @@
                        Text="ComicBin helps to manage your comics effortlessly." />
 		</StackPanel>
 
-		<!--Folder Selection  Scan Button and API Config-->
+		<!--Configuration -->
 		<Border Grid.Row="1"
                 Grid.ColumnSpan="2"
                 CornerRadius="15"
@@ -132,75 +128,78 @@
 			</Grid>
 		</Border>
 
-		<!--  Current Comic Image -->
-		<Border ClipToBounds="True" CornerRadius="10"  Grid.Row="2" Grid.Column="0"
-				Background="Gainsboro" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-				>
-			<Image
-                  Stretch="UniformToFill"
-                  Grid.Column="0"
-                  MaxHeight="600"
-                  VerticalAlignment="Top"
-				  Source="{Binding CurrentImagePath, FallbackValue={StaticResource DefaultImage}}">
-			</Image>
-		</Border>
-
-
-		<!--  Comics List -->
-		<ListBox
-			ItemsSource="{Binding ComicCollection, FallbackValue={x:Null}}"
+		<!-- Scanning UI-->
+		<UniformGrid
+			Columns="2"
 			Grid.Row="2"
-			Grid.Column="1"
-			HorizontalAlignment="Stretch"
-			SelectionMode="Single"
-			MaxHeight="600">
-			<ListBox.Items>
-				<models:Comic FileName="Batman" FilePath="DC Comics" />
-			</ListBox.Items>
-			<ListBox.ItemTemplate>
-				<DataTemplate DataType="models:Comic">
-					<Grid Margin="8,0">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="*" />
-							<RowDefinition Height="*" />
-						</Grid.RowDefinitions>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50" />
-							<ColumnDefinition Width="350" />
-							<ColumnDefinition Width="1*" />
-						</Grid.ColumnDefinitions>
-						<Border Width="40"
+			Background="Gray"
+			IsVisible="{Binding IsScanning, FallbackValue=True}">
+			<Border ClipToBounds="True"
+					CornerRadius="10"
+					Margin="10">
+				<Image
+					  Stretch="UniformToFill"
+					  Grid.Column="0"
+					  MaxHeight="600"
+					  Source="{Binding CurrentImagePath, FallbackValue={StaticResource DefaultImage}}">
+				</Image>
+			</Border>
+			<ListBox
+				CornerRadius="10"
+				ItemsSource="{Binding ComicCollection, FallbackValue={x:Null}}"
+				SelectionMode="Single"
+				MaxHeight="600"
+				Margin="10">
+				<ListBox.Items>
+					<models:Comic FileName="Batman" FilePath="DC Comics" />
+				</ListBox.Items>
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="models:Comic">
+						<Grid Margin="8,0">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="50" />
+								<ColumnDefinition Width="350" />
+								<ColumnDefinition Width="1*" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Grid.RowSpan="2"
+								Width="40"
 								Height="40"
 								Background="Gainsboro"
-								Grid.RowSpan="2">
-							<Image Stretch="UniformToFill"
-								   VerticalAlignment="Stretch"
-								   HorizontalAlignment="Stretch"
-								   Source="{Binding ThumbNailImage, FallbackValue={StaticResource DefaultThumbnailImage}}" />
-						</Border>
+								CornerRadius="10"
+								ClipToBounds="True">
+								<Image Stretch="UniformToFill"
+									   VerticalAlignment="Stretch"
+									   HorizontalAlignment="Stretch"
+									   Source="{Binding ThumbNailImage, FallbackValue={StaticResource DefaultThumbnailImage}}" />
+							</Border>
 
-						<TextBlock Grid.Row="0"
-								   Grid.Column="1"
-								   Margin="12,6,0,0"
-								   FontWeight="Bold"
-								   Text="{Binding Title, Mode=OneWay, FallbackValue='Comic Title'}" />
-						<TextBlock Grid.Row="1"
-								   Grid.Column="1"
-								   Margin="12,0,0,6"
-								   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
-						<Button Grid.RowSpan="2"
-								Grid.ColumnSpan="2"
-								Grid.Column="2"
-								Width="150"
-								Height="30"
-								HorizontalAlignment="Right"
-								VerticalAlignment="Center"
-								Content="Details"
-								Command="{Binding DetailsCommand}" />
-					</Grid>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
+							<TextBlock Grid.Row="0"
+									   Grid.Column="1"
+									   Margin="12,6,0,0"
+									   FontWeight="Bold"
+									   Text="{Binding Title, Mode=OneWay, FallbackValue='Comic Title'}" />
+							<TextBlock Grid.Row="1"
+									   Grid.Column="1"
+									   Margin="12,0,0,6"
+									   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
+							<Button Grid.RowSpan="2"
+									Grid.ColumnSpan="2"
+									Grid.Column="2"
+									HorizontalAlignment="Right"
+									VerticalAlignment="Center"
+									Command="{Binding DetailsCommand}">
+								<TextBlock Text="Details" />
+							</Button>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</UniformGrid>
 
 	</Grid>
 

@@ -1,12 +1,14 @@
-﻿
-using Avalonia.Media.Imaging;
+﻿using SixLabors.Fonts;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 using System;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Reflection;
+using System.Numerics;
+
 
 namespace ComicBin.Core.Services;
 
@@ -16,54 +18,32 @@ public static class ImageHandler
   public static string DefaultMediumResImageLocation { get; internal set; }
   public static string DefaultHighResImageLocation { get; internal set; }
 
-  public static Avalonia.Media.Imaging.Bitmap DefaultHighResImage => new  Avalonia.Media.Imaging.Bitmap(DefaultHighResImageLocation);
+  public static Avalonia.Media.Imaging.Bitmap DefaultHighResImage => new Avalonia.Media.Imaging.Bitmap(DefaultHighResImageLocation);
 
-  public static ImageCodecInfo GetEncoder(ImageFormat format) => ImageCodecInfo.GetImageDecoders().FirstOrDefault(codec => codec.FormatID == format.Guid);
-
-  public static Image ResizeImage(Image image, int maxWidth = 300, int maxHeight = 300)
+  public static Image<Rgba32> ResizeImage(Image<Rgba32> image, int maxWidth = 300, int maxHeight = 300)
   {
     if (image == null)
       throw new ArgumentNullException(nameof(image));
 
-    int newWidth = image.Width;
-    int newHeight = image.Height;
-
-    // Maintain aspect ratio
-    if (image.Width > maxWidth || image.Height > maxHeight)
+    var options = new ResizeOptions
     {
-      var widthRatio = (double)maxWidth / image.Width;
-      var heightRatio = (double)maxHeight / image.Height;
-      var scale = Math.Min(widthRatio, heightRatio);
+      Mode = ResizeMode.Max,
+      Size = new SixLabors.ImageSharp.Size(maxWidth, maxHeight)
+    };
 
-      newWidth = (int)(image.Width * scale);
-      newHeight = (int)(image.Height * scale);
-    }
-
-    var resizedImage = new System.Drawing.Bitmap(newWidth, newHeight);
-    using (var graphics = Graphics.FromImage(resizedImage))
-    {
-      graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-      graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-      graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-
-      graphics.DrawImage(image, 0, 0, newWidth, newHeight);
-    }
-
-    return resizedImage;
+    image.Mutate(x => x.Resize(options));
+    return image;
   }
 
-  public static void SaveResizedImage(Image image, string filePath, int maxWidth, int maxHeight, long quality)
+
+  public static void SaveResizedImage(Image<Rgba32> image, string filePath, int maxWidth, int maxHeight, int quality)
   {
     // Calculate new dimensions while maintaining aspect ratio
     var resizedImage = ResizeImage(image, maxWidth, maxHeight);
-    // Save the resized image with the specified quality
-    var jpegEncoder = GetEncoder(ImageFormat.Jpeg);
-    var encoderParameters = new EncoderParameters(1)
-    {
-      Param = { [0] = new EncoderParameter(Encoder.Quality, quality) }
-    };
 
-    resizedImage.Save(filePath, jpegEncoder, encoderParameters);
+    // Save the resized image with the specified quality
+    var encoder = new JpegEncoder { Quality = quality };
+    resizedImage.Save(filePath, encoder);
   }
 
   public static void CreateDefaultImages(string appDataPath)
@@ -77,44 +57,32 @@ public static class ImageHandler
     DefaultThumbNailImageLocation = Path.Combine(appDataPath, "default_thumbnail.jpg");
     DefaultMediumResImageLocation = Path.Combine(appDataPath, "default_medium.jpg");
     DefaultHighResImageLocation = Path.Combine(appDataPath, "default_highres.jpg");
-    
+
     // Create and save the default images
-    CreatePlaceholderImage(thumbnailSize.Width, thumbnailSize.Height, Color.Gray, "Thumbnail", DefaultThumbNailImageLocation);
-    CreatePlaceholderImage(mediumSize.Width, mediumSize.Height, Color.LightGray, "Medium", DefaultMediumResImageLocation);
-    CreatePlaceholderImage(highResSize.Width, highResSize.Height, Color.DarkGray, "High Res", DefaultHighResImageLocation);
-
+    CreatePlaceholderImage(thumbnailSize.Width, thumbnailSize.Height, SixLabors.ImageSharp.Color.Grey, "Thumbnail", DefaultThumbNailImageLocation);
+    CreatePlaceholderImage(mediumSize.Width, mediumSize.Height, SixLabors.ImageSharp.Color.LightGray, "Medium", DefaultMediumResImageLocation);
+    CreatePlaceholderImage(highResSize.Width, highResSize.Height, SixLabors.ImageSharp.Color.DarkGray, "High Res", DefaultHighResImageLocation);
   }
-
-
-  private static void CreatePlaceholderImage(int width, int height, Color backgroundColor, string text, string filePath)
+  private static void CreatePlaceholderImage(int width, int height, SixLabors.ImageSharp.Color backgroundColor, string text, string filePath)
   {
-    using var bitmap = new System.Drawing.Bitmap(width, height);
-    using var graphics = Graphics.FromImage(bitmap);
-
-    // Fill the background
-    using var backgroundBrush = new SolidBrush(backgroundColor);
-    graphics.FillRectangle(backgroundBrush, 0, 0, width, height);
-
-    // Add text to the center
-    using var font = new Font("Arial", 16, FontStyle.Bold);
-    using var textBrush = new SolidBrush(Color.White);
-    var textSize = graphics.MeasureString(text, font);
-    var textPosition = new PointF((width - textSize.Width) / 2, (height - textSize.Height) / 2);
-    graphics.DrawString(text, font, textBrush, textPosition);
-
-    // Save the image as a JPEG
-    var jpegEncoder = GetEncoder(ImageFormat.Jpeg);
-    var encoderParameters = new EncoderParameters(1)
+    using var image = new Image<Rgba32>(width, height);
+    image.Mutate(ctx =>
     {
-      Param = { [0] = new EncoderParameter(Encoder.Quality, 90L) } // High quality for default placeholders
-    };
-    bitmap.Save(filePath, jpegEncoder, encoderParameters);
+      ctx.BackgroundColor(backgroundColor);
+      var font = SystemFonts.CreateFont("Arial", 16, SixLabors.Fonts.FontStyle.Bold);
+      Vector2 center = new Vector2(image.Width / 2, 10); //center horizontally, 10px down 
+      ctx.DrawText(text, font, SixLabors.ImageSharp.Color.Black, new PointF(width / 2, height / 2));
+
+   
+    });
+
+    var encoder = new JpegEncoder { Quality = 90 };
+    image.Save(filePath, encoder);
   }
 
-
-  public static Image GetImageFromZipArchiveEntry(ZipArchiveEntry entry)
+  public static Image<Rgba32> GetImageFromZipArchiveEntry(ZipArchiveEntry entry)
   {
     using var entryStream = entry.Open();
-    return Image.FromStream(entryStream); // Load the image into memory
+    return Image.Load<Rgba32>(entryStream); // Load the image into memory
   }
 }

@@ -10,23 +10,17 @@ namespace ComicBin.Core.Models
   {
     private readonly IComicMetadataExtractor _metadataExtractor;
 
-    public int Id { get; private set; }
-    public Guid Guid { get; private set; }
-    public string FilePath { get;  set; }
-    public string FileName { get;  set; }
-    public bool UnableToOpen { get; private set; }
-    public bool NeedsMetaData { get; private set; }
-    public int? PageCount { get; private set; }
-    public (string ThumbnailPath, string MediumPath, string HighResPath) CoverImagePaths { get; private set; }
-    public MetaData MetaData { get; private set; }
-
     // Not persisted in DB
     public string GetHighResImagePath => CoverImagePaths.HighResPath;
     public string Publisher => MetaData?.Publisher ?? "Unknown";
     public string Title => string.IsNullOrEmpty(MetaData?.Title) ? "Unknown" : MetaData.Title;
     public Bitmap ThumbNailImage => string.IsNullOrEmpty(CoverImagePaths.ThumbnailPath) ? new Bitmap(ImageHandler.DefaultThumbNailImageLocation) : new Bitmap(CoverImagePaths.ThumbnailPath);
 
-    public Comic() { }
+    public Comic()
+    {
+      _metadataExtractor = null!;
+    }
+
     public Comic(string filePath, IComicMetadataExtractor metadataExtractor)
     {
       if (string.IsNullOrEmpty(filePath))

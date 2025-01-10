@@ -1,5 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using System;
 using System.IO;
 using System.IO.Compression;
 
@@ -32,12 +33,12 @@ public class SystemStorage : ISystemStorage
     var highResFilePath = Path.Combine(ApplicationSettings.AppDataPath, highResFileName);
 
     using var entryStream = coverImage.Open();
-    using var image = Image.FromStream(entryStream); // Load the image into memory
+    using var image = Image.Load<Rgba32>(entryStream); // Load the image into memory
 
     // Generate and save the three sizes
-    ImageHandler.SaveResizedImage(image, thumbnailFilePath, 150, 150, 75L); // Thumbnail
-    ImageHandler.SaveResizedImage(image, mediumFilePath, 300, 300, 85L);    // Medium
-    ImageHandler.SaveResizedImage(image, highResFilePath, 1024, 1024, 90L); // High resolution
+    ImageHandler.SaveResizedImage(image, thumbnailFilePath, 150, 150, 75); // Thumbnail
+    ImageHandler.SaveResizedImage(image, mediumFilePath, 300, 300, 85);    // Medium
+    ImageHandler.SaveResizedImage(image, highResFilePath, 1024, 1024, 90); // High resolution
 
     return (thumbnailFilePath, mediumFilePath, highResFilePath);
   }
