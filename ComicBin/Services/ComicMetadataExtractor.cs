@@ -4,12 +4,14 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Xml.Linq;
+using ComicBin.Data.Entities;
+using ComicBin.Services;
 
 namespace ComicBin.Core.Services;
 
 public interface IComicMetadataExtractor
 {
-  (bool needsMetaData, MetaData metaData, int pageCount, (string ThumbnailPath, string MediumPath, string HighResPath) coverImagePath) ExtractMetadata(string filePath);
+  (bool needsMetaData, MetaData? metaData, int pageCount, (string ThumbnailPath, string MediumPath, string HighResPath) coverImagePath) ExtractMetadata(string filePath);
 }
 
 public class ComicMetadataExtractor : IComicMetadataExtractor
@@ -22,7 +24,7 @@ public class ComicMetadataExtractor : IComicMetadataExtractor
     _storage = storage ?? throw new ArgumentNullException(nameof(storage));
   }
 
-  public (bool needsMetaData, MetaData metaData, int pageCount, (string ThumbnailPath, string MediumPath, string HighResPath) coverImagePath) ExtractMetadata(string filePath)
+  public (bool needsMetaData, MetaData? metaData, int pageCount, (string ThumbnailPath, string MediumPath, string HighResPath) coverImagePath) ExtractMetadata(string filePath)
   {
     var needsMetaData = false;
     if (!filePath.EndsWith(".cbz", StringComparison.OrdinalIgnoreCase))
@@ -43,7 +45,7 @@ public class ComicMetadataExtractor : IComicMetadataExtractor
     int pageCount = archive.Entries
           .Count(entry => imageExtensions.Any(ext => entry.FullName.EndsWith(ext, StringComparison.OrdinalIgnoreCase)));
 
-    MetaData metaData = null;
+    MetaData? metaData = null;
 
     if (comicXML != null)
     {

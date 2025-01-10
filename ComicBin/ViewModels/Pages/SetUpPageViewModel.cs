@@ -17,6 +17,7 @@ using Avalonia;
 using Avalonia.Threading;
 using Avalonia.Media.Imaging;
 using System.Collections.ObjectModel;
+using Avalonia.Controls.ApplicationLifetimes;
 
 namespace ComicBin.ViewModels.Pages;
 
@@ -62,7 +63,7 @@ public class SetUpPageViewModel : PageViewModelBase
     set => this.RaiseAndSetIfChanged(ref _rootFolder, value);
   }
 
-  private Bitmap _currentImagePath = ImageHandler.DefaultHighResImageLocation == null ? null : new Bitmap(ImageHandler.DefaultHighResImageLocation);
+  private Bitmap _currentImagePath = ApplicationSettings.DefaultHighResImage;
   public Bitmap CurrentImagePath
   {
     get => _currentImagePath;
@@ -84,14 +85,14 @@ public class SetUpPageViewModel : PageViewModelBase
     SelectFolderCommand = ReactiveCommand.CreateFromTask(async () =>
     {
       var toplevel = TopLevel.GetTopLevel(new MainWindow());
-      IReadOnlyList<IStorageFolder> pickedFolder = await toplevel?.StorageProvider?.OpenFolderPickerAsync(new FolderPickerOpenOptions() { AllowMultiple = false });
+      var pickedFolder = await toplevel?.StorageProvider?.OpenFolderPickerAsync(new FolderPickerOpenOptions() { AllowMultiple = false })!;
       var folderPath = pickedFolder.FirstOrDefault()?.TryGetLocalPath();
-      RootFolder = folderPath;
+      RootFolder = folderPath ?? string.Empty;
     });
 
     SaveRootFolder = ReactiveCommand.CreateFromTask(async () =>
     {
-      settingsRepository.InsertOrUpdateSetting(ApplicationSettingKey.RootFolder, RootFolder);
+      await settingsRepository.InsertOrUpdateSetting(ApplicationSettingKey.RootFolder, RootFolder);
       ApplicationSettings.UpdateRootFolder(RootFolder);
     });
 
@@ -131,7 +132,7 @@ public class SetUpPageViewModel : PageViewModelBase
           }
         }
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         // Handle exception
       }

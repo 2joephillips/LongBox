@@ -1,9 +1,10 @@
-﻿using ComicBin.Core.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using ComicBin.Core.Models;
+using ComicBin.Services;
 
-namespace ComicBin.Core.Models;
+namespace ComicBin.Data.Entities;
 
 public class MetaData
 {
@@ -21,9 +22,8 @@ public class MetaData
   public int? PageCount { get; set; }
   public string Characters { get; set; }
   public string ScanInformation { get; set; }
-  public List<PageMetaData> Pages { get; set; } = new List<PageMetaData>();
-
-
+  public List<PageMetaData> Pages { get; set; }
+  
   public MetaData(XDocument doc)
   {
     Title = doc.GetRootElement("Title");
@@ -37,7 +37,10 @@ public class MetaData
     PageCount = doc.GetRootElementAsInt("PageCount");
     Characters = doc.GetRootElement("Characters");
     ScanInformation = doc.GetRootElement("ScanInformation");
-    Pages = doc.GetElement("Pages").Elements("Page").Select(p => new PageMetaData(p)).ToList();
+    Penciller = doc.GetRootElement("Penciller");
+    Inker = doc.GetRootElement("Inker");
+    Web = doc.GetRootElement("Web");
+    Pages = doc.GetElement("Pages")?.Elements("Page").Select(p => new PageMetaData(p)).ToList() ?? [];
 
   }
 

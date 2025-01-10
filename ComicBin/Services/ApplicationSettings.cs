@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Avalonia.Media.Imaging;
 
 namespace ComicBin.Core.Services;
 
@@ -12,7 +13,15 @@ public static class ApplicationSettings
   public static bool IsSetUpComplete { get; private set; } = false;
   public static string? RootFolder { get; private set; }
   public static string AppDataPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ComicRack");
+  
+  public static string DefaultThumbNailImageLocation =>  Path.Combine(AppDataPath, "default_thumbnail.jpg");
+  public static string DefaultMediumResImageLocation => Path.Combine(AppDataPath,"default_medium.jpg");
+  public static string DefaultHighResImageLocation => Path.Combine(AppDataPath,  "default_highres.jpg");
+  
+  public static Bitmap DefaultHighResImage => new (DefaultHighResImageLocation);
+  public static Bitmap DefaultThumbNailImage => new (DefaultThumbNailImageLocation);
   public static string DatabasePath => Path.Combine(AppDataPath, "comics.db");
+
 
   /// <summary>
   /// Ensures that the application data folder exists.

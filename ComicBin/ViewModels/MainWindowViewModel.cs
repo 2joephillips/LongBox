@@ -4,17 +4,19 @@ using DynamicData;
 using DynamicData.Kernel;
 using ReactiveUI;
 using System.Linq;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ComicBin.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-  public Interaction<MainWindowViewModel, ReaderViewModel?> ShowDialog { get; }
+
   public ICommand OpenReaderCommand { get; }
 
   private readonly PageViewModelBase[] Pages;
-  private PageViewModelBase _CurrentPage;
+  private PageViewModelBase? _CurrentPage;
 
   public MainWindowViewModel(HomePageViewModel homePageViewModel,
                              SettingsPageViewModel settingsPageViewModel,
@@ -27,20 +29,26 @@ public class MainWindowViewModel : ViewModelBase
 
     _CurrentPage = isSetUpComplete ? Pages.First(): Pages.LastOrDefault();
 
-    var canNavNext = this.WhenAnyValue(x => x.CurrentPage.CanNavigateNext);
-    var canNavPrev = this.WhenAnyValue(x => x.CurrentPage.CanNavigatePrevious);
+
+
+    var canNavNext = this.WhenAnyValue(x => x.CurrentPage).Select(currentPage => currentPage is { CanNavigateNext: true });
+    var canNavPrev = this.WhenAnyValue(x => x.CurrentPage).Select(currentPage => currentPage is { CanNavigatePrevious: true }); 
 
     NavigateNextCommand = ReactiveCommand.Create(NavigateNext, canNavNext);
     NavigatePreviousCommand = ReactiveCommand.Create(NavigatePrevious, canNavPrev);
 
     OpenReaderCommand = ReactiveCommand.CreateFromTask(async () =>
     {
-      var window = new ReaderWindow() { DataContext = new ReaderViewModel() };
-      window.Show();
+      await Task.Run(() =>
+      {
+        var window = new ReaderWindow() { DataContext = new ReaderViewModel() };
+        window.Show();
+      });
+
     });
   }
 
-  public PageViewModelBase CurrentPage
+  public PageViewModelBase? CurrentPage
   {
     get { return _CurrentPage; }
     private set { this.RaiseAndSetIfChanged(ref _CurrentPage, value); }

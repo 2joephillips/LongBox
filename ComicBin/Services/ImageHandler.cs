@@ -14,12 +14,7 @@ namespace ComicBin.Core.Services;
 
 public static class ImageHandler
 {
-  public static string DefaultThumbNailImageLocation { get; internal set; }
-  public static string DefaultMediumResImageLocation { get; internal set; }
-  public static string DefaultHighResImageLocation { get; internal set; }
-
-  public static Avalonia.Media.Imaging.Bitmap DefaultHighResImage => new Avalonia.Media.Imaging.Bitmap(DefaultHighResImageLocation);
-
+  
   public static Image<Rgba32> ResizeImage(Image<Rgba32> image, int maxWidth = 300, int maxHeight = 300)
   {
     if (image == null)
@@ -52,16 +47,12 @@ public static class ImageHandler
     var thumbnailSize = (Width: 150, Height: 150);
     var mediumSize = (Width: 300, Height: 300);
     var highResSize = (Width: 1024, Height: 1024);
-
-    // Define file names
-    DefaultThumbNailImageLocation = Path.Combine(appDataPath, "default_thumbnail.jpg");
-    DefaultMediumResImageLocation = Path.Combine(appDataPath, "default_medium.jpg");
-    DefaultHighResImageLocation = Path.Combine(appDataPath, "default_highres.jpg");
+    
 
     // Create and save the default images
-    CreatePlaceholderImage(thumbnailSize.Width, thumbnailSize.Height, SixLabors.ImageSharp.Color.Grey, "Thumbnail", DefaultThumbNailImageLocation);
-    CreatePlaceholderImage(mediumSize.Width, mediumSize.Height, SixLabors.ImageSharp.Color.LightGray, "Medium", DefaultMediumResImageLocation);
-    CreatePlaceholderImage(highResSize.Width, highResSize.Height, SixLabors.ImageSharp.Color.DarkGray, "High Res", DefaultHighResImageLocation);
+    CreatePlaceholderImage(thumbnailSize.Width, thumbnailSize.Height, SixLabors.ImageSharp.Color.Grey, "Thumbnail", ApplicationSettings.DefaultThumbNailImageLocation);
+    CreatePlaceholderImage(mediumSize.Width, mediumSize.Height, SixLabors.ImageSharp.Color.LightGray, "Medium", ApplicationSettings.DefaultMediumResImageLocation);
+    CreatePlaceholderImage(highResSize.Width, highResSize.Height, SixLabors.ImageSharp.Color.DarkGray, "High Res", ApplicationSettings.DefaultHighResImageLocation);
   }
   private static void CreatePlaceholderImage(int width, int height, SixLabors.ImageSharp.Color backgroundColor, string text, string filePath)
   {

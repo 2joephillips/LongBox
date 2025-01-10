@@ -14,7 +14,7 @@ namespace ComicBin.Core.Models
     public string GetHighResImagePath => CoverImagePaths.HighResPath;
     public string Publisher => MetaData?.Publisher ?? "Unknown";
     public string Title => string.IsNullOrEmpty(MetaData?.Title) ? "Unknown" : MetaData.Title;
-    public Bitmap ThumbNailImage => string.IsNullOrEmpty(CoverImagePaths.ThumbnailPath) ? new Bitmap(ImageHandler.DefaultThumbNailImageLocation) : new Bitmap(CoverImagePaths.ThumbnailPath);
+    public Bitmap ThumbNailImage => string.IsNullOrEmpty(CoverImagePaths.ThumbnailPath) ? ApplicationSettings.DefaultThumbNailImage  : new Bitmap(CoverImagePaths.ThumbnailPath);
 
     public Comic()
     {
@@ -48,9 +48,10 @@ namespace ComicBin.Core.Models
     {
       try
       {
-        (bool needsMetaData, MetaData metaData, int imageCount, (string ThumbnailPath, string MediumPath, string HighResPath) coverPaths) = _metadataExtractor.ExtractMetadata(FilePath);
+        (bool needsMetaData, MetaData? metaData, int imageCount, (string ThumbnailPath, string MediumPath, string HighResPath) coverPaths) = _metadataExtractor.ExtractMetadata(FilePath);
         NeedsMetaData = needsMetaData;
-        MetaData = metaData;
+        if(metaData != null)
+          MetaData = metaData;
         CoverImagePaths = coverPaths;
         PageCount = imageCount;
         UnableToOpen = false;

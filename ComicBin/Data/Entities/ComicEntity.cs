@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace ComicBin.Data.Entities;
 
@@ -17,16 +18,18 @@ public class ComicEntity
   public Guid Guid { get; set; } = Guid.NewGuid();
 
   [Required]
-  public string FilePath { get; set; }
+  [MaxLength(255)] // Adjust the length as appropriate
+  public string FilePath { get; set; } = string.Empty;
 
   [Required]
-  public string FileName { get; set; }
+  [MaxLength(150)] // Adjust the length as appropriate
+  public string FileName { get; set; } = string.Empty;
 
   [DefaultValue(false)]
-  public bool UnableToOpen { get; set; } = false;
+  public bool UnableToOpen { get; set; } 
 
   [DefaultValue(false)]
-  public bool NeedsMetaData { get; set; } = false;
+  public bool NeedsMetaData { get; set; } 
 
   [Required]
   public int? PageCount { get; set; }
@@ -36,5 +39,5 @@ public class ComicEntity
   public (string ThumbnailPath, string MediumPath, string HighResPath) CoverImagePaths { get; set; }
 
   [NotMapped]
-  public MetaData MetaData { get; set; }
+  public MetaData? MetaData { get; set; }
 }

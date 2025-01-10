@@ -1,10 +1,11 @@
-﻿using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Compression;
+using ComicBin.Core.Services;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
-namespace ComicBin.Core.Services;
+namespace ComicBin.Services;
 
 
 public interface ISystemStorage
@@ -18,10 +19,10 @@ public class SystemStorage : ISystemStorage
   {
   }
 
-  public (string ThumbnailPath, string MediumPath, string HighResPath) CreateComicCoverImages(ZipArchiveEntry coverImage)
+  public (string ThumbnailPath, string MediumPath, string HighResPath) CreateComicCoverImages(ZipArchiveEntry? coverImage)
   {
     if (coverImage == null)
-      return (ImageHandler.DefaultThumbNailImageLocation, ImageHandler.DefaultMediumResImageLocation, ImageHandler.DefaultHighResImageLocation);
+      return (ApplicationSettings.DefaultThumbNailImageLocation, ApplicationSettings.DefaultMediumResImageLocation, ApplicationSettings.DefaultHighResImageLocation);
 
     // Generate a unique file name
     var thumbnailFileName = Guid.NewGuid().ToString() + "_thumbnail.jpg";

@@ -1,10 +1,10 @@
 ﻿using System.Xml.Linq;
 
-namespace ComicBin.Core.Services;
+namespace ComicBin.Services;
 
 public static class XDocumenExtensions
 {
-  public static XElement GetElement(this XDocument document, string elementName)
+  public static XElement? GetElement(this XDocument document, string elementName)
   {
     return document.Root?.Element(elementName) ?? null;
   }

@@ -1,12 +1,13 @@
 ﻿using ComicBin.Core.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ComicBin.Data;
 
 public interface ISettingsRepository
 {
   string? GetSetting(ApplicationSettingKey key);
-  void InsertOrUpdateSetting(ApplicationSettingKey key, string value);
+  Task InsertOrUpdateSetting(ApplicationSettingKey key, string value);
 }
 public class SettingsRepository : ISettingsRepository
 {
@@ -23,7 +24,7 @@ public class SettingsRepository : ISettingsRepository
     return setting?.Value;
   }
 
-  public void InsertOrUpdateSetting(ApplicationSettingKey key, string value)
+  public async Task InsertOrUpdateSetting(ApplicationSettingKey key, string value)
   {
     var setting = _context.Settings.FirstOrDefault(s => s.Key == key);
     if (setting != null)
@@ -39,6 +40,6 @@ public class SettingsRepository : ISettingsRepository
         Value = value
       });
     }
-    _context.SaveChanges();
+    await _context.SaveChangesAsync();
   }
 }
