@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:ComicBin.ViewModels"
+		xmlns:controls="using:ComicBin.Views.Controls"
         Title="ComicBin"
 		d:DesignWidth="1440"
 		Width="1440"
@@ -21,37 +22,16 @@
 
 
 	<Border Background="{DynamicResource Black}" >
-		<Grid RowDefinitions="50,1*" Margin="10" ColumnDefinitions="1*, 100" >
+		<Grid RowDefinitions="60,1*" Margin="10" ColumnDefinitions="1*, 100" >
 			<StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="50" VerticalAlignment="Center">
 				<TextBlock Text="ComicBin" Foreground="{DynamicResource SecondaryBrush}" FontFamily="{DynamicResource ComicFont}" FontSize="60" HorizontalAlignment="Left"/>
 
 				<StackPanel Spacing="15" Orientation="Horizontal">
-					<Button>
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-							<Viewbox>
-								<Label Content="&#xE2C2;" FontFamily="{DynamicResource IconFillFont}"/>
-							</Viewbox>
-							<Label Content="Home"/>
-						</StackPanel>
-					</Button>
-					<Button  Command="{Binding OpenReaderCommand}">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-							<Viewbox>
-								<Label Content="&#xE0E6;" FontFamily="{DynamicResource IconFillFont}"/>
-							</Viewbox>
-							<Label Content="Reading"/>
-						</StackPanel>
-					</Button>
-					<Button  Command="{Binding OpenReaderCommand}">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-							<Viewbox>
-								<Label Content="&#xE758;" FontFamily="{DynamicResource IconFillFont}"/>
-							</Viewbox>
-							<Label Content="Libary"/>
-						</StackPanel>
-					</Button>
-					<Button Command="{Binding NavigatePreviousCommand}" Content="Back" />
-					<Button Command="{Binding NavigateNextCommand}" Content="Next" />
+					<controls:NavigationButton>
+						<controls:NavigationButton.ViewModel>
+							<controls:NavigationButtonViewModel Icon="&#xE2C2;" Text="Home" />
+						</controls:NavigationButton.ViewModel>
+					</controls:NavigationButton>
 				</StackPanel>
 			</StackPanel>
 			<StackPanel Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Left">

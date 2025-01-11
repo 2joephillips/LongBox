@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ComicBin.Views.Controls.NavigationButton"
+			  >
+	<Button Classes="btn-nav">
+		<StackPanel>
+			<Viewbox>
+				<TextBlock x:Name="IconLabel" Text="{Binding Icon}" FontFamily="{DynamicResource IconFillFont}" />
+			</Viewbox>
+			<TextBlock x:Name="TextLabel" Text="{Binding Text}" />
+		</StackPanel>
+	</Button>
+</UserControl>
