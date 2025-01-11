@@ -18,6 +18,11 @@ public class MainWindowViewModel : ViewModelBase
   private readonly PageViewModelBase[] Pages;
   private PageViewModelBase? _CurrentPage;
 
+  public MainWindowViewModel()
+  {
+    
+  }
+
   public MainWindowViewModel(HomePageViewModel homePageViewModel,
                              SettingsPageViewModel settingsPageViewModel,
                              AboutPageViewModel aboutPageViewModel,

@@ -43,18 +43,19 @@ public class SetUpPageViewModel : PageViewModelBase
 {
   private const string FOLDER_NOT_SELECTED = "Folder Not Selected";
 
-  public ObservableCollection<Comic> ComicCollection { get; } = new ObservableCollection<Comic>
-    {
-        new Comic { FileName = "Batman", FilePath = "DC Comics" },
-        new Comic { FileName = "Spider-Man", FilePath = "Marvel Comics" }
-    };
-
   public ICommand SelectFolderCommand { get; }
   public ICommand ScanFolderCommand { get; }
   public ICommand SaveRootFolder { get; }
 
 
   private readonly IComicMetadataExtractor _extractor;
+
+  private ObservableCollection<Comic> _comicCollection = new ObservableCollection<Comic>();
+  public ObservableCollection<Comic> ComicCollection
+  {
+    get => _comicCollection;
+    set => this.RaiseAndSetIfChanged(ref _comicCollection, value);
+  }
 
   private string _rootFolder = string.Empty;
   public string RootFolder
@@ -68,6 +69,13 @@ public class SetUpPageViewModel : PageViewModelBase
   {
     get => _currentImagePath;
     set => this.RaiseAndSetIfChanged(ref _currentImagePath, value);
+  }
+
+  private bool _scanningInProgress = false;
+  public bool ScanningInProgress
+  {
+    get => _scanningInProgress;
+    set => this.RaiseAndSetIfChanged(ref _scanningInProgress, value);
   }
 
   private string _scanningProgress = string.Empty;
@@ -100,6 +108,8 @@ public class SetUpPageViewModel : PageViewModelBase
     {
       try
       {
+        ScanningInProgress = true;
+        ComicCollection = new ObservableCollection<Comic>();
         var files = await FolderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
         if (files == null || !files.Any()) return;
 
@@ -130,6 +140,11 @@ public class SetUpPageViewModel : PageViewModelBase
             ComicCollection.Add(comic);
 
           }
+        }
+        else
+        {
+          ScanningInProgress = false;
+          ComicCollection = new ObservableCollection<Comic>();
         }
       }
       catch (Exception)
