@@ -11,7 +11,7 @@ namespace ComicBin.Core.Services;
 
 public interface IComicMetadataExtractor
 {
-  (bool needsMetaData, MetaData? metaData, int pageCount, (string ThumbnailPath, string MediumPath, string HighResPath) coverImagePath) ExtractMetadata(string filePath);
+  (bool needsMetaData, MetaData? metaData, int pageCount, (string ThumbnailPath, string HighResPath) coverImagePath) ExtractMetadata(string filePath);
 }
 
 public class ComicMetadataExtractor : IComicMetadataExtractor
@@ -24,7 +24,7 @@ public class ComicMetadataExtractor : IComicMetadataExtractor
     _storage = storage ?? throw new ArgumentNullException(nameof(storage));
   }
 
-  public (bool needsMetaData, MetaData? metaData, int pageCount, (string ThumbnailPath, string MediumPath, string HighResPath) coverImagePath) ExtractMetadata(string filePath)
+  public (bool needsMetaData, MetaData? metaData, int pageCount, (string ThumbnailPath,  string HighResPath) coverImagePath) ExtractMetadata(string filePath)
   {
     var needsMetaData = false;
     if (!filePath.EndsWith(".cbz", StringComparison.OrdinalIgnoreCase))

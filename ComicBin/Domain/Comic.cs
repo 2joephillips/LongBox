@@ -48,7 +48,7 @@ namespace ComicBin.Core.Models
     {
       try
       {
-        (bool needsMetaData, MetaData? metaData, int imageCount, (string ThumbnailPath, string MediumPath, string HighResPath) coverPaths) = _metadataExtractor.ExtractMetadata(FilePath);
+        (bool needsMetaData, MetaData? metaData, int imageCount, (string ThumbnailPath, string HighResPath) coverPaths) = _metadataExtractor.ExtractMetadata(FilePath);
         NeedsMetaData = needsMetaData;
         if(metaData != null)
           MetaData = metaData;

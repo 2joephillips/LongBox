@@ -36,7 +36,7 @@ public class ComicEntity
 
   // These properties are for metadata but should not be persisted
   [NotMapped]
-  public (string ThumbnailPath, string MediumPath, string HighResPath) CoverImagePaths { get; set; }
+  public (string ThumbnailPath, string HighResPath) CoverImagePaths { get; set; }
 
   [NotMapped]
   public MetaData? MetaData { get; set; }

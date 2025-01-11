@@ -15,7 +15,6 @@ public static class ApplicationSettings
   public static string AppDataPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ComicRack");
   
   public static string DefaultThumbNailImageLocation =>  Path.Combine(AppDataPath, "default_thumbnail.jpg");
-  public static string DefaultMediumResImageLocation => Path.Combine(AppDataPath,"default_medium.jpg");
   public static string DefaultHighResImageLocation => Path.Combine(AppDataPath,  "default_highres.jpg");
   
   public static Bitmap DefaultHighResImage => new (DefaultHighResImageLocation);
