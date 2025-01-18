@@ -7,7 +7,7 @@
 				Height="800" Width="1024">
 			<StackPanel>
 				<Label Content="Comic Font" FontFamily="{DynamicResource ComicFont}" FontSize="40"/>
-				<Label Content="Header Font"  FontFamily="{DynamicResource HeaderFont}" FontSize="24"/>
+				<Label Content="Header Font"  FontFamily="{DynamicResource SemiBoldFont}" FontSize="24"/>
 				<Label Content="Body Font" FontFamily="{DynamicResource BodyFont}" FontSize="18"/>
 				<Label Content="Caption Font"  FontFamily="{DynamicResource CaptionFont}" FontSize="14"/>
 				<Label Content="Mono Font" FontFamily="{DynamicResource MonoFont}" FontSize="16"/>
@@ -19,9 +19,9 @@
 	<!-- Add Resources Here -->
 	<FontFamily x:Key="ComicFont">/Assets/Fonts/Bangers-Regular.ttf#Bangers</FontFamily>
 	<FontFamily x:Key="MonoFont">/Assets/Fonts/SpaceMono-Regular.ttf#Space Mono</FontFamily>
-	<FontFamily x:Key="HeaderFont">/Assets/Fonts/Poppins-SemiBold.ttf#Poppins SemiBold</FontFamily>
+	<FontFamily x:Key="SemiBoldFont">/Assets/Fonts/Poppins-SemiBold.ttf#Poppins SemiBold</FontFamily>
 	<FontFamily x:Key="BodyFont">/Assets/Fonts/Poppins-Regular.ttf#Poppins</FontFamily>
-	<FontFamily x:Key="CaptionFont">/Assets/Fonts/Poppins-Thin.ttf#Poppins Thin</FontFamily>
+	<FontFamily x:Key="ThinFont">/Assets/Fonts/Poppins-Thin.ttf#Poppins Thin</FontFamily>
 	<FontFamily x:Key="IconFont">/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
 	<FontFamily x:Key="IconFillFont">/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
 </ResourceDictionary>

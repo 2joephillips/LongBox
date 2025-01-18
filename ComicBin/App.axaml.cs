@@ -23,6 +23,7 @@ public class App : Application
     servicesCollection
       .AddDatabase()
       .AddServices()
+      .AddViews()
       .AddViewModels();
     Services = servicesCollection.BuildServiceProvider();
   }

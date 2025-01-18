@@ -11,6 +11,8 @@
 		<FluentTheme />
 		<StyleInclude Source="/Styles/DefaultStyles.axaml"/>
 		<StyleInclude Source="/Styles/DefaultButtonStyles.axaml"/>
+		<StyleInclude Source="/Styles/DefaultInputStyles.axaml"/>
+		<StyleInclude Source="/Styles/DefaultTextBlockStyles.axaml"/>
 	</Application.Styles>
 
 	<Application.Resources>

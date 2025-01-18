@@ -1,25 +1,89 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Design.PreviewWith>
-	  <Border Width="500" Height="500">
-      <!-- Add Controls for Previewer Here -->
+    <Design.PreviewWith>
+        <Border Width="500" Height="500">
+            <!-- Add Controls for Previewer Here -->
+            <StackPanel Orientation="Vertical">
+                <StackPanel Grid.Row="1" Grid.Column="0"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Margin="5">
+                    <TextBox Watermark="Help" IsEnabled="False" VerticalAlignment="Stretch"
+                             HorizontalAlignment="Stretch" />
+                    <!-- <Button Classes="icon-only" ToolTip.Tip="Start Scanning Comics" -->
+                    <!--         HorizontalAlignment="Left"> -->
+                    <!--     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"> -->
+                    <!--         <Label Content="&#xE1FE;" FontFamily="{DynamicResource IconFont}" /> -->
+                    <!--     </StackPanel> -->
+                    <!-- </Button> -->
+                </StackPanel>
 
-			<StackPanel Orientation="Horizontal" Classes="input-button" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-				<TextBox />
-				<Button Classes="icon-only" ToolTip.Tip="Start Scanning Comics"
-					HorizontalAlignment="Left">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-						<Label Content="&#xE1FE;" FontFamily="{DynamicResource IconFont}"/>
-					</StackPanel>
-				</Button>
-			</StackPanel>
-    </Border>
-  </Design.PreviewWith>
+                <StackPanel Grid.Row="1" Grid.Column="0"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Margin="5">
+                    <ToolTip.Tip>
+                        <TextBlock>Paste your ComicVine Api</TextBlock>
+                    </ToolTip.Tip>
+                    <TextBlock Margin="0 5">ComicVine Api</TextBlock>
+                    <TextBox
+                        Text="{Binding ComicVineApiKey, Mode=TwoWay, FallbackValue=cf1839e4-dcf4-4558-b355-0748f2b71e68}"
+                        Watermark="example-api-key" />
+                </StackPanel>
 
-  <!-- Add Styles Here -->
-	<Style Selector="StackPanel.input-button /template/ ContentPresenter">
-		<Setter Property="Background" Value="Red"/>
-		<Setter Property="MaxHeight" Value="50"/>
-		<Setter Property="MaxWidth" Value="250"/>
-	</Style>
+                <TextBox Classes="validation-error" 
+                    Text="{Binding ComicVineApiKey, Mode=TwoWay, FallbackValue=cf1839e4-dcf4-4558-b355-0748f2b71e68}"
+                    Watermark="example-api-key" />
+                
+                <TextBox 
+                    Text="{Binding ComicVineApiKey, Mode=TwoWay, FallbackValue=cf1839e4-dcf4-4558-b355-0748f2b71e68}"
+                    Watermark="example-api-key" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{DynamicResource TransparentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}" />
+    </Style>
+    
+
+
+    <Style Selector="TextBox:empty">
+        <Setter Property="Background" Value="{DynamicResource TransparentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}" />
+    </Style>
+
+    <Style Selector="TextBox /template/ ScrollViewer">
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}" />
+    </Style>
+
+    <Style Selector="TextBox:pointerover /template/ Border">
+        <Setter Property="Background" Value="{DynamicResource TransparentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SecondaryBrush}" />
+        <Setter Property="BorderThickness" Value="1"></Setter>
+    </Style>
+    
+    <Style Selector="TextBox:focus /template/ Border">
+        <Setter Property="Background" Value="{DynamicResource TransparentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SecondaryBrush}" />
+        <Setter Property="BorderThickness" Value="1"></Setter>
+    </Style>
+
+    <Style Selector="TextBox:disabled /template/ Border">
+        <Setter Property="Background" Value="{DynamicResource TransparentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}" />
+        <Setter Property="BorderThickness" Value="1"></Setter>
+    </Style>
+
+    <Style Selector="TextBox:disabled /template/ TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}" />
+    </Style>
+    <Style Selector="TextBox:disabled /template/ ScrollViewer">
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}" />
+    </Style>
 </Styles>

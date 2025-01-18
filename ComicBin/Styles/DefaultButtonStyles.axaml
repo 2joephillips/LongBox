@@ -18,6 +18,14 @@
 						Content="&#xE270;"
 						FontFamily="{DynamicResource IconFillFont}" />
 				</Button>
+				<Button
+					ToolTip.Tip="Select Root Folder"
+					VerticalAlignment="Bottom">
+								<StackPanel Orientation="Horizontal">
+									<Label Content="&#xE256;" FontFamily="{DynamicResource IconFillFont}"/>
+									<TextBlock Classes="" Text="Select Folder" />
+								</StackPanel>
+				</Button>
 			</StackPanel>
 		</Border>
 	</Design.PreviewWith>

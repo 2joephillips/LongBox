@@ -1,0 +1,137 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <!-- Add Controls for Previewer Here -->
+		<StackPanel>
+			<TextBlock Text="Header 1" Classes="h1" />
+			<TextBlock Text="Header 1" Classes="h1 primary" />
+			<TextBlock Text="Header 1" Classes="h1 secondary" />
+			<TextBlock Text="Header 2" Classes="h2" />
+			<TextBlock Text="Header 3" Classes="h3" />
+			<TextBlock Text="Header 4" Classes="h4" />
+			<TextBlock Text="Header 5" Classes="h5" />
+			<TextBlock Text="Header 6" Classes="h6" />
+			<TextBlock Text="Header 6" Classes="h6 primary" />
+			<TextBlock Text="Header 6" Classes="h6 secondary" />
+			<TextBlock Text="Header 6" Classes="h6 warning" />
+
+			<TextBlock Text="This is body text." Classes="body"/>
+			<TextBlock Text="This is subtext, less important information." Classes="subtext"/>
+			<TextBlock Text="Label: First Name" Classes="label"/>
+			<TextBlock Text="This is a caption under an image." Classes="caption"/>
+			<TextBlock Text="This is a blockquote for a quote." Classes="blockquote"/>
+			<TextBlock Text="Warning: Something went wrong!" Classes="warning"/>
+			<TextBlock Text="Notification: Your action was successful." Classes="notification"/>
+		</StackPanel>
+    </Border>
+  </Design.PreviewWith>
+
+  <!-- Add Styles Here -->
+
+	<Styles>
+
+		<Style Selector="TextBlock">
+			<Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
+			<Setter Property="FontFamily" Value="{DynamicResource BodyFont}"/>
+		</Style>
+		
+		<Style Selector="TextBlock.primary">
+			<Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
+		</Style>
+
+		<Style Selector="TextBlock.secondary">
+			<Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}" />
+		</Style>
+
+		<Style Selector="TextBlock.warning">
+			<Setter Property="Foreground" Value="OrangeRed" />
+		</Style>
+
+		<!-- Header 1 -->
+		<Style Selector="TextBlock.h1">
+			<Setter Property="FontSize" Value="40" />
+			<Setter Property="FontFamily" Value="{DynamicResource SemiBoldFont}"/>
+			<Setter Property="Margin" Value="0,20,0,20" />
+		</Style>
+
+		<!-- Header 2 -->
+		<Style Selector="TextBlock.h2">
+			<Setter Property="FontSize" Value="32" />
+			<Setter Property="FontFamily" Value="{DynamicResource SemiBoldFont}"/>
+			<Setter Property="Margin" Value="0,16,0,16" />
+		</Style>
+
+		<!-- Header 3 -->
+		<Style Selector="TextBlock.h3">
+			<Setter Property="FontSize" Value="24" />
+			<Setter Property="FontFamily" Value="{DynamicResource SemiBoldFont}"/>
+			<Setter Property="Margin" Value="0,12,0,12" />
+		</Style>
+
+		<!-- Header 4 -->
+		<Style Selector="TextBlock.h4">
+			<Setter Property="FontSize" Value="20" />
+			<Setter Property="Margin" Value="0,8,0,8" />
+		</Style>
+
+		<!-- Header 5 -->
+		<Style Selector="TextBlock.h5">
+			<Setter Property="FontSize" Value="16" />
+			<Setter Property="Margin" Value="0,6,0,6" />
+		</Style>
+
+		<!-- Header 6 -->
+		<Style Selector="TextBlock.h6">
+			<Setter Property="FontSize" Value="14" />
+			<Setter Property="Margin" Value="0,4,0,4" />
+		</Style>
+
+		<!-- Body Text -->
+		<Style Selector="TextBlock.body">
+			<Setter Property="FontSize" Value="14" />
+			<Setter Property="Margin" Value="0,4,0,4" />
+		</Style>
+
+		<!-- Subtext -->
+		<Style Selector="TextBlock.subtext">
+			<Setter Property="FontSize" Value="14" />
+			<Setter Property="FontFamily" Value="{DynamicResource ThinFont}"/>
+			<Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}" />
+			<Setter Property="Margin" Value="0,2,0,2" />
+		</Style>
+
+		<!-- Labels -->
+		<Style Selector="TextBlock.label">
+			<Setter Property="FontSize" Value="14" />
+			<Setter Property="FontFamily" Value="{DynamicResource SemiBoldFont}"/>
+			<Setter Property="Margin" Value="0,8,0,4" />
+		</Style>
+
+
+		<!-- Caption -->
+		<Style Selector="TextBlock.caption">
+			<Setter Property="FontSize" Value="12" />
+			<Setter Property="FontWeight" Value="Light" />
+			<Setter Property="Foreground" Value="#999999" />
+			<Setter Property="Margin" Value="0,2,0,2" />
+		</Style>
+		
+		<!-- Blockquote -->
+		<Style Selector="TextBlock.blockquote">
+			<Setter Property="FontSize" Value="16" />
+			<Setter Property="FontStyle" Value="Italic" />
+			<Setter Property="Margin" Value="20,8,0,8" />
+		</Style>
+
+
+		<!-- Notification Text -->
+		<Style Selector="TextBlock.notification">
+			<Setter Property="FontSize" Value="14" />
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+			<Setter Property="Background" Value="{DynamicResource SecondaryBrush}" />
+			<Setter Property="Padding" Value="8" />
+		</Style>
+	</Styles>
+</Styles>

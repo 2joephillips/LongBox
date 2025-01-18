@@ -3,6 +3,8 @@ using ComicBin.Data;
 using ComicBin.Services;
 using ComicBin.ViewModels;
 using ComicBin.ViewModels.Pages;
+using ComicBin.Views;
+using ComicBin.Views.Pages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +29,16 @@ public static class ServiceCollectionExtensions
     services.AddSingleton<ISettingsRepository, SettingsRepository>();
     return services;
   }
+
+  public static IServiceCollection AddViews(this IServiceCollection services)
+  {
+    services.AddTransient<MainWindow>();
+    services.AddTransient<ReaderWindow>();
+    services.AddTransient<SettingsPageView>();
+    services.AddTransient<SetUpPageView>();
+    return services;
+  }
+
   public static IServiceCollection AddViewModels(this IServiceCollection services)
   {
 
