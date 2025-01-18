@@ -108,7 +108,9 @@
 								<TextBlock>Paste your ComicVine Api.</TextBlock>
 							</ToolTip.Tip>
 						</TextBox>
-						<TextBlock Classes="warning" >
+						<TextBlock       
+								   Classes.caption-warning="{Binding !IsValidKey }"
+									Classes.caption="{Binding IsValidKey }">
 							<Run Text="API Key Status: " />
 							<Run Text="{Binding ApiKeyStatus, FallbackValue='Invalid'}" />
 						</TextBlock>

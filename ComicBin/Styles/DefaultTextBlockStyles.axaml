@@ -20,6 +20,7 @@
 			<TextBlock Text="This is subtext, less important information." Classes="subtext"/>
 			<TextBlock Text="Label: First Name" Classes="label"/>
 			<TextBlock Text="This is a caption under an image." Classes="caption"/>
+			<TextBlock Text="This is a caption under an image." Classes="caption-warning"/>
 			<TextBlock Text="This is a blockquote for a quote." Classes="blockquote"/>
 			<TextBlock Text="Warning: Something went wrong!" Classes="warning"/>
 			<TextBlock Text="Notification: Your action was successful." Classes="notification"/>
@@ -48,6 +49,8 @@
 			<Setter Property="Foreground" Value="OrangeRed" />
 		</Style>
 
+
+		
 		<!-- Header 1 -->
 		<Style Selector="TextBlock.h1">
 			<Setter Property="FontSize" Value="40" />
@@ -113,10 +116,17 @@
 		<Style Selector="TextBlock.caption">
 			<Setter Property="FontSize" Value="12" />
 			<Setter Property="FontWeight" Value="Light" />
-			<Setter Property="Foreground" Value="#999999" />
+			<Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
 			<Setter Property="Margin" Value="0,2,0,2" />
 		</Style>
-		
+
+		<Style Selector="TextBlock.caption-warning">
+			<Setter Property="FontSize" Value="12" />
+			<Setter Property="FontWeight" Value="Light" />
+			<Setter Property="Margin" Value="0,2,0,2" />
+			<Setter Property="Foreground" Value="OrangeRed" />
+		</Style>
+
 		<!-- Blockquote -->
 		<Style Selector="TextBlock.blockquote">
 			<Setter Property="FontSize" Value="16" />
