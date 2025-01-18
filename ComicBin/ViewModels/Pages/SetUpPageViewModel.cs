@@ -72,14 +72,20 @@ public class SetUpPageViewModel : PageViewModelBase
     set => this.RaiseAndSetIfChanged(ref _comicVineApiKey, value);
   }
 
+  private string _apiKeyStatus;
+  public string ApiKeyStatus
+  {
+    get => _apiKeyStatus;
+    set => this.RaiseAndSetIfChanged(ref _apiKeyStatus, value);
+  }
+
   private bool _isValidKey;
   public bool IsValidKey
   {
     get => _isValidKey;
     set => this.RaiseAndSetIfChanged(ref _isValidKey, value);
   }
-  
-  
+
   private Bitmap _currentImagePath = ApplicationSettings.DefaultHighResImage;
   public Bitmap CurrentImagePath
   {
@@ -110,7 +116,7 @@ public class SetUpPageViewModel : PageViewModelBase
     ComicCollection = new ObservableCollection<Comic>();
     RootFolder = ApplicationSettings.RootFolder ?? FolderNotSelected;
     SelectFolderCommand = ReactiveCommand.CreateFromTask(SelectRootFolder);
-
+    ApiKeyStatus = "Not Validated";
     // SaveRootFolder = ReactiveCommand.CreateFromTask(async () =>
     // {
     //   await settingsRepository.InsertOrUpdateSetting(ApplicationSettingKey.RootFolder, RootFolder);
@@ -185,6 +191,11 @@ public class SetUpPageViewModel : PageViewModelBase
         Process.Start("open", url);
       }
     });
+
+    if (!string.IsNullOrEmpty(RootFolder))
+    {
+      Dispatcher.UIThread.InvokeAsync(UpdateProgressWhenRootFolderIsKnown);
+    }
   }
 
   public async Task SelectRootFolder()
@@ -195,19 +206,25 @@ public class SetUpPageViewModel : PageViewModelBase
     var rootFolder = folderPath ?? string.Empty;
     if (rootFolder != string.Empty)
     {
-      // Determine number of files needing to be scanned.
-      var files = await FolderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
-      ScanningProgress = $"Found {files.Count()} comics files.";
+      await UpdateProgressWhenRootFolderIsKnown().ConfigureAwait(false);
     }
 
 
     RootFolder = rootFolder;
   }
 
+  private async Task UpdateProgressWhenRootFolderIsKnown()
+  {
+    // Determine number of files needing to be scanned.
+    var files = await FolderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
+    ScanningProgress = $"Found {files.Count()} comics files.";
+  }
+
   private async Task VerifyApiKey()
   {
    await Dispatcher.UIThread.InvokeAsync(() =>
     {
+      ApiKeyStatus = "Validating API Key...";
       IsValidKey = false;
     });
    
@@ -222,11 +239,13 @@ public class SetUpPageViewModel : PageViewModelBase
       if (response.IsSuccessStatusCode)
       {
         Console.Write("Works");
+        ApiKeyStatus = "Validated";
         IsValidKey = true;
       }
       else
       {
         Console.Write("Invalid API Key");
+        ApiKeyStatus = "Invalid";
         IsValidKey = false;
       }
     }
