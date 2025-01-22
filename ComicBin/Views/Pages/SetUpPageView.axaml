@@ -16,8 +16,8 @@
 	</Design.DataContext>
 
 	<UserControl.Resources>
-		<Bitmap x:Key="DefaultImage">/Assets/Resources/default_highres.jpg</Bitmap>
-		<Bitmap x:Key="DefaultThumbnailImage">/Assets/Resources/default_thumbnail.jpg</Bitmap>
+		<Bitmap x:Key="DefaultImage">/Assets/default_highres.jpg</Bitmap>
+		<Bitmap x:Key="DefaultThumbnailImage">/Assets/default_thumbnail.jpg</Bitmap>
 	</UserControl.Resources>
 
 	<Grid
