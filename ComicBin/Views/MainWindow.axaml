@@ -27,11 +27,11 @@
 				<TextBlock Text="ComicBin" Foreground="{DynamicResource SecondaryBrush}" FontFamily="{DynamicResource ComicFont}" FontSize="60" HorizontalAlignment="Left"/>
 
 				<StackPanel Spacing="15" Orientation="Horizontal">
-					<controls:NavigationButton>
-						<controls:NavigationButton.ViewModel>
-							<controls:NavigationButtonViewModel Icon="&#xE2C2;" Text="Home" />
-						</controls:NavigationButton.ViewModel>
-					</controls:NavigationButton>
+					<controls:ButtonWIcon>
+						<controls:ButtonWIcon.ViewModel>
+							<controls:ButtonWIconViewModel Icon="&#xE0E6;" Text="Home" />
+						</controls:ButtonWIcon.ViewModel>
+					</controls:ButtonWIcon>
 				</StackPanel>
 			</StackPanel>
 			<StackPanel Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Left">

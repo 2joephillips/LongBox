@@ -6,39 +6,33 @@
 			<!-- Add Controls for Previewer Here -->
 
 			<StackPanel Orientation="Vertical">
-				<Button Content="Home"/>
-				<Button Content="Reading" IsEnabled="False"/>
-				<controls:NavigationButton>
-					<controls:NavigationButton.ViewModel>
-						<controls:NavigationButtonViewModel Icon="&#xE0E6;" Text="Dashboard" />
-					</controls:NavigationButton.ViewModel>
-				</controls:NavigationButton>
+				<Button Content="Button"/>
+				<Button Content="Button Disabled" IsEnabled="False"/>
 				<Button Classes="icon-only">
 					<Label
 						Content="&#xE270;"
 						FontFamily="{DynamicResource IconFillFont}" />
 				</Button>
-				<Button
-					ToolTip.Tip="Select Root Folder"
-					VerticalAlignment="Bottom">
-								<StackPanel Orientation="Horizontal">
-									<Label Content="&#xE256;" FontFamily="{DynamicResource IconFillFont}"/>
-									<TextBlock Classes="" Text="Select Folder" />
-								</StackPanel>
-				</Button>
+				<controls:ButtonWIcon>
+					<controls:ButtonWIcon.ViewModel>
+						<controls:ButtonWIconViewModel Icon="&#xE0E6;" Text="Dashboard" />
+					</controls:ButtonWIcon.ViewModel>
+				</controls:ButtonWIcon>
 			</StackPanel>
 		</Border>
 	</Design.PreviewWith>
 
 	<!-- Add Styles Here -->
-
+	
 	<Style Selector="Button" >
 		<Setter Property="VerticalAlignment" Value="Center"/>
 		<Setter Property="HorizontalAlignment" Value="Center"/>
-		<Setter Property="FontFamily" Value="{DynamicResource BodyFont}"/>
-		<Setter Property="Background" Value="{DynamicResource BlackBrush}"/>
+		<Setter Property="Height" Value="45"/>
+		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+		<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
 		<Setter Property="CornerRadius" Value="10"/>
-		
 		<Style Selector="^ /template/ ContentPresenter" >
 			<Setter Property="RenderTransform" Value="scale(1)"/>
 			<Setter Property="Transitions">
@@ -50,22 +44,21 @@
 		</Style>
 	</Style>
 
-	<Style Selector="Button:pointerover /template/ ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-	</Style>
-
-	<Style Selector="Button.btn-nav">
-		<Setter Property="Height" Value="45"/>
+	<Style Selector="Button Label">
 		<Setter Property="FontSize" Value="20"/>
 	</Style>
+		<Style Selector="Button:pointerover Label">
+			<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
+		</Style>
 	
-	<Style Selector="Button.btn-nav StackPanel">
-		<Setter Property="Spacing" Value="10"/>
-		<Setter Property="Orientation" Value="Horizontal"/>
-		<Setter Property="VerticalAlignment" Value="Center"/>
-		<Setter Property="HorizontalAlignment" Value="Center" />
+	<Style Selector="Button:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
 	</Style>
-	
+
+	<Style Selector="Button:disabled">
+		<Setter	Property="Background" Value="Black"/>
+	</Style>
 
 	<Style Selector="Button.icon-only /template/ ContentPresenter">
 		<Setter Property="FontSize" Value="25"/>
@@ -77,5 +70,17 @@
 		<Setter Property="RenderTransform" Value="scale(1.2)"/>
 		<Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}"> </Setter>
 	</Style>
+
+	<Style Selector="Button StackPanel">
+		<Setter Property="Spacing" Value="10"/>
+		<Setter Property="Orientation" Value="Horizontal"/>
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+	</Style>
+
+
+
+
+
 
 </Styles>

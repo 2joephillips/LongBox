@@ -6,9 +6,7 @@ using System.Reactive.Disposables;
 using System.Windows;
 
 namespace ComicBin.Views.Controls;
-
-
-public class NavigationButtonViewModel : ReactiveObject
+public class ButtonWIconViewModel : ReactiveObject
 {
   private string _icon = "\uE2C2";
   private string _text = "Home";
@@ -26,26 +24,25 @@ public class NavigationButtonViewModel : ReactiveObject
   }
 }
 
-public partial class NavigationButton : UserControl, IViewFor<NavigationButtonViewModel>
+public partial class ButtonWIcon :UserControl, IViewFor<ButtonWIconViewModel>
 {
-  public NavigationButton()
-  {
-    InitializeComponent();
-    ViewModel = new NavigationButtonViewModel();
+  public ButtonWIcon()
+    {
+        InitializeComponent();
+        ViewModel = new ButtonWIconViewModel();
 
     this.WhenActivated(disposables =>
     {
-      this.Bind(ViewModel, vm => vm.Icon, v => v.IconLabel.Text)
+      this.Bind(ViewModel, vm => vm.Icon, v => v.IconLabel.Content)
           .DisposeWith(disposables);
-      this.Bind(ViewModel, vm => vm.Text, v => v.TextLabel.Text)
+      this.Bind(ViewModel, vm => vm.Text, v => v.TextLabel.Content)
           .DisposeWith(disposables);
     });
   }
+  public static readonly StyledProperty<ButtonWIconViewModel> ViewModelProperty =
+     AvaloniaProperty.Register<ButtonWIcon, ButtonWIconViewModel>(nameof(ViewModel));
 
-  public static readonly StyledProperty<NavigationButtonViewModel> ViewModelProperty =
-      AvaloniaProperty.Register<NavigationButton, NavigationButtonViewModel>(nameof(ViewModel));
-
-  public NavigationButtonViewModel ViewModel
+  public ButtonWIconViewModel ViewModel
   {
     get => GetValue(ViewModelProperty);
     set => SetValue(ViewModelProperty, value);
@@ -54,6 +51,6 @@ public partial class NavigationButton : UserControl, IViewFor<NavigationButtonVi
   object IViewFor.ViewModel
   {
     get => ViewModel;
-    set => ViewModel = (NavigationButtonViewModel)value;
+    set => ViewModel = (ButtonWIconViewModel)value;
   }
 }
