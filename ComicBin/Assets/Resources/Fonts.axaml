@@ -4,24 +4,23 @@
 	<Design.PreviewWith>
 		<Border Padding="20"
 				CornerRadius="15" BorderThickness="5"
-				Height="800" Width="1024">
+				Height="200" Width="400"
+				Background="{StaticResource BackgroundBrush}">
 			<StackPanel>
-				<Label Content="Comic Font" FontFamily="{DynamicResource ComicFont}" FontSize="40"/>
-				<Label Content="Header Font"  FontFamily="{DynamicResource SemiBoldFont}" FontSize="24"/>
-				<Label Content="Body Font" FontFamily="{DynamicResource BodyFont}" FontSize="18"/>
-				<Label Content="Caption Font"  FontFamily="{DynamicResource CaptionFont}" FontSize="14"/>
-				<Label Content="Mono Font" FontFamily="{DynamicResource MonoFont}" FontSize="16"/>
-				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFont}" FontSize="16"/>
-				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFillFont}" FontSize="16"/>
+				<Label Content="Comic Font" FontFamily="{DynamicResource ComicFont}" />
+				<Label Content="Bold Font"  FontFamily="{DynamicResource BoldFont}" />
+				<Label Content="Body Font" FontFamily="{DynamicResource BodyFont}" />
+				<Label Content="Caption Font" FontFamily="{DynamicResource MonoFont}" />
+				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFont}" />
+				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFillFont}" />
 			</StackPanel>
 		</Border>
 	</Design.PreviewWith>
 	<!-- Add Resources Here -->
-	<FontFamily x:Key="ComicFont">/Assets/Fonts/Bangers-Regular.ttf#Bangers</FontFamily>
-	<FontFamily x:Key="MonoFont">/Assets/Fonts/SpaceMono-Regular.ttf#Space Mono</FontFamily>
-	<FontFamily x:Key="SemiBoldFont">/Assets/Fonts/Poppins-SemiBold.ttf#Poppins SemiBold</FontFamily>
-	<FontFamily x:Key="BodyFont">/Assets/Fonts/Poppins-Regular.ttf#Poppins</FontFamily>
-	<FontFamily x:Key="ThinFont">/Assets/Fonts/Poppins-Thin.ttf#Poppins Thin</FontFamily>
-	<FontFamily x:Key="IconFont">/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
-	<FontFamily x:Key="IconFillFont">/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
+	<FontFamily x:Key="ComicFont">avares://ComicBin/Assets/Fonts/Bangers-Regular.ttf#Bangers</FontFamily>
+	<FontFamily x:Key="MonoFont">avares://ComicBin/Assets/Fonts/SpaceMono-Italic.ttf#Space Mono Italic</FontFamily>
+	<FontFamily x:Key="IconFont">avares://ComicBin/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
+	<FontFamily x:Key="IconFillFont">avares://ComicBin/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
+	<FontFamily x:Key="BoldFont">avares://ComicBin/Assets/Fonts/Poppins-Bold.ttf#Poppins Bold</FontFamily>
+	<FontFamily x:Key="BodyFont">avares://ComicBin/Assets/Fonts/Poppins-Regular.ttf#Poppins</FontFamily>
 </ResourceDictionary>
