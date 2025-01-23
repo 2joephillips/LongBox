@@ -10,7 +10,7 @@
 				<Label Content="Comic Font" FontFamily="{DynamicResource ComicFont}" />
 				<Label Content="Bold Font"  FontFamily="{DynamicResource BoldFont}" />
 				<Label Content="Body Font" FontFamily="{DynamicResource BodyFont}" />
-				<Label Content="Caption Font" FontFamily="{DynamicResource MonoFont}" />
+				<Label Content="Caption Font" FontFamily="{DynamicResource CaptionFont}" />
 				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFont}" />
 				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFillFont}" />
 			</StackPanel>
@@ -18,7 +18,7 @@
 	</Design.PreviewWith>
 	<!-- Add Resources Here -->
 	<FontFamily x:Key="ComicFont">avares://ComicBin/Assets/Fonts/Bangers-Regular.ttf#Bangers</FontFamily>
-	<FontFamily x:Key="MonoFont">avares://ComicBin/Assets/Fonts/SpaceMono-Italic.ttf#Space Mono Italic</FontFamily>
+	<FontFamily x:Key="CaptionFont">avares://ComicBin/Assets/Fonts/SpaceMono-Italic.ttf#Space Mono Italic</FontFamily>
 	<FontFamily x:Key="IconFont">avares://ComicBin/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
 	<FontFamily x:Key="IconFillFont">avares://ComicBin/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
 	<FontFamily x:Key="BoldFont">avares://ComicBin/Assets/Fonts/Poppins-Bold.ttf#Poppins Bold</FontFamily>

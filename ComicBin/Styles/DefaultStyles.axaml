@@ -2,14 +2,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Design.PreviewWith>
 		
-		<Border Padding="20" Height="800" Width="1024" Background="{DynamicResource BlackBrush}">
+		<Border Padding="20" Height="800" Width="1024" Background="{DynamicResource BackgroundBrush}">
 		</Border>
 	</Design.PreviewWith>
 
 
 		<Style Selector="Window">
-			<Setter Property="Background" Value="{DynamicResource BlackBrush}" />
+			<Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
 			<Setter Property="CornerRadius" Value="20"/>
+			<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
 			<Setter Property="FontFamily" Value="{DynamicResource BodyFont}" />
 		</Style>
 	
