@@ -3,43 +3,72 @@
 	<Design.PreviewWith>
 		<Border Padding="20"
 				CornerRadius="15" BorderThickness="5"
-				Height="800" Width="1024" Background="{DynamicResource BlackBrush}">
-			
-			<!-- Add Controls for Previewer Here -->
-			<!--<StackPanel Orientation="Horizontal" Spacing="5">
+				Height="800" Width="1024" Background="{DynamicResource BackgroundBrush}">
 
-				<TextBlock Text="Hello World" />
-				<Button Content="Hello World" />
-			</StackPanel>-->
+			<StackPanel Spacing="10">
+				<Border CornerRadius="10" ClipToBounds="True">
+					<Rectangle  Height="100" Fill="{DynamicResource TextBrush}" />
+				</Border>
+				<Border CornerRadius="10" ClipToBounds="True">
+					<Rectangle  Height="100" Fill="{DynamicResource PrimaryBrush}" />
+				</Border>
+				<Border CornerRadius="10" ClipToBounds="True">
+					<Rectangle  Height="100" Fill="{DynamicResource SecondaryBrush}" />
+				</Border>
+				<Border CornerRadius="10" ClipToBounds="True">
+					<Rectangle  Height="100" Fill="{DynamicResource AccentBrush}" />
+				</Border>
+				<Border CornerRadius="10" ClipToBounds="True">
+					<Rectangle  Height="100" Fill="{DynamicResource PrimarySecondaryBrush}" />
+				</Border>
+				<Border CornerRadius="10" ClipToBounds="True">
+					<Rectangle  Height="100" Fill="{DynamicResource PrimaryAccentBrush}" />
+				</Border>
+				<Border CornerRadius="10" ClipToBounds="True">
+					<Rectangle  Height="100" Fill="{DynamicResource SecondaryBackgroundBrush}" />
+				</Border>
+			</StackPanel>
 		</Border>
 	</Design.PreviewWith>
-	
-  <!-- Add Resources Here -->
+
+	<!-- Add Resources Here -->
 	<!-- Solid Colors -->
 
-	<Color x:Key="White">#FBFFFE</Color>
-	<Color x:Key="Gray">#7C7C7C</Color>
-	<Color x:Key="Black">#1B1B1E</Color>
-	<Color x:Key="Primary">#4F5D75</Color>
-	<Color x:Key="Secondary">#EF8354</Color>
 
+
+
+	<Color x:Key="Text">#ebe6db</Color>
+	<Color x:Key="Background">#1b1b1d</Color>
+	<Color x:Key="Primary">#bfcdd4</Color>
+	<Color x:Key="Secondary">#2f788e</Color>
+	<Color x:Key="Accent">#e9a81c</Color>
 	<!-- Brushes -->
-	
-	<SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
-	<SolidColorBrush x:Key="GrayBrush" Color="{StaticResource Gray}" />
-	<SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}" />
+
+	<SolidColorBrush x:Key="TextBrush" Color="{StaticResource Text}" />
+	<SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}" />
 	<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}" />
 	<SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}" />
-
+	<SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}" />
 
 	<!-- Gradients -->
-	<LinearGradientBrush x:Key="GradientTop" StartPoint="0%,0%" EndPoint="0%,20%">
-		<GradientStop Color="{StaticResource Black}" Offset="0" />
-		<GradientStop Color="{StaticResource Primary}" Offset="1" />
+	<LinearGradientBrush x:Key="PrimarySecondaryBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+		<GradientStop Color="{StaticResource Primary}" Offset="0" />
+		<GradientStop Color="{StaticResource Secondary}" Offset="1" />
+	</LinearGradientBrush>
+	
+	
+	<LinearGradientBrush x:Key="PrimaryAccentBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+		<GradientStop Color="{StaticResource Primary}" Offset="0" />
+		<GradientStop Color="{StaticResource Accent}" Offset="1" />
+	</LinearGradientBrush>
+
+	<LinearGradientBrush x:Key="SecondaryBackgroundBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+		<GradientStop Color="{StaticResource Secondary}" Offset="0" />
+		<GradientStop Color="{StaticResource Background}" Offset="1" />
 	</LinearGradientBrush>
 
 	<RadialGradientBrush x:Key="GradientRadialBlackToSecondary">
-		<GradientStop Color="{StaticResource Black}" Offset="0" />
+		<GradientStop Color="{StaticResource Background}" Offset="0" />
 		<GradientStop Color="{StaticResource Secondary}" Offset="1" />
 	</RadialGradientBrush>
 
