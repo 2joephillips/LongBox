@@ -13,11 +13,6 @@
 						Content="&#xE270;"
 						FontFamily="{DynamicResource IconFillFont}" />
 				</Button>
-				<controls:ButtonWIcon>
-					<controls:ButtonWIcon.ViewModel>
-						<controls:ButtonWIconViewModel Icon="&#xE0E6;" Text="Dashboard" />
-					</controls:ButtonWIcon.ViewModel>
-				</controls:ButtonWIcon>
 			</StackPanel>
 		</Border>
 	</Design.PreviewWith>
