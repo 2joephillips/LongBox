@@ -1,0 +1,35 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:ComicBin.Views.Controls">
+
+  <!--
+    Additional resources 
+    Using Control Themes:
+         https://docs.avaloniaui.net/docs/basics/user-interface/styling/control-themes
+    Using Theme Variants:
+         https://docs.avaloniaui.net/docs/guides/styles-and-resources/how-to-use-theme-variants
+  -->
+  
+  <Design.PreviewWith>
+    <StackPanel Width="400" Spacing="10">      
+        <StackPanel Background="{DynamicResource SystemRegionBrush}">
+          <controls:ButtonWithCommand />
+        </StackPanel>
+    </StackPanel>
+  </Design.PreviewWith>
+ 
+  <ControlTheme x:Key="{x:Type controls:ButtonWithCommand}" TargetType="controls:ButtonWithCommand">
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Button Command="{TemplateBinding ClickCommand}">
+			  <StackPanel>
+				  <Viewbox>
+					  <Label x:Name="IconLabel" Content="{TemplateBinding Icon}" FontFamily="{DynamicResource IconFillFont}"/>
+				  </Viewbox>
+				  <Label x:Name="TextLabel" Content="{TemplateBinding Text}" />
+			  </StackPanel>
+		  </Button>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

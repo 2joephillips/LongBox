@@ -5,7 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:interactivity="http://github.com/wieslawsoltes/AvaloniaBehaviors"
-	   xmlns:reactive="using:ReactiveUI"
+	xmlns:reactive="using:ReactiveUI"
+	xmlns:controls="using:ComicBin.Views.Controls"
+	xmlns:control="using:ComicBin"
     xmlns:vm="using:ComicBin.ViewModels.Pages"
     xmlns:models="using:ComicBin.Core.Models"
     mc:Ignorable="d"
@@ -23,10 +25,10 @@
 	<Grid
         RowDefinitions="150, Auto, *, Auto">
 		<!--Header-->
-		<TextBlock 
+		<TextBlock
                    VerticalAlignment="Center"
 				   HorizontalAlignment="Center"
-				Classes="h1"
+				   Classes="h1 primary"
                    Text="ComicBin helps to manage your comics effortlessly." />
 
 		<!--Configuration -->
@@ -37,7 +39,7 @@
                 Padding="10"
                 Margin="10,10">
 			<StackPanel>
-				<TextBlock Classes="h2" Text="Configuration" VerticalAlignment="Bottom"></TextBlock>
+				<TextBlock Classes="h2 primary" Text="Configuration" VerticalAlignment="Bottom"></TextBlock>
 
 				<Grid ColumnDefinitions="1*, 250" RowDefinitions="Auto, Auto, Auto">
 
@@ -52,12 +54,10 @@
 						<TextBlock Margin="0 5" Classes="label">Root Folder for Comics:</TextBlock>
 						<Border BorderThickness="0,0,0,2" Padding="0,5,0,0" BorderBrush="{DynamicResource PrimaryBrush}">
 							<TextBlock x:Name="RootFolder"
-								 Foreground="{DynamicResource WhiteBrush}"
-								Text="{Binding RootFolder, Mode=OneWay, FallbackValue=Test}"
-									   >
+								Text="{Binding RootFolder, Mode=OneWay, FallbackValue=Test}">
 							</TextBlock>
 						</Border>
-		
+
 					</StackPanel>
 					<StackPanel Grid.Row="0"
                                 Grid.Column="1"
@@ -66,15 +66,8 @@
 						<ToolTip.Tip>
 							<TextBlock>Select Root Comic Folder</TextBlock>
 						</ToolTip.Tip>
-						<Button 
-                                ToolTip.Tip="Select Root Folder"
-                                Command="{Binding SelectFolderCommand}"
-                                VerticalAlignment="Bottom">
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-								<Label Content="&#xE256;" FontFamily="{DynamicResource IconFont}" FontSize="20" Margin="0,0,10,0"/>
-								<TextBlock Text="Select Folder" VerticalAlignment="Center"/>
-							</StackPanel>
-						</Button>
+						<controls:ButtonWithCommand
+							Icon="&#xE256;" Text="Select Folder" ClickCommand="{Binding Select}"/>
 					</StackPanel>
 
 
@@ -88,15 +81,10 @@
 
 						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 							<TextBlock VerticalAlignment="Center"  Classes="label">ComicVine Api:</TextBlock>
-							<Button Classes="icon-only"
-                                    ToolTip.Tip="Open ComicVine Site for API Key"
-                                    Command="{Binding OpenComicVineSiteCommand}"
-                                    VerticalAlignment="Bottom">
-								<StackPanel Orientation="Horizontal">
-									<Label Content="&#xE3E8;" FontSize="20" FontFamily="{DynamicResource IconFillFont}" />
-								</StackPanel>
 
-							</Button>
+							<controls:ButtonWithCommand
+								Icon="&#xE3E8;" ClickCommand="{Binding OpenComicVineSiteCommand}"
+								 ToolTip.Tip="Open ComicVine Site for API Key"/>
 						</StackPanel>
 
 
@@ -108,7 +96,7 @@
 								<TextBlock>Paste your ComicVine Api.</TextBlock>
 							</ToolTip.Tip>
 						</TextBox>
-						<TextBlock       
+						<TextBlock
 								   Classes.caption-warning="{Binding !IsValidKey }"
 									Classes.caption="{Binding IsValidKey }">
 							<Run Text="API Key Status: " />
@@ -122,17 +110,11 @@
 						HorizontalAlignment="Stretch"
                         Grid.Row="1"
                         Grid.Column="1">
-						<Button
-                                ToolTip.Tip="Confirm API Key works"
-                                Command="{Binding VerifyApiKeyCommand}"
-                                VerticalAlignment="Center"
-                                IsEnabled="{Binding !IsValidKey, Mode=TwoWay}"
-								Margin="0,20,0,0">
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-								<Label Content="&#xE184;" FontFamily="{DynamicResource IconFont}" FontSize="20"  Margin="0,0,10,0"/>
-								<TextBlock Text="Verify Api" VerticalAlignment="Center" />
-							</StackPanel>
-						</Button>
+						<controls:ButtonWithCommand
+							Icon="&#xE3E8;" ClickCommand="{Binding OpenComicVineSiteCommand}"
+							ToolTip.Tip="Confirm API Key works"
+							Text="Verify Api"
+							IsEnabled="{Binding !IsValidKey, Mode=TwoWay}"/>
 					</StackPanel>
 
 
@@ -158,7 +140,12 @@
                             Grid.Row="2"
                             Grid.Column="1" />
 
-
+					<controls:ButtonWithCommand
+						Grid.Row="2"
+                        Grid.Column="1"
+						ClickCommand="{Binding ScanFolderCommand}"
+						Text="Start Scanning Files"
+						IsEnabled="{Binding !IsValidKey, Mode=TwoWay}"/>
 				</Grid>
 			</StackPanel>
 		</Border>
