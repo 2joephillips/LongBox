@@ -1,4 +1,6 @@
-﻿using SixLabors.Fonts;
+﻿using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
@@ -59,42 +61,15 @@ public static class ImageHandler
 
   public static void CreateDefaultImages(string appDataPath)
   {
-    // Define sizes for each image
-    var thumbnailSize = (Width: 150, Height: 150);
-    var highResSize = (Width: 1024, Height: 1024);
+    var highRes = new Bitmap(AssetLoader.Open(new Uri("avares://ComicBin/Assets/default_highres.jpg")));
+    highRes.Save(ApplicationSettings.DefaultHighResImageLocation);
+    highRes.Dispose();
 
-    // Create and save the default images
-    CreatePlaceholderImage(thumbnailSize.Width, thumbnailSize.Height, Color.Grey, "Thumbnail", ApplicationSettings.DefaultThumbNailImageLocation);
-    CreatePlaceholderImage(highResSize.Width, highResSize.Height, Color.DarkGray, "High Res", ApplicationSettings.DefaultHighResImageLocation);
+    var thumbnail = new Bitmap(AssetLoader.Open(new Uri("avares://ComicBin/Assets/default_thumbnail.jpg")));
+    thumbnail.Save(ApplicationSettings.DefaultThumbNailImageLocation);
+    thumbnail.Dispose();
+
   }
-  private static void CreatePlaceholderImage(int width, int height, Color backgroundColor, string text, string filePath)
-  {
-    FontFamily fontFamily;
-    if (!SystemFonts.TryGet("Arial", out fontFamily))
-      throw new Exception($"Couldn't find font {"Ariel"}");
-
-    var font = fontFamily.CreateFont(16f, FontStyle.Regular);
-
-    var options = new TextOptions(font)
-    {
-      Dpi = 72,
-      KerningMode = KerningMode.Standard
-    };
-
-    var rect = TextMeasurer.MeasureSize(text, options);
-    using var image = new Image<Rgba32>(width, height);
-    image.Mutate(x => x.DrawText(
-     text,
-     font,
-     new Color(Rgba32.ParseHex("#FFFFFFEE")),
-     new PointF((image.Width - rect.Width) / 2,
-        (image.Height - rect.Height) / 2)
-     ));
-
-    var encoder = new JpegEncoder { Quality = 100 };
-    image.Save(filePath, encoder);
-  }
-
   public static Image<Rgba32> GetImageFromZipArchiveEntry(ZipArchiveEntry entry)
   {
     using var entryStream = entry.Open();

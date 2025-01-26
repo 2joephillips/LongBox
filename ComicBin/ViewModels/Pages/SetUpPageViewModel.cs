@@ -15,7 +15,6 @@ using Avalonia.Threading;
 using Avalonia.Media.Imaging;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Net.Http;
 using System.Reactive.Linq;
 using System.Runtime.InteropServices;
 using ComicBin.Services;
@@ -24,7 +23,6 @@ namespace ComicBin.ViewModels.Pages;
 
 public class SetUpPageViewModel : ViewModelBase
 {
-  private const string FolderNotSelected = "Folder Not Selected";
   private readonly IComicMetadataExtractor _extractor;
   private readonly IApiKeyHandler _apiKeyHandler;
   private readonly IFolderHandler _folderHandler;
@@ -63,11 +61,11 @@ public class SetUpPageViewModel : ViewModelBase
     set => this.RaiseAndSetIfChanged(ref _currentImagePath, value);
   }
 
-  private bool _scanningInProgress;
-  public bool ScanningInProgress
+  private bool _showProgress;
+  public bool ShowProgress
   {
-    get => _scanningInProgress;
-    set => this.RaiseAndSetIfChanged(ref _scanningInProgress, value);
+    get => _showProgress;
+    set => this.RaiseAndSetIfChanged(ref _showProgress, value);
   }
 
   private string _scanningProgress = string.Empty;
@@ -84,9 +82,10 @@ public class SetUpPageViewModel : ViewModelBase
 
   public SetUpPageViewModel()
   {
-    RootFolder = ApplicationSettings.RootFolder ?? FolderNotSelected;
+    var folderHandler = new FolderHandler();
+    RootFolder = ApplicationSettings.RootFolder ?? folderHandler.FolderNotSelected;
     ApiKeyStatus = "Not Validated";
-    ComicVineApiKey = "cf1839e4-dcf4-4558-b355-0748f2b71e68";
+    ComicVineApiKey = "fake-example-key-b355-0748f2b71e68";
     ScanningProgress = " 0/100 Scanned";
   }
 
@@ -96,7 +95,7 @@ public class SetUpPageViewModel : ViewModelBase
     _apiKeyHandler = apiKeyHandler;
     _folderHandler = folderHandler;
     ComicCollection = [];
-    RootFolder = ApplicationSettings.RootFolder ?? FolderNotSelected;
+    RootFolder = ApplicationSettings.RootFolder ?? _folderHandler.FolderNotSelected;
     ApiKeyStatus = "Not Validated";
 
     SelectFolderCommand = ReactiveCommand.CreateFromTask(SelectRootFolder);
@@ -132,7 +131,7 @@ public class SetUpPageViewModel : ViewModelBase
   {
     try
     {
-      ScanningInProgress = true;
+      ShowProgress = true;
       ComicCollection = new ObservableCollection<Comic>();
       var files = await _folderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
       if (!files.Any()) return;
@@ -149,7 +148,7 @@ public class SetUpPageViewModel : ViewModelBase
 
       if (result == ButtonResult.No)
       {
-        ScanningInProgress = false;
+        ShowProgress = false;
         ComicCollection = [];
         return;
       }
