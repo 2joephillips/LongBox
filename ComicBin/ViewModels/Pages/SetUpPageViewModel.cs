@@ -8,7 +8,6 @@ using MsBox.Avalonia;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -19,39 +18,17 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Reactive.Linq;
 using System.Runtime.InteropServices;
+using ComicBin.Services;
 
 namespace ComicBin.ViewModels.Pages;
 
-public static class FolderHandler
-{
-  public static Task<List<string>> ScanFolder(string folderName)
-  {
-    return Task.Run(() =>
-    {
-      var supportedExtensions = new List<string>() { ".jpg", ".png", ".pdf", ".cbz", ".cbr" };
-
-      // Get all file paths in the root directory and its subdirectories
-      var filePaths = Directory.GetFiles(folderName, "*.*", SearchOption.AllDirectories)
-          .Where(file => supportedExtensions.Contains(Path.GetExtension(file).ToLower()))
-          .ToList();
-
-      return filePaths;
-    });
-  }
-}
-
-public class SetUpPageViewModel : PageViewModelBase
+public class SetUpPageViewModel : ViewModelBase
 {
   private const string FolderNotSelected = "Folder Not Selected";
-
-  public ICommand SelectFolderCommand { get; }
-  public ICommand ScanFolderCommand { get; }
-  
-  public ICommand OpenComicVineSiteCommand { get; }
-  public ICommand VerifyApiKeyCommand { get; }
-  
-
-  private ObservableCollection<Comic> _comicCollection = new ObservableCollection<Comic>();
+  private readonly IComicMetadataExtractor _extractor;
+  private readonly IApiKeyHandler _apiKeyHandler;
+  private readonly IFolderHandler _folderHandler;
+  private ObservableCollection<Comic> _comicCollection = new();
   public ObservableCollection<Comic> ComicCollection
   {
     get => _comicCollection;
@@ -64,7 +41,7 @@ public class SetUpPageViewModel : PageViewModelBase
     get => _rootFolder;
     private set => this.RaiseAndSetIfChanged(ref _rootFolder, value);
   }
-  
+
   private string _comicVineApiKey = string.Empty;
   public string ComicVineApiKey
   {
@@ -77,13 +54,6 @@ public class SetUpPageViewModel : PageViewModelBase
   {
     get => _apiKeyStatus;
     set => this.RaiseAndSetIfChanged(ref _apiKeyStatus, value);
-  }
-
-  private bool _isValidKey;
-  public bool IsValidKey
-  {
-    get => _isValidKey;
-    set => this.RaiseAndSetIfChanged(ref _isValidKey, value);
   }
 
   private Bitmap _currentImagePath = ApplicationSettings.DefaultHighResImage;
@@ -101,80 +71,40 @@ public class SetUpPageViewModel : PageViewModelBase
   }
 
   private string _scanningProgress = string.Empty;
-
   public string ScanningProgress
   {
     get => _scanningProgress;
     set => this.RaiseAndSetIfChanged(ref _scanningProgress, value);
   }
 
-  public SetUpPageViewModel() { }
+  public ICommand SelectFolderCommand { get; }
+  public ICommand OpenComicVineSiteCommand { get; }
+  public ICommand VerifyApiKeyCommand { get; }
+  public ICommand ScanFolderCommand { get; }
 
-  public SetUpPageViewModel(IComicMetadataExtractor comicMetadataExtractor)
+  public SetUpPageViewModel()
   {
-    var extractor = comicMetadataExtractor;
-    ComicCollection = new ObservableCollection<Comic>();
     RootFolder = ApplicationSettings.RootFolder ?? FolderNotSelected;
-    SelectFolderCommand = ReactiveCommand.CreateFromTask(SelectRootFolder);
     ApiKeyStatus = "Not Validated";
-    // SaveRootFolder = ReactiveCommand.CreateFromTask(async () =>
-    // {
-    //   await settingsRepository.InsertOrUpdateSetting(ApplicationSettingKey.RootFolder, RootFolder);
-    //   ApplicationSettings.UpdateRootFolder(RootFolder);
-    // });
+    ComicVineApiKey = "cf1839e4-dcf4-4558-b355-0748f2b71e68";
+    ScanningProgress = " 0/100 Scanned";
+  }
 
-    ScanFolderCommand = ReactiveCommand.CreateFromTask(async () =>
-    {
-      try
-      {
-        ScanningInProgress = true;
-        ComicCollection = new ObservableCollection<Comic>();
-        var files = await FolderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
-        if (!files.Any()) return;
+  public SetUpPageViewModel(IComicMetadataExtractor comicMetadataExtractor, IApiKeyHandler apiKeyHandler, IFolderHandler folderHandler)
+  {
+    _extractor = comicMetadataExtractor;
+    _apiKeyHandler = apiKeyHandler;
+    _folderHandler = folderHandler;
+    ComicCollection = [];
+    RootFolder = ApplicationSettings.RootFolder ?? FolderNotSelected;
+    ApiKeyStatus = "Not Validated";
 
-        var comics = files.Select(file => new Comic(file, extractor)).ToList();
+    SelectFolderCommand = ReactiveCommand.CreateFromTask(SelectRootFolder);
 
-        // Show message box on the UI thread
-        var result = await Dispatcher.UIThread.InvokeAsync(async () =>
-        {
-          var box = MessageBoxManager
-                      .GetMessageBoxStandard("Comics Found", "Found " + comics.Count + " comics. Do you want to start scanning?",
-                          ButtonEnum.YesNo);
-
-          return await box.ShowAsync();
-        });
-
-        if (result == ButtonResult.Yes)
-        {
-          var index = 1;
-          ScanningProgress = ProgressText(index, comics);
-          foreach (var comic in comics)
-          {
-            ScanningProgress = ProgressText(index++, comics);
-            // Fetch metadata for the comic on a background thread
-            await Task.Run(() => comic.LoadMetaData()).ConfigureAwait(false);
-            if (comic.CoverImagePaths.HighResPath != null)
-              CurrentImagePath = new Bitmap(comic.CoverImagePaths.HighResPath);
-
-            ComicCollection.Add(comic);
-
-          }
-        }
-        else
-        {
-          ScanningInProgress = false;
-          ComicCollection = new ObservableCollection<Comic>();
-        }
-      }
-      catch (Exception)
-      {
-        // Handle exception
-      }
-    });
-
-    var canVerifyApiKey = this.WhenAnyValue(x => x.ComicVineApiKey).Select(apiKey => !string.IsNullOrEmpty(apiKey)); 
+    var canVerifyApiKey = this.WhenAnyValue(x => x.ComicVineApiKey).Select(apiKey => !string.IsNullOrEmpty(apiKey));
     VerifyApiKeyCommand = ReactiveCommand.CreateFromTask(VerifyApiKey, canVerifyApiKey);
-    
+
+    ScanFolderCommand = ReactiveCommand.CreateFromTask(ScanFolder);
     OpenComicVineSiteCommand = ReactiveCommand.Create(() =>
     {
       var url = "https://comicvine.gamespot.com/api/";
@@ -198,63 +128,91 @@ public class SetUpPageViewModel : PageViewModelBase
     }
   }
 
+  private async Task ScanFolder()
+  {
+    try
+    {
+      ScanningInProgress = true;
+      ComicCollection = new ObservableCollection<Comic>();
+      var files = await _folderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
+      if (!files.Any()) return;
+
+      var comics = files.Select(file => new Comic(file, _extractor)).ToList();
+      // Show message box on the UI thread
+      var result = await Dispatcher.UIThread.InvokeAsync(async () =>
+      {
+        var box = MessageBoxManager
+                    .GetMessageBoxStandard("Comics Found", "Found " + comics.Count + " comics. Do you want to start scanning?",
+                        ButtonEnum.YesNo);
+        return await box.ShowAsync();
+      });
+
+      if (result == ButtonResult.No)
+      {
+        ScanningInProgress = false;
+        ComicCollection = [];
+        return;
+      }
+
+      var index = 1;
+      ScanningProgress = ProgressText(index, comics);
+      foreach (var comic in comics)
+      {
+        ScanningProgress = ProgressText(index++, comics);
+        // Fetch metadata for the comic on a background thread
+        await Task.Run(() => comic.LoadMetaData()).ConfigureAwait(false);
+        if (comic.CoverImagePaths.HighResPath != null)
+          CurrentImagePath = new Bitmap(comic.CoverImagePaths.HighResPath);
+
+        ComicCollection.Add(comic);
+
+      }
+
+    }
+    catch (Exception)
+    {
+      // Handle exception
+    }
+  }
+
   public async Task SelectRootFolder()
   {
     var toplevel = TopLevel.GetTopLevel(new MainWindow());
     var pickedFolder = await toplevel?.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions() { AllowMultiple = false })!;
     var folderPath = pickedFolder.FirstOrDefault()?.TryGetLocalPath();
     var rootFolder = folderPath ?? string.Empty;
-    if (rootFolder != string.Empty)
-    {
-      await UpdateProgressWhenRootFolderIsKnown().ConfigureAwait(false);
-    }
-
-
     RootFolder = rootFolder;
+    if (rootFolder != string.Empty)
+      await UpdateProgressWhenRootFolderIsKnown().ConfigureAwait(false);
   }
 
   private async Task UpdateProgressWhenRootFolderIsKnown()
   {
     // Determine number of files needing to be scanned.
-    var files = await FolderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
+    var files = await _folderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
     ScanningProgress = $"Found {files.Count()} comics files.";
   }
 
   private async Task VerifyApiKey()
   {
-   await Dispatcher.UIThread.InvokeAsync(() =>
-    {
-      ApiKeyStatus = "Validating API Key...";
-      IsValidKey = false;
-    });
-   
-    var apiUrl = $"https://comicvine.gamespot.com/api/issues/?api_key={ComicVineApiKey}&format=json";
+    await Dispatcher.UIThread.InvokeAsync(() =>
+     {
+       ApiKeyStatus = "Validating API Key...";
+     });
 
-    using HttpClient client = new HttpClient();
-    client.DefaultRequestHeaders.Add("User-Agent", "ComicBin");
-    try
+    var validated = await _apiKeyHandler.VerifyApiKeyAsync(ComicVineApiKey);
+    if (validated)
     {
-      HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-      if (response.IsSuccessStatusCode)
-      {
-        Console.Write("Works");
-        ApiKeyStatus = "Validated";
-        IsValidKey = true;
-      }
-      else
-      {
-        Console.Write("Invalid API Key");
-        ApiKeyStatus = "Invalid";
-        IsValidKey = false;
-      }
+      Console.Write("Works");
+      ApiKeyStatus = "Validated";
     }
-    catch (Exception ex)
+    else
     {
-      Console.Write(ex.Message);
+      Console.Write("Invalid API Key");
+      ApiKeyStatus = "Invalid";
     }
   }
-  
+
   private string ProgressText(int index, List<Comic> comics)
   {
     if (index < comics.Count())
@@ -263,14 +221,4 @@ public class SetUpPageViewModel : PageViewModelBase
       return $"{index}/{comics.Count()} Unable To open: {comics.Count(s => s.UnableToOpen)} Needs Metadata : {comics.Count(s => s.NeedsMetaData)} ";
   }
 
-  public override bool CanNavigateNext
-  {
-    get => true;
-    protected set => throw new NotSupportedException();
-  }
-  public override bool CanNavigatePrevious
-  {
-    get => false;
-    protected set => throw new NotSupportedException();
-  }
 }

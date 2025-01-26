@@ -29,13 +29,12 @@
 				<StackPanel Spacing="15" Orientation="Horizontal">
 					<controls:ButtonWithCommand
 						Icon="&#xE0E6;"
+						HasIcon="True"
 						Text="Home"/>
 				</StackPanel>
 			</StackPanel>
 			<StackPanel Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Left">
-				<Button Classes="icon-only">
-					<Label Content="&#xE270;" FontFamily="{DynamicResource IconFillFont}" />
-				</Button>
+				<controls:IconButtonWithCommand Icon="&#xE270;" />
 			</StackPanel>
 			<TransitioningContentControl Grid.Row="1" Content="{Binding CurrentPage}" Grid.ColumnSpan="2"/>
 		</Grid>

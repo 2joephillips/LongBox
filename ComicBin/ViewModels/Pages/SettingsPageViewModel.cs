@@ -7,13 +7,13 @@ namespace ComicBin.ViewModels.Pages;
 /// <summary>
 ///  This is our ViewModel for the second page
 /// </summary>
-public class SettingsPageViewModel : PageViewModelBase
+public class SettingsPageViewModel : ViewModelBase
 {
   public SettingsPageViewModel()
   {
     // Listen to changes of MailAddress and Password and update CanNavigateNext accordingly
-    this.WhenAnyValue(x => x.MailAddress, x => x.Password)
-        .Subscribe(_ => UpdateCanNavigateNext());
+    //this.WhenAnyValue(x => x.MailAddress, x => x.Password)
+    //    .Subscribe(_ => UpdateCanNavigateNext());
   }
 
 
@@ -43,30 +43,4 @@ public class SettingsPageViewModel : PageViewModelBase
     set { this.RaiseAndSetIfChanged(ref _Password, value); }
   }
 
-
-  private bool _CanNavigateNext;
-
-  // For this page the user can only go to the next page if all fields are valid. So we need a private setter.
-  public override bool CanNavigateNext
-  {
-    get { return _CanNavigateNext; }
-    protected set { this.RaiseAndSetIfChanged(ref _CanNavigateNext, value); }
-  }
-
-
-  // We allow navigate back in any case
-  public override bool CanNavigatePrevious
-  {
-    get => true;
-    protected set => throw new NotSupportedException();
-  }
-
-  // Update CanNavigateNext. Allow next page if E-Mail and Password are valid
-  private void UpdateCanNavigateNext()
-  {
-    CanNavigateNext =
-           !string.IsNullOrEmpty(_MailAddress)
-        && _MailAddress.Contains("@")
-        && !string.IsNullOrEmpty(_Password);
-  }
 }

@@ -15,8 +15,8 @@ public class MainWindowViewModel : ViewModelBase
 
   public ICommand OpenReaderCommand { get; }
 
-  private readonly PageViewModelBase[] Pages;
-  private PageViewModelBase? _CurrentPage;
+  private readonly ViewModelBase[]? Pages;
+  private ViewModelBase? _CurrentPage;
 
   public MainWindowViewModel()
   {
@@ -34,14 +34,6 @@ public class MainWindowViewModel : ViewModelBase
 
     _CurrentPage = isSetUpComplete ? Pages.First(): Pages.LastOrDefault();
 
-
-
-    var canNavNext = this.WhenAnyValue(x => x.CurrentPage).Select(currentPage => currentPage is { CanNavigateNext: true });
-    var canNavPrev = this.WhenAnyValue(x => x.CurrentPage).Select(currentPage => currentPage is { CanNavigatePrevious: true }); 
-
-    NavigateNextCommand = ReactiveCommand.Create(NavigateNext, canNavNext);
-    NavigatePreviousCommand = ReactiveCommand.Create(NavigatePrevious, canNavPrev);
-
     OpenReaderCommand = ReactiveCommand.CreateFromTask(async () =>
     {
       await Task.Run(() =>
@@ -53,7 +45,7 @@ public class MainWindowViewModel : ViewModelBase
     });
   }
 
-  public PageViewModelBase? CurrentPage
+  public ViewModelBase? CurrentPage
   {
     get { return _CurrentPage; }
     private set { this.RaiseAndSetIfChanged(ref _CurrentPage, value); }

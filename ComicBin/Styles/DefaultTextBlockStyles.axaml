@@ -35,7 +35,7 @@
 		<Style Selector="TextBlock">
 			<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
 		</Style>
-		
+
 		<Style Selector="TextBlock.primary">
 			<Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
 		</Style>
@@ -47,9 +47,13 @@
 		<Style Selector="TextBlock.accent">
 			<Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
 		</Style>
-		
+
 		<Style Selector="TextBlock.warning">
 			<Setter Property="Foreground" Value="OrangeRed" />
+		</Style>
+
+		<Style Selector="Label.warning">
+			<Setter Property="Foreground" Value="OrangeRed"/>
 		</Style>
 
 
@@ -62,11 +66,11 @@
 		</Style>
 
 		<!-- Header 2 -->
-		<Style Selector="TextBlock.h2">
-			<Setter Property="FontSize" Value="32" />
-			<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
-			<Setter Property="Margin" Value="0,16,0,16" />
-		</Style>
+        <Style Selector="TextBlock.h2">
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
+            <Setter Property="Margin" Value="0,16,0,16" />
+        </Style>
 
 		<!-- Header 3 -->
 		<Style Selector="TextBlock.h3">

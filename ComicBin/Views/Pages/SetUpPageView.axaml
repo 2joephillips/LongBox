@@ -27,19 +27,21 @@
 		<!--Header-->
 		<TextBlock
                    VerticalAlignment="Center"
-				   HorizontalAlignment="Center"
-				   Classes="h1 primary"
-                   Text="ComicBin helps to manage your comics effortlessly." />
+				   HorizontalAlignment="Center" Classes="h1">
+			<Run Text="ComicBin helps to manage your "/>
+			<Run Text="comics " Foreground="{StaticResource SecondaryBrush}" FontFamily="{StaticResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom"/>
+			<Run Text="effortlessly."/>
+		</TextBlock>
 
 		<!--Configuration -->
 		<Border Grid.Row="1"
                 CornerRadius="15"
-                BorderBrush="{DynamicResource BlackBrush}"
+                BorderBrush="{DynamicResource PrimaryBrush}"
                 BorderThickness="2"
                 Padding="10"
                 Margin="10,10">
 			<StackPanel>
-				<TextBlock Classes="h2 primary" Text="Configuration" VerticalAlignment="Bottom"></TextBlock>
+				<TextBlock Classes="h2" Text="Configuration" VerticalAlignment="Bottom"></TextBlock>
 
 				<Grid ColumnDefinitions="1*, 250" RowDefinitions="Auto, Auto, Auto">
 
@@ -52,12 +54,13 @@
 							<TextBlock>This folder will serve as the central location for organizing and managing your comic collection. All subfolders and files within this root will be scanned.</TextBlock>
 						</ToolTip.Tip>
 						<TextBlock Margin="0 5" Classes="label">Root Folder for Comics:</TextBlock>
-						<Border BorderThickness="0,0,0,2" Padding="0,5,0,0" BorderBrush="{DynamicResource PrimaryBrush}">
+						<Border BorderThickness="0,0,0,2" BorderBrush="{DynamicResource PrimaryBrush}">
 							<TextBlock x:Name="RootFolder"
-								Text="{Binding RootFolder, Mode=OneWay, FallbackValue=Test}">
+									   Margin="0,0,0,0"
+										Classes="h5"
+										Text="{Binding RootFolder}">
 							</TextBlock>
 						</Border>
-
 					</StackPanel>
 					<StackPanel Grid.Row="0"
                                 Grid.Column="1"
@@ -67,7 +70,11 @@
 							<TextBlock>Select Root Comic Folder</TextBlock>
 						</ToolTip.Tip>
 						<controls:ButtonWithCommand
-							Icon="&#xE256;" Text="Select Folder" ClickCommand="{Binding Select}"/>
+							Icon="&#xE256;" 
+							HasIcon="True" 
+							Text="Select Folder" 
+							Command="{Binding SelectFolderCommand}"
+							Margin="0,20,0,0"/>
 					</StackPanel>
 
 
@@ -79,19 +86,19 @@
                                 Margin="5">
 
 
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch">
 							<TextBlock VerticalAlignment="Center"  Classes="label">ComicVine Api:</TextBlock>
-
-							<controls:ButtonWithCommand
-								Icon="&#xE3E8;" ClickCommand="{Binding OpenComicVineSiteCommand}"
-								 ToolTip.Tip="Open ComicVine Site for API Key"/>
+							<!--<controls:IconButtonWithCommand Icon="&#xE3E8;" ClickCommand="{Binding OpenComicVineSiteCommand}" FontSize="10"/>-->
 						</StackPanel>
 
 
 						<TextBox
-                            Text="{Binding ComicVineApiKey, Mode=TwoWay, FallbackValue=cf1839e4-dcf4-4558-b355-0748f2b71e68}"
-                            IsEnabled="{Binding !IsValidKey, Mode=TwoWay}"
-                            Watermark="example-api-key">
+                            Text="{Binding ComicVineApiKey, Mode=TwoWay}"
+							FontSize="16"
+							Foreground="{DynamicResource PrimaryBrush}"
+                            Watermark="example-api-key"
+							CornerRadius="10"
+							Padding="10,5,10,5">
 							<ToolTip.Tip>
 								<TextBlock>Paste your ComicVine Api.</TextBlock>
 							</ToolTip.Tip>
@@ -99,23 +106,21 @@
 						<TextBlock
 								   Classes.caption-warning="{Binding !IsValidKey }"
 									Classes.caption="{Binding IsValidKey }">
-							<Run Text="API Key Status: " />
-							<Run Text="{Binding ApiKeyStatus, FallbackValue='Invalid'}" />
+							<Run Text="API Key Status: "/>
+							<Run Text="{Binding ApiKeyStatus}" />
 						</TextBlock>
 					</StackPanel>
 
-					<StackPanel
-                        Orientation="Horizontal"
-						VerticalAlignment="Stretch"
-						HorizontalAlignment="Stretch"
-                        Grid.Row="1"
-                        Grid.Column="1">
-						<controls:ButtonWithCommand
-							Icon="&#xE3E8;" ClickCommand="{Binding OpenComicVineSiteCommand}"
-							ToolTip.Tip="Confirm API Key works"
-							Text="Verify Api"
-							IsEnabled="{Binding !IsValidKey, Mode=TwoWay}"/>
-					</StackPanel>
+					<controls:ButtonWithCommand
+						Grid.Row="1"
+						VerticalAlignment="Center"
+						HorizontalAlignment="Left"
+						Grid.Column="1"
+						Icon="&#xE2D6;" Command="{Binding VerifyApiKeyCommand}"
+						HasIcon="True"
+						ToolTip.Tip="Confirm API Key works"
+						Text="Verify Api"
+						Margin="0,20,0,0"/>
 
 
 					<!--Progress Bar and start scanning -->
@@ -125,27 +130,21 @@
                                 
                                 Margin="10">
 						<TextBlock
+							Classes="label"
                             Text="Progress: "
-                            IsEnabled="False"
-                            Margin="0,0,15,0"
                             Width="100" />
 						<TextBlock Name="ScanningProgress"
-                                   Text="{Binding ScanningProgress, FallbackValue='0/0'}"
+								   Classes="label primary"
+                                   Text="{Binding ScanningProgress}"
                                    IsEnabled="False" />
 					</StackPanel>
-
-					<Button Content="Start Scanning Files"
-                            Command="{Binding ScanFolderCommand}"
-                            HorizontalAlignment="Left"
-                            Grid.Row="2"
-                            Grid.Column="1" />
 
 					<controls:ButtonWithCommand
 						Grid.Row="2"
                         Grid.Column="1"
-						ClickCommand="{Binding ScanFolderCommand}"
-						Text="Start Scanning Files"
-						IsEnabled="{Binding !IsValidKey, Mode=TwoWay}"/>
+						HorizontalAlignment="Left"
+						Command="{Binding ScanFolderCommand}"
+						Text="Start Scanning Files"/>
 				</Grid>
 			</StackPanel>
 		</Border>

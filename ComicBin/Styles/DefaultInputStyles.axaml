@@ -46,7 +46,7 @@
 
     <!-- Add Styles Here -->
 
-    <Style Selector="TextBox">
+    <!--<Style Selector="TextBox">
         <Setter Property="Background" Value="{DynamicResource TransparentBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}" />
     </Style>
@@ -85,5 +85,5 @@
     </Style>
     <Style Selector="TextBox:disabled /template/ ScrollViewer">
         <Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}" />
-    </Style>
+    </Style>-->
 </Styles>

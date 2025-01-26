@@ -10,7 +10,6 @@
 	<Application.Styles>
 		<SimpleTheme />
 		<StyleInclude Source="/Styles/DefaultStyles.axaml"/>
-		<StyleInclude Source="/Styles/DefaultButtonStyles.axaml"/>
 		<StyleInclude Source="/Styles/DefaultInputStyles.axaml"/>
 		<StyleInclude Source="/Styles/DefaultTextBlockStyles.axaml"/>
 	</Application.Styles>
@@ -21,6 +20,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="/Assets/Resources/Colors.axaml"/>
 				<ResourceInclude Source="/Assets/Resources/Fonts.axaml"/>
+				<ResourceInclude Source="/Views/Controls/IconButtonWithCommand.axaml"/>
 				<ResourceInclude Source="/Views/Controls/ButtonWithCommand.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>

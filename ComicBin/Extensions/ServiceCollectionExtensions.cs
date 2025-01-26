@@ -25,8 +25,11 @@ public static class ServiceCollectionExtensions
   public static IServiceCollection AddServices(this IServiceCollection services)
   {
     services.AddTransient<IComicMetadataExtractor, ComicMetadataExtractor>();
+    services.AddTransient<IFolderHandler, FolderHandler>();
+    services.AddTransient<IApiKeyHandler, ApiKeyHandler>();
     services.AddTransient<ISystemStorage, SystemStorage>();
     services.AddSingleton<ISettingsRepository, SettingsRepository>();
+
     return services;
   }
 
