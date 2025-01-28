@@ -4,10 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:interactivity="http://github.com/wieslawsoltes/AvaloniaBehaviors"
-	xmlns:reactive="using:ReactiveUI"
 	xmlns:controls="using:ComicBin.Views.Controls"
-	xmlns:control="using:ComicBin"
     xmlns:vm="using:ComicBin.ViewModels.Pages"
     xmlns:models="using:ComicBin.Core.Models"
     mc:Ignorable="d"
@@ -29,7 +26,7 @@
                    VerticalAlignment="Center"
 				   HorizontalAlignment="Center" Classes="h1">
 			<Run Text="ComicBin helps to manage your "/>
-			<Run Text="comics " Foreground="{StaticResource SecondaryBrush}" FontFamily="{StaticResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom"/>
+			<Run Text="comics " Foreground="{StaticResource SecondaryBrush}" FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom"/>
 			<Run Text="effortlessly."/>
 		</TextBlock>
 
@@ -86,9 +83,9 @@
                                 Margin="5">
 
 
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-							<TextBlock VerticalAlignment="Center"  Classes="label">ComicVine Api:</TextBlock>
-							<!--<controls:IconButtonWithCommand Icon="&#xE3E8;" ClickCommand="{Binding OpenComicVineSiteCommand}" FontSize="10"/>-->
+						<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Orientation="Horizontal">
+							<TextBlock VerticalAlignment="Center"  Classes="label" HorizontalAlignment="Left">ComicVine Api:</TextBlock>
+							<controls:IconButtonWithCommand Icon="&#xE3E8;" Command="{Binding OpenComicVineSiteCommand}" FontSize="6" ToolTip.Tip="Click for more info"/>
 						</StackPanel>
 
 
@@ -104,10 +101,10 @@
 							</ToolTip.Tip>
 						</TextBox>
 						<TextBlock
-								   Classes.caption-warning="{Binding !IsValidKey }"
-									Classes.caption="{Binding IsValidKey }">
+								   Classes.caption-warning="{Binding !ApiKeyStatus.IsValid }"
+									Classes.caption="{Binding ApiKeyStatus.IsValid }">
 							<Run Text="API Key Status: "/>
-							<Run Text="{Binding ApiKeyStatus}" />
+							<Run Text="{Binding ApiKeyStatus.Message}" />
 						</TextBlock>
 					</StackPanel>
 
@@ -127,16 +124,27 @@
 					<StackPanel Orientation="Horizontal"
                                 Grid.Row="2"
                                 Grid.Column="0"
-                                
                                 Margin="10">
 						<TextBlock
-							Classes="label"
-                            Text="Progress: "
-                            Width="100" />
+							Text="Progress: "
+                            Width="100"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center">
+							<TextBlock.Classes>label</TextBlock.Classes>
+						</TextBlock>
+						<ProgressBar  Margin="0 10" Height="20"
+							  Minimum="0"
+									  Maximum="{Binding ScanningProgress.Total}"
+									  Value="{Binding ScanningProgress.Current}"
+									  
+								IsVisible="{Binding ScanningProgress.InProgress}"
+							  ShowProgressText="True"/>
 						<TextBlock Name="ScanningProgress"
-								   Classes="label primary"
-                                   Text="{Binding ScanningProgress}"
-                                   IsEnabled="False" />
+						           Text="{Binding ScanningProgress.Message}"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center">
+							<TextBlock.Classes>label primary</TextBlock.Classes>
+						</TextBlock>
 					</StackPanel>
 
 					<controls:ButtonWithCommand
@@ -154,7 +162,7 @@
             Columns="2"
             Grid.Row="2"
             Background="Transparent"
-            IsVisible="{Binding ShowProgress}">
+            IsVisible="{Binding ScanningProgress.InProgress}">
 			<Border ClipToBounds="True"
                     CornerRadius="10"
                     Margin="10">
@@ -165,59 +173,59 @@
                     Source="{Binding CurrentImagePath, FallbackValue={StaticResource DefaultImage}}">
 				</Image>
 			</Border>
-				<ListBox
-					ItemsSource="{Binding ComicCollection}"
-					SelectionMode="Single"
-					MaxHeight="600"
-					CornerRadius="10"
-					BorderThickness="0"
-					Margin="10">
-					<ListBox.ItemTemplate>
-						<DataTemplate DataType="models:Comic">
-							<Grid Margin="8,0">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="*" />
-									<RowDefinition Height="*" />
-								</Grid.RowDefinitions>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="50" />
-									<ColumnDefinition Width="350" />
-									<ColumnDefinition Width="1*" />
-								</Grid.ColumnDefinitions>
-								<Border
-									Grid.RowSpan="2"
-									Width="40"
-									Height="40"
-									Background="Gainsboro"
-									CornerRadius="10"
-									ClipToBounds="True">
-									<Image Stretch="UniformToFill"
-										   VerticalAlignment="Stretch"
-										   HorizontalAlignment="Stretch"
-										   Source="{Binding ThumbNailImage, FallbackValue={StaticResource DefaultThumbnailImage}}" />
-								</Border>
+			<ListBox
+				ItemsSource="{Binding ComicCollection}"
+				SelectionMode="Single"
+				MaxHeight="600"
+				CornerRadius="10"
+				BorderThickness="0"
+				Margin="10">
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="models:Comic">
+						<Grid Margin="8,0">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="50" />
+								<ColumnDefinition Width="350" />
+								<ColumnDefinition Width="1*" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Grid.RowSpan="2"
+								Width="40"
+								Height="40"
+								Background="Gainsboro"
+								CornerRadius="10"
+								ClipToBounds="True">
+								<Image Stretch="UniformToFill"
+									   VerticalAlignment="Stretch"
+									   HorizontalAlignment="Stretch"
+									   Source="{Binding ThumbNailImage, FallbackValue={StaticResource DefaultThumbnailImage}}" />
+							</Border>
 
-								<TextBlock Grid.Row="0"
-										   Grid.Column="1"
-										   Margin="12,6,0,0"
-										   FontWeight="Bold"
-										   Text="{Binding Title, Mode=OneWay, FallbackValue='Comic Title'}" />
-								<TextBlock Grid.Row="1"
-										   Grid.Column="1"
-										   Margin="12,0,0,6"
-										   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
-								<Button Grid.RowSpan="2"
-										Grid.ColumnSpan="2"
-										Grid.Column="2"
-										HorizontalAlignment="Right"
-										VerticalAlignment="Center"
-										Command="{Binding DetailsCommand}">
-									<TextBlock Text="Details" />
-								</Button>
-							</Grid>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
+							<TextBlock Grid.Row="0"
+									   Grid.Column="1"
+									   Margin="12,6,0,0"
+									   FontWeight="Bold"
+									   Text="{Binding Title, Mode=OneWay, FallbackValue='Comic Title'}" />
+							<TextBlock Grid.Row="1"
+									   Grid.Column="1"
+									   Margin="12,0,0,6"
+									   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
+							<Button Grid.RowSpan="2"
+									Grid.ColumnSpan="2"
+									Grid.Column="2"
+									HorizontalAlignment="Right"
+									VerticalAlignment="Center"
+									Command="{Binding DetailsCommand}">
+								<TextBlock Text="Details" />
+							</Button>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
 		</UniformGrid>
 
 	</Grid>

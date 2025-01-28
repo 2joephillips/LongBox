@@ -13,7 +13,7 @@
   <Design.PreviewWith>
     <StackPanel Width="400" Spacing="10">      
         <StackPanel Background="{DynamicResource SystemRegionBrush}">
-          <controls:IconButtonWithCommand 	Icon="&#xE0E6;" />
+          <controls:IconButtonWithCommand 	Icon="&#xE0E6;" FontSize="10"/>
         </StackPanel>
     </StackPanel>
   </Design.PreviewWith>
@@ -46,9 +46,6 @@
 			  <Setter Property="HorizontalAlignment" Value="Center"/>
 			  <Setter Property="Orientation" Value="Horizontal"/>
 			  <Setter Property="Spacing" Value="10"/>
-		  </Style>
-		  <Style Selector="^ Label">
-			  <Setter Property="FontSize" Value="20"/>
 		  </Style>
 		  <Setter Property="Transitions">
 			  <Transitions>

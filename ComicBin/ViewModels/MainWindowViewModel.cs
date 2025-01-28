@@ -20,7 +20,6 @@ public class MainWindowViewModel : ViewModelBase
 
   public MainWindowViewModel()
   {
-    
   }
 
   public MainWindowViewModel(HomePageViewModel homePageViewModel,
@@ -41,7 +40,6 @@ public class MainWindowViewModel : ViewModelBase
         var window = new ReaderWindow() { DataContext = new ReaderViewModel() };
         window.Show();
       });
-
     });
   }
 
