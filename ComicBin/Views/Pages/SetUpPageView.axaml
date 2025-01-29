@@ -121,31 +121,42 @@
 
 
 					<!--Progress Bar and start scanning -->
-					<StackPanel Orientation="Horizontal"
+					<Grid
                                 Grid.Row="2"
                                 Grid.Column="0"
-                                Margin="10">
+                                Margin="10" ColumnDefinitions="100,900,*">
 						<TextBlock
+							Grid.Column="0"
 							Text="Progress: "
                             Width="100"
 							HorizontalAlignment="Center"
 							VerticalAlignment="Center">
 							<TextBlock.Classes>label</TextBlock.Classes>
 						</TextBlock>
-						<ProgressBar  Margin="0 10" Height="20"
-							  Minimum="0"
-									  Maximum="{Binding ScanningProgress.Total}"
-									  Value="{Binding ScanningProgress.Current}"
-									  
-								IsVisible="{Binding ScanningProgress.InProgress}"
-							  ShowProgressText="True"/>
+
 						<TextBlock Name="ScanningProgress"
+								   				Grid.Column="1"
 						           Text="{Binding ScanningProgress.Message}"
-								   HorizontalAlignment="Center"
+								   Padding="10,0"
+								   HorizontalAlignment="Left"
 								   VerticalAlignment="Center">
 							<TextBlock.Classes>label primary</TextBlock.Classes>
 						</TextBlock>
-					</StackPanel>
+						<Border 
+							CornerRadius="10" 
+							ClipToBounds="True"  
+							Grid.Column="2">
+							<ProgressBar
+								VerticalAlignment="Stretch"
+								HorizontalAlignment="Stretch"
+								Minimum="0"
+								CornerRadius="20"
+								Maximum="{Binding ScanningProgress.Total}"
+								Value="{Binding ScanningProgress.Current}"	  
+								IsVisible="{Binding ScanningProgress.InProgress}"
+								ShowProgressText="True"/>
+						</Border>
+					</Grid>
 
 					<controls:ButtonWithCommand
 						Grid.Row="2"
@@ -167,7 +178,7 @@
                     CornerRadius="10"
                     Margin="10">
 				<Image
-                    Stretch="UniformToFill"
+                    Stretch="Fill"
                     Grid.Column="0"
                     MaxHeight="600"
                     Source="{Binding CurrentImagePath, FallbackValue={StaticResource DefaultImage}}">

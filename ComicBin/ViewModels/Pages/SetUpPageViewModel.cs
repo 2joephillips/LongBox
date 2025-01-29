@@ -85,7 +85,15 @@ public class SetUpPageViewModel : ViewModelBase
     RootFolder = ApplicationSettings.RootFolder ?? folderHandler.FolderNotSelected;
     ApiKeyStatus = new ApiKeyValidationResult(false, "Not Validated");
     ComicVineApiKey = "fake-example-key-b355-0748f2b71e68";
-    ScanningProgress = new FolderScanningProgress(false, 0, 0, string.Empty);
+    ScanningProgress = new FolderScanningProgress(true, 2, 10, "scanning");
+    var comic = new Comic() { 
+      CoverImagePaths = (
+        ThumbnailPath: "C:\\Users\\Josep\\AppData\\Local\\ComicRack\\dbd3c688-af7b-481d-a116-630d2a396c1b_thumbnail.jpg", 
+        HighResPath: "C:\\Users\\Josep\\AppData\\Local\\ComicRack\\55bfabb8-8557-4c4e-b459-35f10bbcdd9a_highres.jpg"
+        ), 
+      FileName = "fake-file-name",
+    };
+    ComicCollection = [comic];
   }
 
   public SetUpPageViewModel(IComicMetadataExtractor comicMetadataExtractor, IApiKeyHandler apiKeyHandler, IFolderHandler folderHandler)
