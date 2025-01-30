@@ -142,9 +142,9 @@
 								   VerticalAlignment="Center">
 							<TextBlock.Classes>label primary</TextBlock.Classes>
 						</TextBlock>
-						<Border 
-							CornerRadius="10" 
-							ClipToBounds="True"  
+						<Border
+							CornerRadius="10"
+							ClipToBounds="True"
 							Grid.Column="2">
 							<ProgressBar
 								VerticalAlignment="Stretch"
@@ -152,7 +152,7 @@
 								Minimum="0"
 								CornerRadius="20"
 								Maximum="{Binding ScanningProgress.Total}"
-								Value="{Binding ScanningProgress.Current}"	  
+								Value="{Binding ScanningProgress.Current}"
 								IsVisible="{Binding ScanningProgress.InProgress}"
 								ShowProgressText="True"/>
 						</Border>
@@ -178,19 +178,20 @@
                     CornerRadius="10"
                     Margin="10">
 				<Image
-                    Stretch="Fill"
+                    Stretch="UniformToFill"
                     Grid.Column="0"
                     MaxHeight="600"
                     Source="{Binding CurrentImagePath, FallbackValue={StaticResource DefaultImage}}">
 				</Image>
 			</Border>
+			<Border CornerRadius="10" ClipToBounds="True" Background="Red" Margin="10">
 			<ListBox
 				ItemsSource="{Binding ComicCollection}"
 				SelectionMode="Single"
-				MaxHeight="600"
-				CornerRadius="10"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Stretch"
 				BorderThickness="0"
-				Margin="10">
+				MaxHeight="600">
 				<ListBox.ItemTemplate>
 					<DataTemplate DataType="models:Comic">
 						<Grid Margin="8,0">
@@ -225,18 +226,20 @@
 									   Grid.Column="1"
 									   Margin="12,0,0,6"
 									   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
-							<Button Grid.RowSpan="2"
+							<controls:ButtonWithCommand
+									Grid.RowSpan="2"
 									Grid.ColumnSpan="2"
 									Grid.Column="2"
 									HorizontalAlignment="Right"
-									VerticalAlignment="Center"
-									Command="{Binding DetailsCommand}">
-								<TextBlock Text="Details" />
-							</Button>
+									Command="{Binding DetailsCommand}"
+									Text="Details"
+									/>
+
 						</Grid>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
+			</Border>
 		</UniformGrid>
 
 	</Grid>

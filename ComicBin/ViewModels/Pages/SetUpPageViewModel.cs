@@ -86,11 +86,12 @@ public class SetUpPageViewModel : ViewModelBase
     ApiKeyStatus = new ApiKeyValidationResult(false, "Not Validated");
     ComicVineApiKey = "fake-example-key-b355-0748f2b71e68";
     ScanningProgress = new FolderScanningProgress(true, 2, 10, "scanning");
-    var comic = new Comic() { 
+    var comic = new Comic()
+    {
       CoverImagePaths = (
-        ThumbnailPath: "C:\\Users\\Josep\\AppData\\Local\\ComicRack\\dbd3c688-af7b-481d-a116-630d2a396c1b_thumbnail.jpg", 
+        ThumbnailPath: "C:\\Users\\Josep\\AppData\\Local\\ComicRack\\dbd3c688-af7b-481d-a116-630d2a396c1b_thumbnail.jpg",
         HighResPath: "C:\\Users\\Josep\\AppData\\Local\\ComicRack\\55bfabb8-8557-4c4e-b459-35f10bbcdd9a_highres.jpg"
-        ), 
+        ),
       FileName = "fake-file-name",
     };
     ComicCollection = [comic];
@@ -114,7 +115,7 @@ public class SetUpPageViewModel : ViewModelBase
     OpenComicVineSiteCommand = ReactiveCommand.Create(_apiKeyHandler.OpenComicVineSite);
 
 
-    if (!string.IsNullOrEmpty(RootFolder))
+    if (RootFolder != _folderHandler.FolderNotSelected)
       Dispatcher.UIThread.InvokeAsync(async () => { ScanningProgress = await _folderHandler.ScanFolderResults(RootFolder).ConfigureAwait(false); });
 
   }
@@ -123,7 +124,6 @@ public class SetUpPageViewModel : ViewModelBase
   {
     try
     {
-
       ComicCollection = new ObservableCollection<Comic>();
       var files = await _folderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
       if (!files.Any()) return;
@@ -145,20 +145,26 @@ public class SetUpPageViewModel : ViewModelBase
         return;
       }
 
-      var index = 1;
-
+      var index = 0;
+      ScanningProgress = new FolderScanningProgress(true, index, comics.Count, ProgressText(index, comics));
       foreach (var comic in comics)
       {
-        // Fetch metadata for the comic on a background thread
-        ScanningProgress = new FolderScanningProgress(true, index, comics.Count, ProgressText(index, comics));
-        await Task.Run(() => comic.LoadMetaData()).ConfigureAwait(false);
-        if (comic.CoverImagePaths.HighResPath != null)
-          CurrentImagePath = new Bitmap(comic.CoverImagePaths.HighResPath);
+        await Task.Run(async () =>
+        {
+          comic.LoadMetaData();
+          await Dispatcher.UIThread.InvokeAsync(async () =>
+          {
+            // Fetch metadata for the comic on a background thread
+            ScanningProgress = new FolderScanningProgress(true, index, comics.Count, ProgressText(index, comics));
+            if (comic.CoverImagePaths.HighResPath != null)
+              CurrentImagePath = new Bitmap(comic.CoverImagePaths.HighResPath);
 
-        ComicCollection.Add(comic);
+            ComicCollection.Add(comic);
+          });
+
+        }).ConfigureAwait(false);
         index++;
       }
-
     }
     catch (Exception)
     {
@@ -193,8 +199,8 @@ public class SetUpPageViewModel : ViewModelBase
 
   private string ProgressText(int index, List<Comic> comics)
   {
-    if (index < comics.Count())
-      return $" | Scanning: {comics[index - 1].FileName}";
+    if (index < comics.Count() - 1 )
+      return $" | Scanning: {comics[index].FileName}";
     else
       return $" | Unable To open: {comics.Count(s => s.UnableToOpen)} Needs Metadata : {comics.Count(s => s.NeedsMetaData)} ";
   }

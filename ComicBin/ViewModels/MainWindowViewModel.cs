@@ -3,6 +3,7 @@ using ComicBin.ViewModels.Pages;
 using DynamicData;
 using DynamicData.Kernel;
 using ReactiveUI;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -15,8 +16,14 @@ public class MainWindowViewModel : ViewModelBase
 
   public ICommand OpenReaderCommand { get; }
 
-  private readonly ViewModelBase[]? Pages;
   private ViewModelBase? _CurrentPage;
+  public ViewModelBase? CurrentPage
+  {
+    get { return _CurrentPage; }
+    private set { this.RaiseAndSetIfChanged(ref _CurrentPage, value); }
+  }
+
+  private Dictionary<string, ViewModelBase>? ViewDirectory;
 
   public MainWindowViewModel()
   {
@@ -29,9 +36,15 @@ public class MainWindowViewModel : ViewModelBase
   {
     var isSetUpComplete = ApplicationSettings.IsSetUpComplete;
 
-    Pages = [homePageViewModel, settingsPageViewModel, aboutPageViewModel, setUpPageViewModel];
+    ViewDirectory = new Dictionary<string, ViewModelBase>
+    {
+      { "home", homePageViewModel },
+      { "settings", settingsPageViewModel },
+      { "about", aboutPageViewModel },
+      { "setup", setUpPageViewModel }
+    };
 
-    _CurrentPage = isSetUpComplete ? Pages.First(): Pages.LastOrDefault();
+    _CurrentPage = isSetUpComplete ? ViewDirectory["home"] : ViewDirectory["setup"];
 
     OpenReaderCommand = ReactiveCommand.CreateFromTask(async () =>
     {
@@ -43,26 +56,6 @@ public class MainWindowViewModel : ViewModelBase
     });
   }
 
-  public ViewModelBase? CurrentPage
-  {
-    get { return _CurrentPage; }
-    private set { this.RaiseAndSetIfChanged(ref _CurrentPage, value); }
-  }
 
-  public ICommand NavigateNextCommand { get; }
-
-  private void NavigateNext()
-  {
-    var index = Pages.IndexOf(CurrentPage) + 1;
-    CurrentPage = Pages[index];
-  }
-
-  public ICommand NavigatePreviousCommand { get; }
-
-  private void NavigatePrevious()
-  {
-    var index = Pages.IndexOf(CurrentPage) - 1;
-    CurrentPage = Pages[index];
-  }
 }
 
