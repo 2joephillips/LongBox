@@ -17,22 +17,9 @@ public class ComicEntity
   [Required]
   public Guid Guid { get; set; } = Guid.NewGuid();
 
-  [Required]
-  [MaxLength(255)] // Adjust the length as appropriate
-  public string FilePath { get; set; } = string.Empty;
 
-  [Required]
-  [MaxLength(150)] // Adjust the length as appropriate
-  public string FileName { get; set; } = string.Empty;
-
-  [DefaultValue(false)]
-  public bool UnableToOpen { get; set; } 
-
-  [DefaultValue(false)]
-  public bool NeedsMetaData { get; set; } 
-
-  [Required]
-  public int? PageCount { get; set; }
+  [ForeignKey("CBZFileId")]
+  public CBZFileEntity CBZFile { get; set; }
 
   // These properties are for metadata but should not be persisted
   [NotMapped]

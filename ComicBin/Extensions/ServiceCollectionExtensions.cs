@@ -50,6 +50,7 @@ public static class ServiceCollectionExtensions
     services.AddSingleton<AboutPageViewModel>();
     services.AddSingleton<SetUpPageViewModel>();
     services.AddTransient<MainWindowViewModel>();
+    services.AddTransient<ReaderViewModel>();
     return services;
   }
 }

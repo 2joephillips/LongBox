@@ -32,7 +32,8 @@ public class MainWindowViewModel : ViewModelBase
   public MainWindowViewModel(HomePageViewModel homePageViewModel,
                              SettingsPageViewModel settingsPageViewModel,
                              AboutPageViewModel aboutPageViewModel,
-                              SetUpPageViewModel setUpPageViewModel)
+                              SetUpPageViewModel setUpPageViewModel, 
+                              IComicMetadataExtractor extractor)
   {
     var isSetUpComplete = ApplicationSettings.IsSetUpComplete;
 
@@ -50,7 +51,7 @@ public class MainWindowViewModel : ViewModelBase
     {
       await Task.Run(() =>
       {
-        var window = new ReaderWindow() { DataContext = new ReaderViewModel() };
+        var window = new ReaderWindow() { DataContext = new ReaderViewModel(extractor) };
         window.Show();
       });
     });

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
 using ComicBin.Core.Services;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -10,7 +9,7 @@ namespace ComicBin.Services;
 
 public interface ISystemStorage
 {
-  (string ThumbnailPath, string HighResPath) CreateComicCoverImages(ZipArchiveEntry? coverImage);
+  (string ThumbnailPath, string HighResPath) CreateComicCoverImages(Image<Rgba32>? coverImage);
 }
 
 public class SystemStorage : ISystemStorage
@@ -19,7 +18,7 @@ public class SystemStorage : ISystemStorage
   {
   }
 
-  public (string ThumbnailPath, string HighResPath) CreateComicCoverImages(ZipArchiveEntry? coverImage)
+  public (string ThumbnailPath, string HighResPath) CreateComicCoverImages(Image<Rgba32>? coverImage)
   {
     if (coverImage == null)
       return (ApplicationSettings.DefaultThumbNailImageLocation,ApplicationSettings.DefaultHighResImageLocation);
@@ -30,9 +29,8 @@ public class SystemStorage : ISystemStorage
 
     var thumbnailFilePath = Path.Combine(ApplicationSettings.AppDataPath, comicImagePath + "_thumbnail.jpg");
     var highResFilePath = Path.Combine(ApplicationSettings.AppDataPath, highResFileName);
-    using var entryStream = coverImage.Open();
-    using var image = Image.Load<Rgba32>(entryStream); // Load the image into memory
-    ImageHandler.CreatePlaceholderImages(image, highResFilePath, thumbnailFilePath);
+    
+    ImageHandler.CreatePlaceholderImages(coverImage, highResFilePath, thumbnailFilePath);
 
     return (thumbnailFilePath, highResFilePath);
   }
