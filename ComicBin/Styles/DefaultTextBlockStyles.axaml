@@ -32,10 +32,6 @@
 
 	<Styles>
 
-		<Style Selector="TextBlock">
-			<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-		</Style>
-
 		<Style Selector="TextBlock.primary">
 			<Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
 		</Style>

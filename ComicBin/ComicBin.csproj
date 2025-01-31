@@ -15,10 +15,14 @@
     <None Remove="Models\**" />
     <AvaloniaXaml Remove="Assets\Resources\Colors.axaml" />
     <AvaloniaXaml Remove="Assets\Resources\Fonts.axaml" />
+    <AvaloniaXaml Remove="Controls\IconButton.axaml" />
     <None Remove=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="Assets\Resources\Colors.axaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Controls\IconButton.axaml" />
   </ItemGroup>
   <ItemGroup>
     <!--This helps with theme dll-s trimming.

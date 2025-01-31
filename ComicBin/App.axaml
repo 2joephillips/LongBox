@@ -20,8 +20,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="/Assets/Resources/Colors.axaml"/>
 				<ResourceInclude Source="/Assets/Resources/Fonts.axaml"/>
-				<ResourceInclude Source="/Views/Controls/IconButtonWithCommand.axaml"/>
-				<ResourceInclude Source="/Views/Controls/ButtonWithCommand.axaml"/>
+				<ResourceInclude Source="/Controls/IconButton.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

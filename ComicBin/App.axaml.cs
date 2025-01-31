@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Metadata;
 using ComicBin.Core.Services;
 using ComicBin.Data;
 using ComicBin.Extensions;
@@ -8,6 +9,8 @@ using ComicBin.ViewModels;
 using ComicBin.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+
+[assembly: XmlnsDefinition("https://github.com/avaloniaui", "ComicBin.Controls")]
 
 namespace ComicBin;
 

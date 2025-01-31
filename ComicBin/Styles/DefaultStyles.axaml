@@ -3,17 +3,67 @@
 	<Design.PreviewWith>
 		
 		<Border Padding="20" Height="800" Width="1024" Background="{DynamicResource BackgroundBrush}">
+			<StackPanel>
+				<!--Normal button-->
+				<IconButton IconText="&#xE270;"/>
+				<IconButton Content="Click Me!" IconText="&#xE270;"/>
+				<Button Content="Click Me!" />
+				<CheckBox Content="Check Me!" />
+				<ToggleButton Content="Toggle Me!" />
+
+				<!--Disabled button-->
+				<IconButton IconText="&#xE270;" IsEnabled="False"/>
+				<IconButton Content="Click Me!" IconText="&#xE270;" IsEnabled="False"/>
+				<Button Content="Click Me!" IsEnabled="False"/>
+				<CheckBox Content="Check Me!" IsEnabled="False"/>
+				<ToggleButton Content="Toggle Me!" IsEnabled="False"/>
+			</StackPanel>
+
 		</Border>
 	</Design.PreviewWith>
 
 
-		<Style Selector="Window">
-			<Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
-			<Setter Property="CornerRadius" Value="20"/>
-			<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-			<Setter Property="FontFamily" Value="{DynamicResource BodyFont}" />
-		</Style>
-	
+
+
 	<!-- Add Styles Here -->
-	
+	<Style Selector="Window">
+		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+		<Setter Property="CornerRadius" Value="20"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+		<Setter Property="FontFamily" Value="{DynamicResource BodyFont}" />
+	</Style>
+
+	<Style Selector=":is(Button)">
+		<Setter Property="RenderTransform" Value="scale(1)"/>
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="Height" Value="45"/>
+		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+		<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
+		<Setter Property="CornerRadius" Value="10"/>
+		<Setter Property="Transitions">
+			<Transitions>
+				<BrushTransition Property="Background" Duration="0:0:0.5"></BrushTransition>
+				<TransformOperationsTransition Property="RenderTransform" Duration="0:0:.075" />
+			</Transitions>
+		</Setter>
+	</Style>
+
+	<Style Selector=":is(Button):disabled">
+		<Setter Property="Background" Value="Black"/>
+		<Setter Property="Foreground" Value="Gray"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover">
+		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover /template/ Label">
+		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
+	</Style>
+
 </Styles>

@@ -8,8 +8,8 @@
     xmlns:vm="using:ComicBin.ViewModels.Pages"
     xmlns:models="using:ComicBin.Core.Models"
     mc:Ignorable="d"
-    d:DesignWidth="1440"
-    d:DesignHeight="1024">
+    d:DesignWidth="1400"
+    d:DesignHeight="720">
 	<Design.DataContext>
 		<vm:SetUpPageViewModel />
 	</Design.DataContext>
@@ -66,10 +66,9 @@
 						<ToolTip.Tip>
 							<TextBlock>Select Root Comic Folder</TextBlock>
 						</ToolTip.Tip>
-						<controls:ButtonWithCommand
-							Icon="&#xE256;"
-							HasIcon="True"
-							Text="Select Folder"
+						<IconButton
+							IconText="&#xE256;"
+							Content="Select Folder"
 							Command="{Binding SelectFolderCommand}"
 							Margin="0,20,0,0"/>
 					</StackPanel>
@@ -85,7 +84,7 @@
 
 						<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Orientation="Horizontal">
 							<TextBlock VerticalAlignment="Center"  Classes="label" HorizontalAlignment="Left">ComicVine Api:</TextBlock>
-							<controls:IconButtonWithCommand Icon="&#xE3E8;" Command="{Binding OpenComicVineSiteCommand}" FontSize="6" ToolTip.Tip="Click for more info"/>
+							<IconButton IconText="&#xE3E8;" Command="{Binding OpenComicVineSiteCommand}" FontSize="6" ToolTip.Tip="Click for more info"/>
 						</StackPanel>
 
 
@@ -108,15 +107,15 @@
 						</TextBlock>
 					</StackPanel>
 
-					<controls:ButtonWithCommand
+					<IconButton
 						Grid.Row="1"
 						VerticalAlignment="Center"
 						HorizontalAlignment="Left"
 						Grid.Column="1"
-						Icon="&#xE2D6;" Command="{Binding VerifyApiKeyCommand}"
-						HasIcon="True"
+						IconText="&#xE2D6;" 
+						Command="{Binding VerifyApiKeyCommand}"
 						ToolTip.Tip="Confirm API Key works"
-						Text="Verify Api"
+						Content="Verify Api"
 						Margin="0,20,0,0"/>
 
 
@@ -148,12 +147,12 @@
 						</Border>
 					</Grid>
 
-					<controls:ButtonWithCommand
+					<IconButton
 						Grid.Row="2"
                         Grid.Column="1"
 						HorizontalAlignment="Left"
 						Command="{Binding ScanFolderCommand}"
-						Text="Start Scanning Files"/>
+						Content="Start Scanning Files"/>
 				</Grid>
 			</StackPanel>
 		</Border>
@@ -217,13 +216,13 @@
 									   Grid.Column="1"
 									   Margin="12,0,0,6"
 									   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
-							<controls:ButtonWithCommand
+							<IconButton
 									Grid.RowSpan="2"
 									Grid.ColumnSpan="2"
 									Grid.Column="2"
 									HorizontalAlignment="Right"
 									Command="{Binding DetailsCommand}"
-									Text="Details"
+									Content="Details"
 									/>
 
 						</Grid>

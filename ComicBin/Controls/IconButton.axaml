@@ -1,0 +1,59 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				x:ClassModifier="internal">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<StackPanel Spacing="20">
+				<IconButton IconText="&#xE270;"/>
+				<IconButton Content="Click Me!" IconText="&#xE270;"/>
+				<IconButton Content="Click Me!"/>
+				<Button Content="Click Me!" />
+			</StackPanel>
+		</Border>
+	</Design.PreviewWith>
+	
+	<ControlTheme x:Key="{x:Type IconButton}" TargetType="IconButton">
+		<Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}" />
+		<Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}" />
+		<Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+		<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Padding" Value="4" />
+		<Setter Property="Template">
+			<ControlTemplate>
+				<ContentPresenter Name="PART_ContentPresenter"
+								  Padding="{TemplateBinding Padding}"
+								  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+								  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+								  Background="{TemplateBinding Background}"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="{TemplateBinding BorderThickness}"
+								  Content="{TemplateBinding Content}"
+								  CornerRadius="{TemplateBinding CornerRadius}"
+								  RecognizesAccessKey="True"
+								  TextElement.Foreground="{TemplateBinding Foreground}">
+
+					<ContentPresenter.ContentTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal">
+								<Label Content="{Binding $parent[IconButton].IconText}" FontFamily="{DynamicResource IconFont}" />
+								<ContentPresenter DataContext="{Binding $parent[IconButton].DataContext}" 
+												  Content="{Binding $parent[IconButton].Content}"  />
+							</StackPanel>
+							</DataTemplate>
+					</ContentPresenter.ContentTemplate>
+				</ContentPresenter>
+			</ControlTemplate>
+		</Setter>
+		<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+		</Style>
+		<Style Selector="^:pressed  /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}" />
+		</Style>
+		<Style Selector="^:disabled">
+			<Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+		</Style>
+	</ControlTheme>
+</ResourceDictionary>
