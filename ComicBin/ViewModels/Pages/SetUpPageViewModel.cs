@@ -1,24 +1,23 @@
-﻿using ComicBin.Core.Models;
+﻿using Avalonia.Media.Imaging;
+using Avalonia.Threading;
+using ComicBin.Core.Models;
 using ComicBin.Core.Services;
+using ComicBin.Services;
+using ComicBin.ViewModels;
 using MsBox.Avalonia.Enums;
-using MsBox.Avalonia;
 using ReactiveUI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Avalonia.Threading;
-using Avalonia.Media.Imaging;
-using System.Collections.ObjectModel;
+using System;
+using MsBox.Avalonia;
+using System.Linq;
 using System.Reactive.Linq;
-using ComicBin.Services;
 
 namespace ComicBin.ViewModels.Pages;
 
-
-
-public class SetUpPageViewModel : ViewModelBase
+  public class SetUpPageViewModel : ViewModelBase
 {
   private readonly IComicMetadataExtractor _extractor;
   private readonly IApiKeyHandler _apiKeyHandler;
@@ -71,13 +70,11 @@ public class SetUpPageViewModel : ViewModelBase
     get => _scanningInProgress;
     set => this.RaiseAndSetIfChanged(ref _scanningInProgress, value);
   }
-
-
-
   public ICommand SelectFolderCommand { get; }
   public ICommand OpenComicVineSiteCommand { get; }
   public ICommand VerifyApiKeyCommand { get; }
   public ICommand ScanFolderCommand { get; }
+
 
   public SetUpPageViewModel()
   {
@@ -85,16 +82,17 @@ public class SetUpPageViewModel : ViewModelBase
     RootFolder = ApplicationSettings.RootFolder ?? folderHandler.FolderNotSelected;
     ApiKeyStatus = new ApiKeyValidationResult(false, "Not Validated");
     ComicVineApiKey = "fake-example-key-b355-0748f2b71e68";
-    ScanningProgress = new FolderScanningProgress(true, 2, 10, "scanning");
+
+    ScanningProgress = new FolderScanningProgress(true, 2, 10, $" Total scanned: 100 | Unable To open: 1 | Needs Metadata : 3 ");
     var comic = new Comic()
     {
       CoverImagePaths = (
         ThumbnailPath: "C:\\Users\\Josep\\AppData\\Local\\ComicRack\\dbd3c688-af7b-481d-a116-630d2a396c1b_thumbnail.jpg",
         HighResPath: "C:\\Users\\Josep\\AppData\\Local\\ComicRack\\55bfabb8-8557-4c4e-b459-35f10bbcdd9a_highres.jpg"
         ),
-      FileName = "fake-file-name",
     };
     ComicCollection = [comic];
+
   }
 
   public SetUpPageViewModel(IComicMetadataExtractor comicMetadataExtractor, IApiKeyHandler apiKeyHandler, IFolderHandler folderHandler)
@@ -114,10 +112,14 @@ public class SetUpPageViewModel : ViewModelBase
     ScanFolderCommand = ReactiveCommand.CreateFromTask(ScanFolder);
     OpenComicVineSiteCommand = ReactiveCommand.Create(_apiKeyHandler.OpenComicVineSite);
 
-
     if (RootFolder != _folderHandler.FolderNotSelected)
       Dispatcher.UIThread.InvokeAsync(async () => { ScanningProgress = await _folderHandler.ScanFolderResults(RootFolder).ConfigureAwait(false); });
 
+  }
+
+  private async Task ShowDetails()
+  {
+    Console.WriteLine("Show Details");
   }
 
   private async Task ScanFolder()
@@ -128,12 +130,12 @@ public class SetUpPageViewModel : ViewModelBase
       var files = await _folderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
       if (!files.Any()) return;
 
-      var comics = files.Select(file => new Comic(file, _extractor)).ToList();
+      var zipFiles = files.Select(file => new CBZFile(file)).ToList();
       // Show message box on the UI thread
       var result = await Dispatcher.UIThread.InvokeAsync(async () =>
       {
         var box = MessageBoxManager
-                    .GetMessageBoxStandard("Comics Found", "Found " + comics.Count + " comics. Do you want to start scanning?",
+                    .GetMessageBoxStandard("Comics Found", "Found " + zipFiles.Count + " comics. Do you want to start scanning?",
                         ButtonEnum.YesNo);
         return await box.ShowAsync();
       });
@@ -146,16 +148,17 @@ public class SetUpPageViewModel : ViewModelBase
       }
 
       var index = 0;
-      ScanningProgress = new FolderScanningProgress(true, index, comics.Count, ProgressText(index, comics));
-      foreach (var comic in comics)
+      ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Count, ProgressText(index, zipFiles));
+      foreach (var zip in zipFiles)
       {
         await Task.Run(async () =>
         {
+          var comic = new Comic(zip, _extractor);
           comic.LoadMetaData();
           await Dispatcher.UIThread.InvokeAsync(async () =>
           {
             // Fetch metadata for the comic on a background thread
-            ScanningProgress = new FolderScanningProgress(true, index, comics.Count, ProgressText(index, comics));
+            ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Count, ProgressText(index, zipFiles));
             if (comic.CoverImagePaths.HighResPath != null)
               CurrentImagePath = new Bitmap(comic.CoverImagePaths.HighResPath);
 
@@ -165,6 +168,11 @@ public class SetUpPageViewModel : ViewModelBase
         }).ConfigureAwait(false);
         index++;
       }
+      await Dispatcher.UIThread.InvokeAsync(async () =>
+      {
+        // Fetch metadata for the comic on a background thread
+        ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Count, ProgressText(index, zipFiles));
+      });
     }
     catch (Exception)
     {
@@ -180,29 +188,24 @@ public class SetUpPageViewModel : ViewModelBase
       ScanningProgress = await _folderHandler.ScanFolderResults(RootFolder).ConfigureAwait(false);
   }
 
-  private async Task UpdateProgressWhenRootFolderIsKnown()
-  {
-    // Determine number of files needing to be scanned.
-
-  }
 
   private async Task VerifyApiKey()
   {
     await Dispatcher.UIThread.InvokeAsync(() =>
-     {
-       ApiKeyStatus = new(false, "Validating API Key...");
-     });
+    {
+      ApiKeyStatus = new(false, "Validating API Key...");
+    });
 
     ApiKeyStatus = await _apiKeyHandler.VerifyApiKeyAsync(ComicVineApiKey);
 
   }
 
-  private string ProgressText(int index, List<Comic> comics)
+  private string ProgressText(int index, List<CBZFile> zipFiles)
   {
-    if (index < comics.Count() - 1 )
-      return $" | Scanning: {comics[index].FileName}";
+    if (index <= zipFiles.Count() - 1)
+      return $" Scanning: {zipFiles[index].FileName}";
     else
-      return $" | Unable To open: {comics.Count(s => s.UnableToOpen)} Needs Metadata : {comics.Count(s => s.NeedsMetaData)} ";
+      return $" Total scanned: {zipFiles.Count()} | Unable To open: {zipFiles.Count(s => s.UnableToOpen)} Needs Metadata : {zipFiles.Count(s => s.NeedsMetaData)} ";
   }
 
 }

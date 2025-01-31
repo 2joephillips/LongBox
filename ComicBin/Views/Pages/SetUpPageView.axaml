@@ -124,23 +124,13 @@
 					<Grid
                                 Grid.Row="2"
                                 Grid.Column="0"
-                                Margin="10" ColumnDefinitions="100,900,*">
+                                Margin="10" ColumnDefinitions="900,*">
 						<TextBlock
 							Grid.Column="0"
-							Text="Progress: "
-                            Width="100"
-							HorizontalAlignment="Center"
+							 Text="{Binding ScanningProgress.Message}"
+							HorizontalAlignment="Left"
 							VerticalAlignment="Center">
 							<TextBlock.Classes>label</TextBlock.Classes>
-						</TextBlock>
-
-						<TextBlock Name="ScanningProgress"
-								   				Grid.Column="1"
-						           Text="{Binding ScanningProgress.Message}"
-								   Padding="10,0"
-								   HorizontalAlignment="Left"
-								   VerticalAlignment="Center">
-							<TextBlock.Classes>label primary</TextBlock.Classes>
 						</TextBlock>
 						<Border
 							CornerRadius="10"
@@ -210,7 +200,8 @@
 								Height="40"
 								Background="Gainsboro"
 								CornerRadius="10"
-								ClipToBounds="True">
+								ClipToBounds="True"
+								>
 								<Image Stretch="UniformToFill"
 									   VerticalAlignment="Stretch"
 									   HorizontalAlignment="Stretch"
