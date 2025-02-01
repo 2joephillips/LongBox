@@ -15,7 +15,10 @@
 
 	<!-- Add Resources Here -->
 	<SolidColorBrush x:Key="TextBrush" Color="{StaticResource Neutrals}" />
-	<SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource 800_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource 900_Dark_Neutrals}" />
+
+	<SolidColorBrush x:Key="ButtonBackgoundBrush" Color="{StaticResource 800_Dark_Neutrals}" />
+	
 	<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Blue}" />
 	<SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Orange}" />
 	<SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}" />

@@ -1,37 +1,44 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Design.PreviewWith>
-		
+
 		<Border Padding="20" Height="1000" Width="800" Background="{DynamicResource BackgroundBrush}">
 			<StackPanel Spacing="10">
 				<!--Normal button-->
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<IconButton Classes="icon-only small" IconText="&#xE270;"/>
+					<IconButton Classes="icon-only" IconText="&#xE270;"/>
+					<IconButton Classes="icon-only large" IconText="&#xE270;"/>
+					<IconButton Classes="icon-only xlarge" IconText="&#xE270;"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<Button Content="Click Me!" Classes="small" />
+					<Button Content="Click Me!" />
+					<Button Content="Click Me!" Classes="large" />
+					<Button Content="Click Me!" Classes="xlarge" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<IconButton Content="Click Me!" IconText="&#xE270;"/>
+					<IconButton Classes="small" Content="Click Me!" IconText="&#xE270;"/>
+					<IconButton Classes="large" Content="Click Me!" IconText="&#xE270;"/>
+					<IconButton Classes="xlarge" Content="Click Me!" IconText="&#xE270;"/>
+				</StackPanel>
 
-				<IconButton Classes="icon-only small" IconText="&#xE270;"/>
-				<IconButton Classes="icon-only" IconText="&#xE270;"/>
-				<IconButton Classes="icon-only large" IconText="&#xE270;"/>
-				<IconButton Classes="icon-only xlarge" IconText="&#xE270;"/>
-
-				<Button Content="Click Me!" Classes="small" />
-				<Button Content="Click Me!" />
-				<Button Content="Click Me!" Classes="large" />
-				<Button Content="Click Me!" Classes="xlarge" />
-
-				<IconButton Content="Click Me!" IconText="&#xE270;"/>
-				<IconButton Classes="small" Content="Click Me!" IconText="&#xE270;"/>
-				<IconButton Classes="large" Content="Click Me!" IconText="&#xE270;"/>
-				<IconButton Classes="xlarge" Content="Click Me!" IconText="&#xE270;"/>
 
 				<IconButton  IconText="&#xE270;" Classes="nav" Content="Home Nav" />
-				
+
 				<CheckBox Content="Check Me!" />
 				<ToggleButton Content="Toggle Me!" />
 
 				<!--Disabled button-->
-				<IconButton IconText="&#xE270;" IsEnabled="False"/>
-				<IconButton Content="Click Me!" IconText="&#xE270;" IsEnabled="False"/>
-				<Button Content="Click Me!" IsEnabled="False"/>
-				<CheckBox Content="Check Me!" IsEnabled="False"/>
-				<ToggleButton Content="Toggle Me!" IsEnabled="False"/>
+				<!--
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<IconButton IconText="&#xE270;" IsEnabled="False"/>
+					<IconButton Content="Click Me!" IconText="&#xE270;" IsEnabled="False"/>
+					<Button Content="Click Me!" IsEnabled="False"/>
+					<CheckBox Content="Check Me!" IsEnabled="False"/>
+					<ToggleButton Content="Toggle Me!" IsEnabled="False"/>
+				</StackPanel>-->
 			</StackPanel>
 
 		</Border>
@@ -53,9 +60,9 @@
 		<Setter Property="VerticalAlignment" Value="Center"/>
 		<Setter Property="HorizontalAlignment" Value="Center"/>
 		<Setter Property="Height" Value="45"/>
-		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="Background" Value="{DynamicResource ButtonBackgoundBrush}"/>
 		<Setter Property="BorderThickness" Value="0"/>
-		<Setter Property="BorderBrush" Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource ButtonBackgoundBrush}"/>
 		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
 		<Setter Property="FontSize" Value="18"/>
 		<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
@@ -66,6 +73,9 @@
 				<BrushTransition Property="Background" Duration="0:0:0.5"></BrushTransition>
 				<TransformOperationsTransition Property="RenderTransform" Duration="0:0:.075" />
 			</Transitions>
+		</Setter>
+		<Setter Property="Effect">
+			<DropShadowEffect BlurRadius="5" Opacity="0.3" Color="{DynamicResource 700_Dark_Neutrals}"></DropShadowEffect>
 		</Setter>
 	</Style>
 
@@ -82,7 +92,7 @@
 		<Setter Property="FontSize" Value="32"/>
 		<Setter Property="Height" Value="65"/>
 	</Style>
-	
+
 	<Style Selector=":is(Button):disabled">
 		<Setter Property="Background" Value="Black"/>
 		<Setter Property="Foreground" Value="Gray"/>
@@ -92,17 +102,27 @@
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
 		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="Effect">
+			<DropShadowEffect BlurRadius="1" Opacity=".7" Color="{DynamicResource 800_Dark_Neutrals}"></DropShadowEffect>
+		</Setter>
+
+	</Style>
+
+	<Style Selector=":is(Button).nav">
+		<Setter Property="Effect"/>
 	</Style>
 
 	<Style Selector=":is(Button).nav /template/ ContentPresenter">
 		<Setter Property="BorderThickness" Value="0"/>
 		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="Effect">
+			<DropShadowEffect BlurRadius="0" Opacity=".7" Color="{DynamicResource 800_Dark_Neutrals}"></DropShadowEffect>
+		</Setter>
 	</Style>
 
 	<Style Selector=":is(Button):pointerover /template/ ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-		<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
-		<Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+		<Setter Property="Background" Value="{DynamicResource Accent_Brush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource Accent_Brush}"/>
 	</Style>
 
 	<Style Selector=":is(Button):pointerover.icon-only /template/ ContentPresenter">
@@ -114,12 +134,13 @@
 
 	<Style Selector=":is(Button):pointerover.nav">
 		<Setter Property="RenderTransform" Value="scale(1.2)"/>
+		<Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
 	</Style>
 
 	<Style Selector=":is(Button):pointerover.nav /template/ ContentPresenter">
 		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}"/>
 		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
 		<Setter Property="RenderTransform" Value="scale(1.1)"/>
 	</Style>
 </Styles>
