@@ -1,75 +1,510 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<Design.PreviewWith>
-		<Border Padding="20"
-				CornerRadius="15" BorderThickness="5"
-				Height="800" Width="1024" Background="{DynamicResource BackgroundBrush}">
+	<Design.PreviewWith >
+		<StackPanel>
+			<Grid Width="300" Height="300">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Light Accents" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<StackPanel Grid.Row="1" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 900_Light_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Light_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Light_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Light_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Light_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Light_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Light_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Light_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 100_Light_Accent_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
 
-			<StackPanel Spacing="10">
-				<Border CornerRadius="10" ClipToBounds="True">
-					<Rectangle  Height="100" Fill="{DynamicResource TextBrush}" />
-				</Border>
-				<Border CornerRadius="10" ClipToBounds="True">
-					<Rectangle  Height="100" Fill="{DynamicResource PrimaryBrush}" />
-				</Border>
-				<Border CornerRadius="10" ClipToBounds="True">
-					<Rectangle  Height="100" Fill="{DynamicResource SecondaryBrush}" />
-				</Border>
-				<Border CornerRadius="10" ClipToBounds="True">
-					<Rectangle  Height="100" Fill="{DynamicResource AccentBrush}" />
-				</Border>
-				<Border CornerRadius="10" ClipToBounds="True">
-					<Rectangle  Height="100" Fill="{DynamicResource PrimarySecondaryBrush}" />
-				</Border>
-				<Border CornerRadius="10" ClipToBounds="True">
-					<Rectangle  Height="100" Fill="{DynamicResource PrimaryAccentBrush}" />
-				</Border>
-				<Border CornerRadius="10" ClipToBounds="True">
-					<Rectangle  Height="100" Fill="{DynamicResource SecondaryBackgroundBrush}" />
-				</Border>
-			</StackPanel>
-		</Border>
+				<StackPanel Grid.Row="1">
+					<TextBlock Text="Standard Accent" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<Rectangle Fill="{StaticResource Accent_Brush}" Height="50"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical" Grid.Row="2">
+					<TextBlock Text="Dark Accents" FontSize="16" FontWeight="Bold"  Margin="5"/>
+					<StackPanel Grid.Row="5" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 100_Dark_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Dark_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Dark_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Dark_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Dark_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Dark_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Dark_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Dark_Accent_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 900_Dark_Accent_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+			
+			
+			<Grid Width="300" Height="300">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Light Neutralss" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<StackPanel Grid.Row="1" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 900_Light_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Light_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Light_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Light_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Light_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Light_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Light_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Light_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 100_Light_Neutrals_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+
+				<StackPanel Grid.Row="1">
+					<TextBlock Text="Standard Neutrals" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<Rectangle Fill="{StaticResource Neutrals_Brush}" Height="50"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical" Grid.Row="2">
+					<TextBlock Text="Dark Neutralss" FontSize="16" FontWeight="Bold"  Margin="5"/>
+					<StackPanel Grid.Row="5" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 100_Dark_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Dark_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Dark_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Dark_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Dark_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Dark_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Dark_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Dark_Neutrals_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 900_Dark_Neutrals_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+
+			<Grid Width="300" Height="300">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Light Reds" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<StackPanel Grid.Row="1" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 900_Light_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Light_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Light_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Light_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Light_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Light_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Light_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Light_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 100_Light_Red_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+
+				<StackPanel Grid.Row="1">
+					<TextBlock Text="Standard Red" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<Rectangle Fill="{StaticResource Red_Brush}" Height="50"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical" Grid.Row="2">
+					<TextBlock Text="Dark Reds" FontSize="16" FontWeight="Bold"  Margin="5"/>
+					<StackPanel Grid.Row="5" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 100_Dark_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Dark_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Dark_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Dark_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Dark_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Dark_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Dark_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Dark_Red_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 900_Dark_Red_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+
+			<Grid Width="300" Height="300">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Light Greens" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<StackPanel Grid.Row="1" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 900_Light_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Light_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Light_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Light_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Light_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Light_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Light_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Light_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 100_Light_Green_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+
+				<StackPanel Grid.Row="1">
+					<TextBlock Text="Standard Green" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<Rectangle Fill="{StaticResource Green_Brush}" Height="50"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical" Grid.Row="2">
+					<TextBlock Text="Dark Greens" FontSize="16" FontWeight="Bold"  Margin="5"/>
+					<StackPanel Grid.Row="5" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 100_Dark_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Dark_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Dark_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Dark_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Dark_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Dark_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Dark_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Dark_Green_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 900_Dark_Green_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+
+			<Grid Width="300" Height="300">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Light Oranges" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<StackPanel Grid.Row="1" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 900_Light_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Light_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Light_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Light_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Light_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Light_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Light_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Light_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 100_Light_Orange_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+
+				<StackPanel Grid.Row="1">
+					<TextBlock Text="Standard Orange" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<Rectangle Fill="{StaticResource Orange_Brush}" Height="50"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical" Grid.Row="2">
+					<TextBlock Text="Dark Oranges" FontSize="16" FontWeight="Bold"  Margin="5"/>
+					<StackPanel Grid.Row="5" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 100_Dark_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Dark_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Dark_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Dark_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Dark_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Dark_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Dark_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Dark_Orange_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 900_Dark_Orange_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+
+			<Grid Width="300" Height="300">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Light Blues" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<StackPanel Grid.Row="1" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 900_Light_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Light_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Light_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Light_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Light_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Light_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Light_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Light_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 100_Light_Blue_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+
+				<StackPanel Grid.Row="1">
+					<TextBlock Text="Standard Blue" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<Rectangle Fill="{StaticResource Blue_Brush}" Height="50"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical" Grid.Row="2">
+					<TextBlock Text="Dark Blues" FontSize="16" FontWeight="Bold"  Margin="5"/>
+					<StackPanel Grid.Row="5" Orientation="Horizontal">
+						<Rectangle Fill="{StaticResource 100_Dark_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 200_Dark_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 300_Dark_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 400_Dark_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 500_Dark_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 600_Dark_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 700_Dark_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 800_Dark_Blue_Brush}" Width="30" Height="50"/>
+						<Rectangle Fill="{StaticResource 900_Dark_Blue_Brush}" Width="30" Height="50"/>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</StackPanel>
+
 	</Design.PreviewWith>
 
 	<!-- Add Resources Here -->
+		
 	<!-- Solid Colors -->
+	<Color x:Key="Red">#D6301A</Color>
+	<Color x:Key="Green">#1AD678</Color>
+	<Color x:Key="Orange">#D68E1A</Color>
+	<Color x:Key="Blue">#1AABD6</Color>
+	<Color x:Key="Neutrals">#EBE6DB</Color>
+	<Color x:Key="Accent">#6B1BE4</Color>
 
+	<!-- Color Shades -->
+	<Color x:Key="900_Light_Accent">#F0E8FC</Color>
+	<Color x:Key="800_Light_Accent">#E1D1FA</Color>
+	<Color x:Key="700_Light_Accent">#D3BBF7</Color>
+	<Color x:Key="600_Light_Accent">#C4A4F4</Color>
+	<Color x:Key="500_Light_Accent">#B58DF2</Color>
+	<Color x:Key="400_Light_Accent">#A676EF</Color>
+	<Color x:Key="300_Light_Accent">#975FEC</Color>
+	<Color x:Key="200_Light_Accent">#8949E9</Color>
+	<Color x:Key="100_Light_Accent">#7A32E7</Color>
+	<Color x:Key="100_Dark_Accent">#6018CD</Color>
+	<Color x:Key="200_Dark_Accent">#5616B6</Color>
+	<Color x:Key="300_Dark_Accent">#4B13A0</Color>
+	<Color x:Key="400_Dark_Accent">#401089</Color>
+	<Color x:Key="500_Dark_Accent">#360E72</Color>
+	<Color x:Key="600_Dark_Accent">#2B0B5B</Color>
+	<Color x:Key="700_Dark_Accent">#200844</Color>
+	<Color x:Key="800_Dark_Accent">#15052E</Color>
+	<Color x:Key="900_Dark_Accent">#0B0317</Color>
 
+	<Color x:Key="900_Light_Red">#FBEAE8</Color>
+	<Color x:Key="800_Light_Red">#F7D6D1</Color>
+	<Color x:Key="700_Light_Red">#F3C1BA</Color>
+	<Color x:Key="600_Light_Red">#EFACA3</Color>
+	<Color x:Key="500_Light_Red">#EB988D</Color>
+	<Color x:Key="400_Light_Red">#E68376</Color>
+	<Color x:Key="300_Light_Red">#E26E5F</Color>
+	<Color x:Key="200_Light_Red">#DE5948</Color>
+	<Color x:Key="100_Light_Red">#DA4531</Color>
+	<Color x:Key="100_Dark_Red">#C12B17</Color>
+	<Color x:Key="200_Dark_Red">#AB2615</Color>
+	<Color x:Key="300_Dark_Red">#962212</Color>
+	<Color x:Key="400_Dark_Red">#801D10</Color>
+	<Color x:Key="500_Dark_Red">#6B180D</Color>
+	<Color x:Key="600_Dark_Red">#56130A</Color>
+	<Color x:Key="700_Dark_Red">#400E08</Color>
+	<Color x:Key="800_Dark_Red">#2B0A05</Color>
+	<Color x:Key="900_Dark_Red">#150503</Color>
 
+	<Color x:Key="900_Light_Green">#E8FBF2</Color>
+	<Color x:Key="800_Light_Green">#D1F7E4</Color>
+	<Color x:Key="700_Light_Green">#BAF3D7</Color>
+	<Color x:Key="600_Light_Green">#A3EFC9</Color>
+	<Color x:Key="500_Light_Green">#8DEBBC</Color>
+	<Color x:Key="400_Light_Green">#76E6AE</Color>
+	<Color x:Key="300_Light_Green">#5FE2A1</Color>
+	<Color x:Key="200_Light_Green">#48DE93</Color>
+	<Color x:Key="100_Light_Green">#31DA86</Color>
+	<Color x:Key="100_Dark_Green">#17C16C</Color>
+	<Color x:Key="200_Dark_Green">#15AB60</Color>
+	<Color x:Key="300_Dark_Green">#129654</Color>
+	<Color x:Key="400_Dark_Green">#108048</Color>
+	<Color x:Key="500_Dark_Green">#0D6B3C</Color>
+	<Color x:Key="600_Dark_Green">#0A5630</Color>
+	<Color x:Key="700_Dark_Green">#084024</Color>
+	<Color x:Key="800_Dark_Green">#052B18</Color>
+	<Color x:Key="900_Dark_Green">#03150C</Color>
 
-	<Color x:Key="Text">#ebe6db</Color>
-	<Color x:Key="Background">#1b1b1d</Color>
-	<Color x:Key="Primary">#bfcdd4</Color>
-	<Color x:Key="Secondary">#2f788e</Color>
-	<Color x:Key="Accent">#e9a81c</Color>
-	<!-- Brushes -->
+	<Color x:Key="900_Light_Orange">#FBF4E8</Color>
+	<Color x:Key="800_Light_Orange">#F7E8D1</Color>
+	<Color x:Key="700_Light_Orange">#F3DDBA</Color>
+	<Color x:Key="600_Light_Orange">#EFD2A3</Color>
+	<Color x:Key="500_Light_Orange">#EBC78D</Color>
+	<Color x:Key="400_Light_Orange">#E6BB76</Color>
+	<Color x:Key="300_Light_Orange">#E2B05F</Color>
+	<Color x:Key="200_Light_Orange">#DEA548</Color>
+	<Color x:Key="100_Light_Orange">#DA9931</Color>
+	<Color x:Key="100_Dark_Orange">#C18017</Color>
+	<Color x:Key="200_Dark_Orange">#AB7215</Color>
+	<Color x:Key="300_Dark_Orange">#966312</Color>
+	<Color x:Key="400_Dark_Orange">#805510</Color>
+	<Color x:Key="500_Dark_Orange">#6B470D</Color>
+	<Color x:Key="600_Dark_Orange">#56390A</Color>
+	<Color x:Key="700_Dark_Orange">#402B08</Color>
+	<Color x:Key="800_Dark_Orange">#2B1C05</Color>
+	<Color x:Key="900_Dark_Orange">#150E03</Color>
 
-	<SolidColorBrush x:Key="TextBrush" Color="{StaticResource Text}" />
-	<SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}" />
-	<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}" />
-	<SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}" />
-	<SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}" />
+	<Color x:Key="900_Light_Blue">#E8F7FB</Color>
+	<Color x:Key="800_Light_Blue">#D1EEF7</Color>
+	<Color x:Key="700_Light_Blue">#BAE6F3</Color>
+	<Color x:Key="600_Light_Blue">#A3DDEF</Color>
+	<Color x:Key="500_Light_Blue">#8DD5EB</Color>
+	<Color x:Key="400_Light_Blue">#76CDE6</Color>
+	<Color x:Key="300_Light_Blue">#5FC4E2</Color>
+	<Color x:Key="200_Light_Blue">#48BCDE</Color>
+	<Color x:Key="100_Light_Blue">#31B3DA</Color>
+	<Color x:Key="100_Dark_Blue">#179AC1</Color>
+	<Color x:Key="200_Dark_Blue">#1589AB</Color>
+	<Color x:Key="300_Dark_Blue">#127896</Color>
+	<Color x:Key="400_Dark_Blue">#106780</Color>
+	<Color x:Key="500_Dark_Blue">#0D566B</Color>
+	<Color x:Key="600_Dark_Blue">#0A4456</Color>
+	<Color x:Key="700_Dark_Blue">#083340</Color>
+	<Color x:Key="800_Dark_Blue">#05222B</Color>
+	<Color x:Key="900_Dark_Blue">#031115</Color>
 
-	<!-- Gradients -->
-	<LinearGradientBrush x:Key="PrimarySecondaryBrush" StartPoint="0%,0%" EndPoint="0%,100%">
-		<GradientStop Color="{StaticResource Primary}" Offset="0" />
-		<GradientStop Color="{StaticResource Secondary}" Offset="1" />
-	</LinearGradientBrush>
+	<Color x:Key="900_Light_Neutrals">#FDFDFB</Color>
+	<Color x:Key="800_Light_Neutrals">#FBFAF8</Color>
+	<Color x:Key="700_Light_Neutrals">#F9F8F4</Color>
+	<Color x:Key="600_Light_Neutrals">#F7F5F1</Color>
+	<Color x:Key="500_Light_Neutrals">#F5F3ED</Color>
+	<Color x:Key="400_Light_Neutrals">#F3F0E9</Color>
+	<Color x:Key="300_Light_Neutrals">#F1EEE6</Color>
+	<Color x:Key="200_Light_Neutrals">#EFEBE2</Color>
+	<Color x:Key="100_Light_Neutrals">#EDE9DF</Color>
+	<Color x:Key="100_Dark_Neutrals">#D4CFC5</Color>
+	<Color x:Key="200_Dark_Neutrals">#BCB8AF</Color>
+	<Color x:Key="300_Dark_Neutrals">#A5A199</Color>
+	<Color x:Key="400_Dark_Neutrals">#8D8A83</Color>
+	<Color x:Key="500_Dark_Neutrals">#76736E</Color>
+	<Color x:Key="600_Dark_Neutrals">#5E5C58</Color>
+	<Color x:Key="700_Dark_Neutrals">#464542</Color>
+	<Color x:Key="800_Dark_Neutrals">#2F2E2C</Color>
+	<Color x:Key="900_Dark_Neutrals">#171716</Color>
+
+	<SolidColorBrush x:Key="900_Light_Accent_Brush" Color="{StaticResource 900_Light_Accent}" />
+	<SolidColorBrush x:Key="800_Light_Accent_Brush" Color="{StaticResource 800_Light_Accent}" />
+	<SolidColorBrush x:Key="700_Light_Accent_Brush" Color="{StaticResource 700_Light_Accent}" />
+	<SolidColorBrush x:Key="600_Light_Accent_Brush" Color="{StaticResource 600_Light_Accent}" />
+	<SolidColorBrush x:Key="500_Light_Accent_Brush" Color="{StaticResource 500_Light_Accent}" />
+	<SolidColorBrush x:Key="400_Light_Accent_Brush" Color="{StaticResource 400_Light_Accent}" />
+	<SolidColorBrush x:Key="300_Light_Accent_Brush" Color="{StaticResource 300_Light_Accent}" />
+	<SolidColorBrush x:Key="200_Light_Accent_Brush" Color="{StaticResource 200_Light_Accent}" />
+	<SolidColorBrush x:Key="100_Light_Accent_Brush" Color="{StaticResource 100_Light_Accent}" />
+	<SolidColorBrush x:Key="Accent_Brush" Color="{StaticResource Accent}" />
+	<SolidColorBrush x:Key="100_Dark_Accent_Brush" Color="{StaticResource 100_Dark_Accent}" />
+	<SolidColorBrush x:Key="200_Dark_Accent_Brush" Color="{StaticResource 200_Dark_Accent}" />
+	<SolidColorBrush x:Key="300_Dark_Accent_Brush" Color="{StaticResource 300_Dark_Accent}" />
+	<SolidColorBrush x:Key="400_Dark_Accent_Brush" Color="{StaticResource 400_Dark_Accent}" />
+	<SolidColorBrush x:Key="500_Dark_Accent_Brush" Color="{StaticResource 500_Dark_Accent}" />
+	<SolidColorBrush x:Key="600_Dark_Accent_Brush" Color="{StaticResource 600_Dark_Accent}" />
+	<SolidColorBrush x:Key="700_Dark_Accent_Brush" Color="{StaticResource 700_Dark_Accent}" />
+	<SolidColorBrush x:Key="800_Dark_Accent_Brush" Color="{StaticResource 800_Dark_Accent}" />
+	<SolidColorBrush x:Key="900_Dark_Accent_Brush" Color="{StaticResource 900_Dark_Accent}" />
 	
-	
-	<LinearGradientBrush x:Key="PrimaryAccentBrush" StartPoint="0%,0%" EndPoint="0%,100%">
-		<GradientStop Color="{StaticResource Primary}" Offset="0" />
-		<GradientStop Color="{StaticResource Accent}" Offset="1" />
-	</LinearGradientBrush>
 
-	<LinearGradientBrush x:Key="SecondaryBackgroundBrush" StartPoint="0%,0%" EndPoint="0%,100%">
-		<GradientStop Color="{StaticResource Secondary}" Offset="0" />
-		<GradientStop Color="{StaticResource Background}" Offset="1" />
-	</LinearGradientBrush>
+	<SolidColorBrush x:Key="900_Light_Red_Brush" Color="{StaticResource 900_Light_Red}" />
+	<SolidColorBrush x:Key="800_Light_Red_Brush" Color="{StaticResource 800_Light_Red}" />
+	<SolidColorBrush x:Key="700_Light_Red_Brush" Color="{StaticResource 700_Light_Red}" />
+	<SolidColorBrush x:Key="600_Light_Red_Brush" Color="{StaticResource 600_Light_Red}" />
+	<SolidColorBrush x:Key="500_Light_Red_Brush" Color="{StaticResource 500_Light_Red}" />
+	<SolidColorBrush x:Key="400_Light_Red_Brush" Color="{StaticResource 400_Light_Red}" />
+	<SolidColorBrush x:Key="300_Light_Red_Brush" Color="{StaticResource 300_Light_Red}" />
+	<SolidColorBrush x:Key="200_Light_Red_Brush" Color="{StaticResource 200_Light_Red}" />
+	<SolidColorBrush x:Key="100_Light_Red_Brush" Color="{StaticResource 100_Light_Red}" />
+	<SolidColorBrush x:Key="Red_Brush" Color="{StaticResource Red}" />
+	<SolidColorBrush x:Key="100_Dark_Red_Brush" Color="{StaticResource 100_Dark_Red}" />
+	<SolidColorBrush x:Key="200_Dark_Red_Brush" Color="{StaticResource 200_Dark_Red}" />
+	<SolidColorBrush x:Key="300_Dark_Red_Brush" Color="{StaticResource 300_Dark_Red}" />
+	<SolidColorBrush x:Key="400_Dark_Red_Brush" Color="{StaticResource 400_Dark_Red}" />
+	<SolidColorBrush x:Key="500_Dark_Red_Brush" Color="{StaticResource 500_Dark_Red}" />
+	<SolidColorBrush x:Key="600_Dark_Red_Brush" Color="{StaticResource 600_Dark_Red}" />
+	<SolidColorBrush x:Key="700_Dark_Red_Brush" Color="{StaticResource 700_Dark_Red}" />
+	<SolidColorBrush x:Key="800_Dark_Red_Brush" Color="{StaticResource 800_Dark_Red}" />
+	<SolidColorBrush x:Key="900_Dark_Red_Brush" Color="{StaticResource 900_Dark_Red}" />
 
-	<RadialGradientBrush x:Key="GradientRadialBlackToSecondary">
-		<GradientStop Color="{StaticResource Background}" Offset="0" />
-		<GradientStop Color="{StaticResource Secondary}" Offset="1" />
-	</RadialGradientBrush>
+	<SolidColorBrush x:Key="900_Light_Green_Brush" Color="{StaticResource 900_Light_Green}" />
+	<SolidColorBrush x:Key="800_Light_Green_Brush" Color="{StaticResource 800_Light_Green}" />
+	<SolidColorBrush x:Key="700_Light_Green_Brush" Color="{StaticResource 700_Light_Green}" />
+	<SolidColorBrush x:Key="600_Light_Green_Brush" Color="{StaticResource 600_Light_Green}" />
+	<SolidColorBrush x:Key="500_Light_Green_Brush" Color="{StaticResource 500_Light_Green}" />
+	<SolidColorBrush x:Key="400_Light_Green_Brush" Color="{StaticResource 400_Light_Green}" />
+	<SolidColorBrush x:Key="300_Light_Green_Brush" Color="{StaticResource 300_Light_Green}" />
+	<SolidColorBrush x:Key="200_Light_Green_Brush" Color="{StaticResource 200_Light_Green}" />
+	<SolidColorBrush x:Key="100_Light_Green_Brush" Color="{StaticResource 100_Light_Green}" />
+	<SolidColorBrush x:Key="Green_Brush" Color="{StaticResource Green}" />
+	<SolidColorBrush x:Key="100_Dark_Green_Brush" Color="{StaticResource 100_Dark_Green}" />
+	<SolidColorBrush x:Key="200_Dark_Green_Brush" Color="{StaticResource 200_Dark_Green}" />
+	<SolidColorBrush x:Key="300_Dark_Green_Brush" Color="{StaticResource 300_Dark_Green}" />
+	<SolidColorBrush x:Key="400_Dark_Green_Brush" Color="{StaticResource 400_Dark_Green}" />
+	<SolidColorBrush x:Key="500_Dark_Green_Brush" Color="{StaticResource 500_Dark_Green}" />
+	<SolidColorBrush x:Key="600_Dark_Green_Brush" Color="{StaticResource 600_Dark_Green}" />
+	<SolidColorBrush x:Key="700_Dark_Green_Brush" Color="{StaticResource 700_Dark_Green}" />
+	<SolidColorBrush x:Key="800_Dark_Green_Brush" Color="{StaticResource 800_Dark_Green}" />
+	<SolidColorBrush x:Key="900_Dark_Green_Brush" Color="{StaticResource 900_Dark_Green}" />
+
+	<SolidColorBrush x:Key="900_Light_Orange_Brush" Color="{StaticResource 900_Light_Orange}" />
+	<SolidColorBrush x:Key="800_Light_Orange_Brush" Color="{StaticResource 800_Light_Orange}" />
+	<SolidColorBrush x:Key="700_Light_Orange_Brush" Color="{StaticResource 700_Light_Orange}" />
+	<SolidColorBrush x:Key="600_Light_Orange_Brush" Color="{StaticResource 600_Light_Orange}" />
+	<SolidColorBrush x:Key="500_Light_Orange_Brush" Color="{StaticResource 500_Light_Orange}" />
+	<SolidColorBrush x:Key="400_Light_Orange_Brush" Color="{StaticResource 400_Light_Orange}" />
+	<SolidColorBrush x:Key="300_Light_Orange_Brush" Color="{StaticResource 300_Light_Orange}" />
+	<SolidColorBrush x:Key="200_Light_Orange_Brush" Color="{StaticResource 200_Light_Orange}" />
+	<SolidColorBrush x:Key="100_Light_Orange_Brush" Color="{StaticResource 100_Light_Orange}" />
+	<SolidColorBrush x:Key="Orange_Brush" Color="{StaticResource Orange}" />
+	<SolidColorBrush x:Key="100_Dark_Orange_Brush" Color="{StaticResource 100_Dark_Orange}" />
+	<SolidColorBrush x:Key="200_Dark_Orange_Brush" Color="{StaticResource 200_Dark_Orange}" />
+	<SolidColorBrush x:Key="300_Dark_Orange_Brush" Color="{StaticResource 300_Dark_Orange}" />
+	<SolidColorBrush x:Key="400_Dark_Orange_Brush" Color="{StaticResource 400_Dark_Orange}" />
+	<SolidColorBrush x:Key="500_Dark_Orange_Brush" Color="{StaticResource 500_Dark_Orange}" />
+	<SolidColorBrush x:Key="600_Dark_Orange_Brush" Color="{StaticResource 600_Dark_Orange}" />
+	<SolidColorBrush x:Key="700_Dark_Orange_Brush" Color="{StaticResource 700_Dark_Orange}" />
+	<SolidColorBrush x:Key="800_Dark_Orange_Brush" Color="{StaticResource 800_Dark_Orange}" />
+	<SolidColorBrush x:Key="900_Dark_Orange_Brush" Color="{StaticResource 900_Dark_Orange}" />
+
+	<SolidColorBrush x:Key="900_Light_Blue_Brush" Color="{StaticResource 900_Light_Blue}" />
+	<SolidColorBrush x:Key="800_Light_Blue_Brush" Color="{StaticResource 800_Light_Blue}" />
+	<SolidColorBrush x:Key="700_Light_Blue_Brush" Color="{StaticResource 700_Light_Blue}" />
+	<SolidColorBrush x:Key="600_Light_Blue_Brush" Color="{StaticResource 600_Light_Blue}" />
+	<SolidColorBrush x:Key="500_Light_Blue_Brush" Color="{StaticResource 500_Light_Blue}" />
+	<SolidColorBrush x:Key="400_Light_Blue_Brush" Color="{StaticResource 400_Light_Blue}" />
+	<SolidColorBrush x:Key="300_Light_Blue_Brush" Color="{StaticResource 300_Light_Blue}" />
+	<SolidColorBrush x:Key="200_Light_Blue_Brush" Color="{StaticResource 200_Light_Blue}" />
+	<SolidColorBrush x:Key="100_Light_Blue_Brush" Color="{StaticResource 100_Light_Blue}" />
+	<SolidColorBrush x:Key="Blue_Brush" Color="{StaticResource Blue}" />
+	<SolidColorBrush x:Key="100_Dark_Blue_Brush" Color="{StaticResource 100_Dark_Blue}" />
+	<SolidColorBrush x:Key="200_Dark_Blue_Brush" Color="{StaticResource 200_Dark_Blue}" />
+	<SolidColorBrush x:Key="300_Dark_Blue_Brush" Color="{StaticResource 300_Dark_Blue}" />
+	<SolidColorBrush x:Key="400_Dark_Blue_Brush" Color="{StaticResource 400_Dark_Blue}" />
+	<SolidColorBrush x:Key="500_Dark_Blue_Brush" Color="{StaticResource 500_Dark_Blue}" />
+	<SolidColorBrush x:Key="600_Dark_Blue_Brush" Color="{StaticResource 600_Dark_Blue}" />
+	<SolidColorBrush x:Key="700_Dark_Blue_Brush" Color="{StaticResource 700_Dark_Blue}" />
+	<SolidColorBrush x:Key="800_Dark_Blue_Brush" Color="{StaticResource 800_Dark_Blue}" />
+	<SolidColorBrush x:Key="900_Dark_Blue_Brush" Color="{StaticResource 900_Dark_Blue}" />
+
+	<SolidColorBrush x:Key="900_Light_Neutrals_Brush" Color="{StaticResource 900_Light_Neutrals}" />
+	<SolidColorBrush x:Key="800_Light_Neutrals_Brush" Color="{StaticResource 800_Light_Neutrals}" />
+	<SolidColorBrush x:Key="700_Light_Neutrals_Brush" Color="{StaticResource 700_Light_Neutrals}" />
+	<SolidColorBrush x:Key="600_Light_Neutrals_Brush" Color="{StaticResource 600_Light_Neutrals}" />
+	<SolidColorBrush x:Key="500_Light_Neutrals_Brush" Color="{StaticResource 500_Light_Neutrals}" />
+	<SolidColorBrush x:Key="400_Light_Neutrals_Brush" Color="{StaticResource 400_Light_Neutrals}" />
+	<SolidColorBrush x:Key="300_Light_Neutrals_Brush" Color="{StaticResource 300_Light_Neutrals}" />
+	<SolidColorBrush x:Key="200_Light_Neutrals_Brush" Color="{StaticResource 200_Light_Neutrals}" />
+	<SolidColorBrush x:Key="100_Light_Neutrals_Brush" Color="{StaticResource 100_Light_Neutrals}" />
+	<SolidColorBrush x:Key="Neutrals_Brush" Color="{StaticResource Neutrals}" />
+	<SolidColorBrush x:Key="100_Dark_Neutrals_Brush" Color="{StaticResource 100_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="200_Dark_Neutrals_Brush" Color="{StaticResource 200_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="300_Dark_Neutrals_Brush" Color="{StaticResource 300_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="400_Dark_Neutrals_Brush" Color="{StaticResource 400_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="500_Dark_Neutrals_Brush" Color="{StaticResource 500_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="600_Dark_Neutrals_Brush" Color="{StaticResource 600_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="700_Dark_Neutrals_Brush" Color="{StaticResource 700_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="800_Dark_Neutrals_Brush" Color="{StaticResource 800_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="900_Dark_Neutrals_Brush" Color="{StaticResource 900_Dark_Neutrals}" />
 
 </ResourceDictionary>

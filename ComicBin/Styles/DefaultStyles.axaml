@@ -2,12 +2,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Design.PreviewWith>
 		
-		<Border Padding="20" Height="800" Width="1024" Background="{DynamicResource BackgroundBrush}">
-			<StackPanel>
+		<Border Padding="20" Height="1000" Width="800" Background="{DynamicResource BackgroundBrush}">
+			<StackPanel Spacing="10">
 				<!--Normal button-->
-				<IconButton IconText="&#xE270;"/>
-				<IconButton Content="Click Me!" IconText="&#xE270;"/>
+
+				<IconButton Classes="icon-only small" IconText="&#xE270;"/>
+				<IconButton Classes="icon-only" IconText="&#xE270;"/>
+				<IconButton Classes="icon-only large" IconText="&#xE270;"/>
+				<IconButton Classes="icon-only xlarge" IconText="&#xE270;"/>
+
+				<Button Content="Click Me!" Classes="small" />
 				<Button Content="Click Me!" />
+				<Button Content="Click Me!" Classes="large" />
+				<Button Content="Click Me!" Classes="xlarge" />
+
+				<IconButton Content="Click Me!" IconText="&#xE270;"/>
+				<IconButton Classes="small" Content="Click Me!" IconText="&#xE270;"/>
+				<IconButton Classes="large" Content="Click Me!" IconText="&#xE270;"/>
+				<IconButton Classes="xlarge" Content="Click Me!" IconText="&#xE270;"/>
+
+				<IconButton  IconText="&#xE270;" Classes="nav" Content="Home Nav" />
+				
 				<CheckBox Content="Check Me!" />
 				<ToggleButton Content="Toggle Me!" />
 
@@ -39,10 +54,13 @@
 		<Setter Property="HorizontalAlignment" Value="Center"/>
 		<Setter Property="Height" Value="45"/>
 		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="BorderThickness" Value="0"/>
 		<Setter Property="BorderBrush" Value="{DynamicResource BackgroundBrush}"/>
 		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+		<Setter Property="FontSize" Value="18"/>
 		<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
 		<Setter Property="CornerRadius" Value="10"/>
+		<Setter	Property="Padding" Value="10"/>
 		<Setter Property="Transitions">
 			<Transitions>
 				<BrushTransition Property="Background" Duration="0:0:0.5"></BrushTransition>
@@ -51,19 +69,57 @@
 		</Setter>
 	</Style>
 
+	<Style Selector=":is(Button).small">
+		<Setter Property="FontSize" Value="14"/>
+	</Style>
+
+	<Style Selector=":is(Button).large">
+		<Setter Property="Height" Value="55"/>
+		<Setter Property="FontSize" Value="22"/>
+	</Style>
+
+	<Style Selector=":is(Button).xlarge">
+		<Setter Property="FontSize" Value="32"/>
+		<Setter Property="Height" Value="65"/>
+	</Style>
+	
 	<Style Selector=":is(Button):disabled">
 		<Setter Property="Background" Value="Black"/>
 		<Setter Property="Foreground" Value="Gray"/>
 	</Style>
 
-	<Style Selector=":is(Button):pointerover">
-		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-		<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
+	<Style Selector=":is(Button).icon-only">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
 	</Style>
 
-	<Style Selector=":is(Button):pointerover /template/ Label">
-		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-		<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
+	<Style Selector=":is(Button).nav /template/ ContentPresenter">
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
 	</Style>
 
+	<Style Selector=":is(Button):pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover.icon-only /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="RenderTransform" Value="scale(1.2)"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover.nav">
+		<Setter Property="RenderTransform" Value="scale(1.2)"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover.nav /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="RenderTransform" Value="scale(1.1)"/>
+	</Style>
 </Styles>

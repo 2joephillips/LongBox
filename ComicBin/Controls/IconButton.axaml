@@ -4,22 +4,14 @@
 	<Design.PreviewWith>
 		<Border Padding="20">
 			<StackPanel Spacing="20">
-				<IconButton IconText="&#xE270;"/>
+				<IconButton IconText="&#xE270;" Classes="icon-only"/>
 				<IconButton Content="Click Me!" IconText="&#xE270;"/>
 				<IconButton Content="Click Me!"/>
-				<Button Content="Click Me!" />
 			</StackPanel>
 		</Border>
 	</Design.PreviewWith>
 	
 	<ControlTheme x:Key="{x:Type IconButton}" TargetType="IconButton">
-		<Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}" />
-		<Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}" />
-		<Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
-		<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
-		<Setter Property="HorizontalContentAlignment" Value="Center" />
-		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="Padding" Value="4" />
 		<Setter Property="Template">
 			<ControlTemplate>
 				<ContentPresenter Name="PART_ContentPresenter"
@@ -36,24 +28,16 @@
 
 					<ContentPresenter.ContentTemplate>
 						<DataTemplate>
-							<StackPanel Orientation="Horizontal">
-								<Label Content="{Binding $parent[IconButton].IconText}" FontFamily="{DynamicResource IconFont}" />
+							<StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+								<Label Content="{Binding $parent[IconButton].IconText}" FontFamily="{DynamicResource IconFont}" VerticalAlignment="Center" Margin="0,3,0,0"/>
 								<ContentPresenter DataContext="{Binding $parent[IconButton].DataContext}" 
-												  Content="{Binding $parent[IconButton].Content}"  />
+												  Content="{Binding $parent[IconButton].Content}" 
+												  VerticalAlignment="Center"/>
 							</StackPanel>
 							</DataTemplate>
 					</ContentPresenter.ContentTemplate>
 				</ContentPresenter>
 			</ControlTemplate>
 		</Setter>
-		<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-			<Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-		</Style>
-		<Style Selector="^:pressed  /template/ ContentPresenter#PART_ContentPresenter">
-			<Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}" />
-		</Style>
-		<Style Selector="^:disabled">
-			<Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-		</Style>
 	</ControlTheme>
 </ResourceDictionary>

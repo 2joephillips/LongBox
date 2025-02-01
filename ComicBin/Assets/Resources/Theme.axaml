@@ -1,0 +1,23 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith >
+		<StackPanel Orientation="Vertical" Grid.Row="2">
+			<TextBlock Text="Dark Accents" FontSize="16" FontWeight="Bold"  Margin="5"/>
+			<StackPanel Grid.Row="5" Orientation="Horizontal">
+				<Rectangle Fill="{StaticResource TextBrush}" Width="30" Height="50"/>
+				<Rectangle Fill="{StaticResource BackgroundBrush}" Width="30" Height="50"/>
+				<Rectangle Fill="{StaticResource PrimaryBrush}" Width="30" Height="50"/>
+				<Rectangle Fill="{StaticResource SecondaryBrush}" Width="30" Height="50"/>
+				<Rectangle Fill="{StaticResource Accent_HoverBrush}" Width="30" Height="50"/>
+			</StackPanel>
+		</StackPanel>
+	</Design.PreviewWith>
+
+	<!-- Add Resources Here -->
+	<SolidColorBrush x:Key="TextBrush" Color="{StaticResource Neutrals}" />
+	<SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource 800_Dark_Neutrals}" />
+	<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Blue}" />
+	<SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Orange}" />
+	<SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}" />
+	<SolidColorBrush x:Key="Accent_HoverBrush" Color="{StaticResource 300_Light_Accent}"/> 
+</ResourceDictionary>

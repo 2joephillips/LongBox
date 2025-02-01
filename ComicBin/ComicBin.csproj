@@ -15,6 +15,7 @@
     <None Remove="Models\**" />
     <AvaloniaXaml Remove="Assets\Resources\Colors.axaml" />
     <AvaloniaXaml Remove="Assets\Resources\Fonts.axaml" />
+    <AvaloniaXaml Remove="Assets\Resources\Theme.axaml" />
     <AvaloniaXaml Remove="Controls\IconButton.axaml" />
     <None Remove=".gitignore" />
   </ItemGroup>
@@ -53,6 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Update="Assets\Resources\Fonts.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Update="Assets\Resources\Theme.axaml">
       <SubType>Designer</SubType>
     </AvaloniaResource>
   </ItemGroup>

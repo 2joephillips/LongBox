@@ -24,16 +24,16 @@
 
 
 	<Border Background="{DynamicResource Black}" >
-		<Grid RowDefinitions="60,1*" Margin="10" ColumnDefinitions="1*, 100">
+		<Grid RowDefinitions="60,1*"  ColumnDefinitions="1*, 100" Margin="10">
 			<StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="50" VerticalAlignment="Center">
 				<TextBlock Text="ComicBin" Foreground="{DynamicResource SecondaryBrush}" FontFamily="{DynamicResource ComicFont}" FontSize="60" HorizontalAlignment="Left"/>
 
 				<StackPanel Spacing="15" Orientation="Horizontal">
-					<IconButton IconText="&#xE0E6;" Content="Home"/>
+					<IconButton IconText="&#xE0E6;" Content="Home" Classes="large nav"/>
 				</StackPanel>
 			</StackPanel>
-			<StackPanel Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Left">
-				<IconButton IconText="&#xE270;"/>
+			<StackPanel Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center">
+				<IconButton Classes="icon-only xlarge" IconText="&#xE270;"/>
 			</StackPanel>
 			<TransitioningContentControl Grid.Row="1" Content="{Binding CurrentPage}" Grid.ColumnSpan="2"/>
 		</Grid>
