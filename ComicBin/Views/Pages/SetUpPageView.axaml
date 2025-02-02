@@ -26,7 +26,7 @@
                    VerticalAlignment="Center"
 				   HorizontalAlignment="Center" Classes="h1">
 			<Run Text="ComicBin helps to manage your "/>
-			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom" />
+			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" Foreground="{DynamicResource Brand}" FontSize="52"  BaselineAlignment="Bottom" />
 			<Run Text="effortlessly."/>
 		</TextBlock>
 
@@ -113,7 +113,7 @@
 						VerticalAlignment="Center"
 						HorizontalAlignment="Left"
 						Grid.Column="1"
-						IconText="&#xE2D6;" 
+						IconText="&#xE2D6;"
 						Command="{Binding VerifyApiKeyCommand}"
 						ToolTip.Tip="Confirm API Key works"
 						Content="Verify Api"
@@ -176,61 +176,64 @@
 				</Image>
 			</Border>
 			<Border CornerRadius="10" ClipToBounds="True" Background="Red" Margin="10">
-			<ListBox
-				ItemsSource="{Binding ComicCollection}"
-				SelectionMode="Single"
-				HorizontalAlignment="Stretch"
-				VerticalAlignment="Stretch"
-				BorderThickness="0"
-				MaxHeight="600">
-				<ListBox.ItemTemplate>
-					<DataTemplate DataType="models:Comic">
-						<Grid Margin="8,0">
-							<Grid.RowDefinitions>
-								<RowDefinition Height="*" />
-								<RowDefinition Height="*" />
-							</Grid.RowDefinitions>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="50" />
-								<ColumnDefinition Width="350" />
-								<ColumnDefinition Width="1*" />
-							</Grid.ColumnDefinitions>
-							<Border
-								Grid.RowSpan="2"
-								Width="40"
-								Height="40"
-								Background="Gainsboro"
-								CornerRadius="10"
-								ClipToBounds="True"
-								>
-								<Image Stretch="UniformToFill"
-									   VerticalAlignment="Stretch"
-									   HorizontalAlignment="Stretch"
-									   Source="{Binding ThumbNailImage, FallbackValue={StaticResource DefaultThumbnailImage}}" />
-							</Border>
-
-							<TextBlock Grid.Row="0"
-									   Grid.Column="1"
-									   Margin="12,6,0,0"
-									   FontWeight="Bold"
-									   Text="{Binding Title, Mode=OneWay, FallbackValue='Comic Title'}" />
-							<TextBlock Grid.Row="1"
-									   Grid.Column="1"
-									   Margin="12,0,0,6"
-									   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
-							<IconButton
+				<ListBox
+					x:Name="ComicList"
+					ItemsSource="{Binding ComicCollection}"
+					SelectedItem="{Binding SelectedComic, Mode=TwoWay}"
+					SelectionMode="Single"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch"
+					BorderThickness="0"
+					MaxHeight="600">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="models:Comic">
+							<Grid Margin="8,0">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="50" />
+									<ColumnDefinition Width="350" />
+									<ColumnDefinition Width="1*" />
+								</Grid.ColumnDefinitions>
+								<Border
 									Grid.RowSpan="2"
-									Grid.ColumnSpan="2"
-									Grid.Column="2"
-									HorizontalAlignment="Right"
-									Command="{Binding DetailsCommand}"
-									Content="Details"
+									Width="40"
+									Height="40"
+									Background="Gainsboro"
+									CornerRadius="10"
+									ClipToBounds="True"
+								>
+									<Image Stretch="UniformToFill"
+										   VerticalAlignment="Stretch"
+										   HorizontalAlignment="Stretch"
+										   Source="{Binding ThumbNailImage, FallbackValue={StaticResource DefaultThumbnailImage}}" />
+								</Border>
+
+								<TextBlock Grid.Row="0"
+										   Grid.Column="1"
+										   Margin="12,6,0,0"
+										   FontWeight="Bold"
+										   Text="{Binding Title, Mode=OneWay, FallbackValue='Comic Title'}" />
+								<TextBlock Grid.Row="1"
+										   Grid.Column="1"
+										   Margin="12,0,0,6"
+										   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
+								<IconButton
+										Grid.RowSpan="2"
+										Grid.ColumnSpan="2"
+										Grid.Column="2"
+										HorizontalAlignment="Right"
+										CommandParameter="{Binding}"
+										Command="{Binding DataContext.ShowDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+										Content="Details"
 									/>
 
-						</Grid>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
 			</Border>
 		</UniformGrid>
 

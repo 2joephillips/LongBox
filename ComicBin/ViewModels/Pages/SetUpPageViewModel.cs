@@ -70,11 +70,20 @@ namespace ComicBin.ViewModels.Pages;
     get => _scanningInProgress;
     set => this.RaiseAndSetIfChanged(ref _scanningInProgress, value);
   }
+
+  public Comic _selectedComic;
+  public Comic SelectedComic
+  {
+    get => _selectedComic;
+    set => this.RaiseAndSetIfChanged(ref _selectedComic, value);
+  }
+
   public ICommand SelectFolderCommand { get; }
   public ICommand OpenComicVineSiteCommand { get; }
   public ICommand VerifyApiKeyCommand { get; }
   public ICommand ScanFolderCommand { get; }
-
+  public ICommand ShowDetailsCommand { get; }
+  public ICommand UpdateCurrentImageCommand { get; }
 
   public SetUpPageViewModel()
   {
@@ -91,7 +100,7 @@ namespace ComicBin.ViewModels.Pages;
         HighResPath: "C:\\Users\\Josep\\AppData\\Local\\ComicRack\\55bfabb8-8557-4c4e-b459-35f10bbcdd9a_highres.jpg"
         ),
     };
-    ComicCollection = [comic];
+    ComicCollection = [comic, comic];
 
   }
 
@@ -111,15 +120,24 @@ namespace ComicBin.ViewModels.Pages;
 
     ScanFolderCommand = ReactiveCommand.CreateFromTask(ScanFolder);
     OpenComicVineSiteCommand = ReactiveCommand.Create(_apiKeyHandler.OpenComicVineSite);
+    ShowDetailsCommand = ReactiveCommand.CreateFromTask<Comic>(ShowDetails);
+    UpdateCurrentImageCommand = ReactiveCommand.CreateFromTask<Comic>(UpdateCurrentImage);
 
     if (RootFolder != _folderHandler.FolderNotSelected)
       Dispatcher.UIThread.InvokeAsync(async () => { ScanningProgress = await _folderHandler.ScanFolderResults(RootFolder).ConfigureAwait(false); });
 
+    this.WhenAnyValue(X => X.SelectedComic).InvokeCommand(UpdateCurrentImageCommand);
   }
 
-  private async Task ShowDetails()
+  private async Task ShowDetails(Comic comic)
   {
     Console.WriteLine("Show Details");
+  }
+
+  private async Task UpdateCurrentImage(Comic comic)
+  {
+    if (comic == null) return;
+    CurrentImagePath = new Bitmap(comic.GetHighResImagePath);
   }
 
   private async Task ScanFolder()
@@ -159,8 +177,8 @@ namespace ComicBin.ViewModels.Pages;
           {
             // Fetch metadata for the comic on a background thread
             ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Count, ProgressText(index, zipFiles));
-            if (comic.CoverImagePaths.HighResPath != null)
-              CurrentImagePath = new Bitmap(comic.CoverImagePaths.HighResPath);
+            if (comic.GetHighResImagePath != null)
+              await UpdateCurrentImage(comic);
 
             ComicCollection.Add(comic);
           });
