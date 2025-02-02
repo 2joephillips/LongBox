@@ -20,25 +20,26 @@
 	</UserControl.Resources>
 
 	<Grid
-        RowDefinitions="150, Auto, *, Auto">
+        RowDefinitions="45, Auto, *">
 		<!--Header-->
 		<TextBlock
                    VerticalAlignment="Center"
 				   HorizontalAlignment="Center" Classes="h1">
 			<Run Text="ComicBin helps to manage your "/>
-			<Run Text="comics " Foreground="{StaticResource SecondaryBrush}" FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom"/>
+			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom" />
 			<Run Text="effortlessly."/>
 		</TextBlock>
 
 		<!--Configuration -->
 		<Border Grid.Row="1"
                 CornerRadius="15"
-                BorderBrush="{DynamicResource PrimaryBrush}"
-                BorderThickness="2"
-                Padding="10"
-                Margin="10,10">
+                Background="{DynamicResource SurfaceBrush}"
+                BorderThickness="0"
+                Padding="20,10"
+				
+                Margin="25,25">
 			<StackPanel>
-				<TextBlock Classes="h2" Text="Configuration" VerticalAlignment="Bottom"></TextBlock>
+				<TextBlock Classes="h3" Text="Configuration" VerticalAlignment="Bottom"></TextBlock>
 
 				<Grid ColumnDefinitions="1*, 250" RowDefinitions="Auto, Auto, Auto">
 
@@ -51,7 +52,7 @@
 							<TextBlock>This folder will serve as the central location for organizing and managing your comic collection. All subfolders and files within this root will be scanned.</TextBlock>
 						</ToolTip.Tip>
 						<TextBlock Margin="0 5" Classes="label">Root Folder for Comics:</TextBlock>
-						<Border BorderThickness="0,0,0,2" BorderBrush="{DynamicResource PrimaryBrush}">
+						<Border BorderThickness="0,0,0,2" BorderBrush="{DynamicResource TextBrush}">
 							<TextBlock x:Name="RootFolder"
 									   Margin="0,0,0,0"
 										Classes="h5"
@@ -84,14 +85,14 @@
 
 						<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Orientation="Horizontal">
 							<TextBlock VerticalAlignment="Center"  Classes="label" HorizontalAlignment="Left">ComicVine Api:</TextBlock>
-							<IconButton IconText="&#xE3E8;" Command="{Binding OpenComicVineSiteCommand}" FontSize="6" ToolTip.Tip="Click for more info"/>
+							<IconButton IconText="&#xE3E8;" Classes="icon-only" Command="{Binding OpenComicVineSiteCommand}" FontSize="10" ToolTip.Tip="Click for more info"/>
 						</StackPanel>
 
 
 						<TextBox
                             Text="{Binding ComicVineApiKey, Mode=TwoWay}"
 							FontSize="16"
-							Foreground="{DynamicResource PrimaryBrush}"
+							Foreground="{DynamicResource TextBrush}"
                             Watermark="example-api-key"
 							CornerRadius="10"
 							Padding="10,5,10,5">
@@ -162,7 +163,8 @@
             Columns="2"
             Grid.Row="2"
             Background="Transparent"
-            IsVisible="{Binding ScanningProgress.InProgress}">
+            IsVisible="{Binding ScanningProgress.InProgress}"
+			Margin="25,5">
 			<Border ClipToBounds="True"
                     CornerRadius="10"
                     Margin="10">

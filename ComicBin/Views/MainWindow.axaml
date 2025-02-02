@@ -9,9 +9,9 @@
 		d:DesignWidth="1400"
 		Width="1400"
 		MinWidth="1400"
-        d:DesignHeight="800"
-		Height="800"
-		MinHeight="800"
+        d:DesignHeight="1200"
+		Height="1200"
+		MinHeight="1200"
         x:CompileBindings="True"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -23,17 +23,22 @@
 	</Design.DataContext>
 
 
-	<Border Background="{DynamicResource Black}" >
+	<Border Background="{DynamicResource BackgroundBrush}">
 		<Grid RowDefinitions="60,1*"  ColumnDefinitions="1*, 100" Margin="10">
-			<StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="50" VerticalAlignment="Center">
-				<TextBlock Text="ComicBin" Foreground="{DynamicResource SecondaryBrush}" FontFamily="{DynamicResource ComicFont}" FontSize="60" HorizontalAlignment="Left"/>
+			<StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="50" VerticalAlignment="Center" Margin="50,0">
+				<TextBlock Text="ComicBin" 
+						   Foreground="{DynamicResource Brand}" 
+						   FontFamily="{DynamicResource ComicFont}" 
+						   FontSize="62"
+						   Classes="primary"
+						   HorizontalAlignment="Left"/>
 
 				<StackPanel Spacing="15" Orientation="Horizontal">
 					<IconButton IconText="&#xE0E6;" Content="Home" Classes="large nav"/>
 				</StackPanel>
 			</StackPanel>
 			<StackPanel Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center">
-				<IconButton Classes="icon-only xlarge" IconText="&#xE270;"/>
+				<IconButton Classes="icon-only xlarge primary" IconText="&#xE270;"/>
 			</StackPanel>
 			<TransitioningContentControl Grid.Row="1" Content="{Binding CurrentPage}" Grid.ColumnSpan="2"/>
 		</Grid>

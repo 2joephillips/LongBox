@@ -1,110 +1,134 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Design.PreviewWith>
-    <Border Padding="20">
-      <!-- Add Controls for Previewer Here -->
-		<StackPanel>
-			
-			<TextBlock Text="Normal" />
-			<TextBlock Text="Primary" Classes="primary" />
-			<TextBlock Text="Secondary" Classes="secondary" />
-			<TextBlock Text="Accent" Classes="accent" />
-			<TextBlock Text="Warning" Classes="warning" />
-			
-			<TextBlock Text="Header 1" Classes="h1" />
-			<TextBlock Text="Header 2" Classes="h2" />
-			<TextBlock Text="Header 3" Classes="h3" />
-			<TextBlock Text="Header 4" Classes="h4" />
-			<TextBlock Text="Header 5" Classes="h5" />
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<!-- Add Controls for Previewer Here -->
+			<StackPanel>
 
-			<TextBlock Text="This is body text." Classes="body"/>
-			<TextBlock Text="This is subtext, less important information." Classes="subtext"/>
-			<TextBlock Text="Label: First Name" Classes="label"/>
-			<TextBlock Text="This is a caption under an image." Classes="caption"/>
-			<TextBlock Text="This is a caption under an image." Classes="caption-warning"/>
-			<TextBlock Text="This is a blockquote for a quote." Classes="blockquote"/>
-			<TextBlock Text="Notification: Your action was successful." Classes="notification"/>
-		</StackPanel>
-    </Border>
-  </Design.PreviewWith>
+				<TextBlock Text="Normal" />
+				<TextBlock Text="Primary" Classes="primary" />
+				<TextBlock Text="Secondary" Classes="secondary" />
+				<TextBlock Text="Warning" Classes="warning" />
+				<TextBlock Text="Error" Classes="error" />
 
-  <!-- Add Styles Here -->
+				<TextBlock Text="Header 1" Classes="h1" />
+				<TextBlock Text="Header 2" Classes="h2" />
+				<TextBlock Text="Header 3" Classes="h3" />
+				<TextBlock Text="Header 4" Classes="h4" />
+				<TextBlock Text="Header 5" Classes="h5" />
+
+				<TextBlock Text="This is body text." Classes="body"/>
+				<TextBlock Text="This is subtext, less important information." Classes="subtext"/>
+				<TextBlock Text="Label: First Name" Classes="label"/>
+				<TextBlock Text="This is a caption under an image." Classes="caption"/>
+				<TextBlock Text="This is a caption under an image." Classes="caption-warning"/>
+				<TextBlock Text="This is a blockquote for a quote." Classes="blockquote"/>
+				<TextBlock Text="Notification: Your action was successful." Classes="notification-success"/>
+				<TextBlock Text="Notification: Your action was successful." Classes="notification-warning"/>
+				<TextBlock Text="Notification: Your action was successful." Classes="notification-error"/>
+			</StackPanel>
+		</Border>
+	</Design.PreviewWith>
+
+	<!-- Add Styles Here -->
+
 
 	<Styles>
 
+		<Style Selector="Label">
+			<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
+			<Setter Property="Margin" Value="0,8,0,4" />
+		</Style>
+
+		<Style Selector="Label.primary">
+			<Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
+		</Style>
+
 		<Style Selector="TextBlock.primary">
-			<Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
+			<Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
+		</Style>
+
+		<Style Selector="Label.secondary">
+			<Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
 		</Style>
 
 		<Style Selector="TextBlock.secondary">
-			<Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}" />
-		</Style>
-
-		<Style Selector="TextBlock.accent">
-			<Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+			<Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
 		</Style>
 
 		<Style Selector="TextBlock.warning">
-			<Setter Property="Foreground" Value="OrangeRed" />
+			<Setter Property="Foreground" Value="{DynamicResource WarningTextBrush}" />
 		</Style>
 
 		<Style Selector="Label.warning">
-			<Setter Property="Foreground" Value="OrangeRed"/>
+			<Setter Property="Foreground" Value="{DynamicResource WarningTextBrush}"/>
+		</Style>
+
+		<Style Selector="TextBlock.error">
+			<Setter Property="Foreground" Value="{DynamicResource ErrorTextBrush}" />
+		</Style>
+
+		<Style Selector="Label.error">
+			<Setter Property="Foreground" Value="{DynamicResource ErrorTextBrush}"/>
 		</Style>
 
 
-		
 		<!-- Header 1 -->
 		<Style Selector="TextBlock.h1">
+			<Setter Property="Foreground" Value="{DynamicResource HeaderBrush}"/>
 			<Setter Property="FontSize" Value="40" />
 			<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
-			<Setter Property="Margin" Value="0,20,0,20" />
+			<Setter Property="Margin" Value="0,0,0,20" />
 		</Style>
 
 		<!-- Header 2 -->
-        <Style Selector="TextBlock.h2">
-            <Setter Property="FontSize" Value="32" />
-            <Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
-            <Setter Property="Margin" Value="0,16,0,16" />
-        </Style>
+		<Style Selector="TextBlock.h2">
+			<Setter Property="Foreground" Value="{DynamicResource HeaderBrush}"/>
+			<Setter Property="FontSize" Value="32" />
+			<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
+			<Setter Property="Margin" Value="0,0,0,16" />
+		</Style>
 
 		<!-- Header 3 -->
 		<Style Selector="TextBlock.h3">
+			<Setter Property="Foreground" Value="{DynamicResource HeaderBrush}"/>
 			<Setter Property="FontSize" Value="24" />
 			<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
-			<Setter Property="Margin" Value="0,12,0,12" />
+			<Setter Property="Margin" Value="0,0,0,12" />
 		</Style>
 
 		<!-- Header 4 -->
 		<Style Selector="TextBlock.h4">
+			<Setter Property="Foreground" Value="{DynamicResource HeaderBrush}"/>
 			<Setter Property="FontSize" Value="20" />
-			<Setter Property="Margin" Value="0,8,0,8" />
+			<Setter Property="Margin" Value="0,0,0,8" />
 		</Style>
 
 		<!-- Header 5 -->
 		<Style Selector="TextBlock.h5">
+			<Setter Property="Foreground" Value="{DynamicResource HeaderBrush}"/>
 			<Setter Property="FontSize" Value="16" />
-			<Setter Property="Margin" Value="0,6,0,6" />
+			<Setter Property="Margin" Value="0,0,0,6" />
 		</Style>
 
 		<!-- Body Text -->
 		<Style Selector="TextBlock.body">
+			<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
 			<Setter Property="FontSize" Value="14" />
 			<Setter Property="Margin" Value="0,4,0,4" />
 		</Style>
 
 		<!-- Labels -->
-		<Style Selector="TextBlock.label">
-			<Setter Property="FontSize" Value="14" />
-			<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
-			<Setter Property="Margin" Value="0,8,0,4" />
+		<Style Selector="TextBlock.lable">
+			<Setter Property="FontSize" Value="16" />
+			<Setter Property="FontWeight" Value="Bold"/>
 		</Style>
 
 		<!-- Caption -->
 		<Style Selector="TextBlock.caption">
 			<Setter Property="FontSize" Value="12" />
 			<Setter Property="FontFamily" Value="{DynamicResource CaptionFont}"/>
-			<Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
+			<Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
 			<Setter Property="Margin" Value="0,2,0,2" />
 		</Style>
 
@@ -123,11 +147,27 @@
 
 
 		<!-- Notification Text -->
-		<Style Selector="TextBlock.notification">
+		<Style Selector="TextBlock.notification-success">
 			<Setter Property="FontSize" Value="14" />
 			<Setter Property="FontWeight" Value="Bold" />
 			<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
-			<Setter Property="Background" Value="{DynamicResource SecondaryBrush}" />
+			<Setter Property="Background" Value="{DynamicResource SuccessTextBrush}" />
+			<Setter Property="Padding" Value="8" />
+		</Style>
+
+		<Style Selector="TextBlock.notification-warning">
+			<Setter Property="FontSize" Value="14" />
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
+			<Setter Property="Background" Value="{DynamicResource WarningTextBrush}" />
+			<Setter Property="Padding" Value="8" />
+		</Style>
+
+		<Style Selector="TextBlock.notification-error">
+			<Setter Property="FontSize" Value="14" />
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
+			<Setter Property="Background" Value="{DynamicResource ErrorTextBrush}" />
 			<Setter Property="Padding" Value="8" />
 		</Style>
 	</Styles>
