@@ -118,7 +118,7 @@
 	</Style>
 
 	<Style Selector=":is(Button):pointerover.icon-only.primary /template/ ContentPresenter">
-		<Setter Property="Foreground" Value="{DynamicResource Brand}"/>
+		<Setter Property="Foreground" Value="{DynamicResource Primary}"/>
 	</Style>
 
 	<Style Selector=":is(Button):pointerover.icon-only.secondary /template/ ContentPresenter">

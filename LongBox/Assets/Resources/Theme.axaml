@@ -2,28 +2,28 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Design.PreviewWith >
 		<StackPanel Orientation="Vertical" Grid.Row="2">
-			<TextBlock Text="LongBox" FontSize="32" FontWeight="Bold"  Margin="5" Foreground="{StaticResource Brand}"/>
-			<TextBlock Text="Theme Colors" FontSize="26" FontWeight="Bold"  Margin="5" Foreground="{StaticResource Secondary}"/>
-			<TextBlock Text="Theme Colors" FontSize="18" FontWeight="Bold"  Margin="5" Foreground="{StaticResource Accent}"/>
-			<StackPanel Grid.Row="5" Orientation="Horizontal">
-				<Rectangle Fill="{StaticResource TextBrush}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource HeaderBrush}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource ErrorTextBrush}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource WarningTextBrush}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource SuccessTextBrush}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource AccentTextBrush}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource ErrorBrush}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource SurfaceBrush}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource SurfaceBrush2}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource SurfaceBrush3}" Width="30" Height="100"/>
-				<Rectangle Fill="{StaticResource SurfaceBrush4}" Width="30" Height="100"/>
+			<TextBlock Text="LongBox" FontSize="32" FontWeight="Bold"  Margin="5" Foreground="{DynamicResource Brand}"/>
+			<TextBlock Text="Theme Colors" FontSize="26" FontWeight="Bold"  Margin="5" Foreground="{DynamicResource Secondary}"/>
+			<TextBlock Text="Theme Colors" FontSize="18" FontWeight="Bold"  Margin="5" Foreground="{DynamicResource Accent}"/>
+			<StackPanel Orientation="Horizontal">
+				<Rectangle Fill="{DynamicResource TextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource HeaderBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource ErrorTextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource WarningTextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SuccessTextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource AccentTextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource ErrorBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SurfaceBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SurfaceBrush2}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SurfaceBrush3}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SurfaceBrush4}" Width="30" Height="100"/>
 				
 			</StackPanel>
 		</StackPanel>
 	</Design.PreviewWith>
 
 	<!-- Add Resources Here -->
-	<SolidColorBrush x:Key="Brand" Color="{StaticResource Blue}" />
+	<SolidColorBrush x:Key="Primary" Color="{StaticResource Blue}" />
 	<SolidColorBrush x:Key="Secondary" Color="{StaticResource Green}" />
 	<SolidColorBrush x:Key="Accent" Color="{StaticResource Purple}" />
 	<SolidColorBrush x:Key="TextBrush" Color="{StaticResource White}" />

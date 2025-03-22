@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:LongBox.ViewModels"
-		xmlns:controls="using:LongBox.Views.Controls"
         Title="LongBox"
 		d:DesignWidth="1400"
 		Width="1400"
