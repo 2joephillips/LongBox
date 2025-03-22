@@ -1,0 +1,26 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Design.PreviewWith>
+		<Border Padding="20"
+				CornerRadius="15" BorderThickness="5"
+				Height="200" Width="400"
+				Background="{StaticResource BackgroundBrush}">
+			<StackPanel>
+				<Label Content="Comic Font" FontFamily="{DynamicResource ComicFont}" />
+				<Label Content="Bold Font"  FontFamily="{DynamicResource BoldFont}" />
+				<Label Content="Body Font" FontFamily="{DynamicResource BodyFont}" />
+				<Label Content="Caption Font" FontFamily="{DynamicResource CaptionFont}" />
+				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFont}" />
+				<Label Content="&#xe2c2;" FontFamily="{DynamicResource IconFillFont}" />
+			</StackPanel>
+		</Border>
+	</Design.PreviewWith>
+	<!-- Add Resources Here -->
+	<FontFamily x:Key="ComicFont">avares://LongBox/Assets/Fonts/Bangers-Regular.ttf#Bangers</FontFamily>
+	<FontFamily x:Key="CaptionFont">avares://LongBox/Assets/Fonts/SpaceMono-Italic.ttf#Space Mono Italic</FontFamily>
+	<FontFamily x:Key="IconFont">avares://LongBox/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
+	<FontFamily x:Key="IconFillFont">avares://LongBox/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
+	<FontFamily x:Key="BoldFont">avares://LongBox/Assets/Fonts/Poppins-Bold.ttf#Poppins Bold</FontFamily>
+	<FontFamily x:Key="BodyFont">avares://LongBox/Assets/Fonts/Poppins-Regular.ttf#Poppins</FontFamily>
+</ResourceDictionary>

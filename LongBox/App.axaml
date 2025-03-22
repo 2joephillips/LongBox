@@ -1,0 +1,28 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:LongBox"
+             RequestedThemeVariant="Dark"
+             x:Class="LongBox.App">
+	<Application.DataTemplates>
+		<local:ViewLocator/>
+	</Application.DataTemplates>
+
+	<Application.Styles>
+		<SimpleTheme />
+		<StyleInclude Source="/Styles/DefaultStyles.axaml"/>
+		<StyleInclude Source="/Styles/DefaultInputStyles.axaml"/>
+		<StyleInclude Source="/Styles/DefaultTextBlockStyles.axaml"/>
+	</Application.Styles>
+
+	<Application.Resources>
+		
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Assets/Resources/Colors.axaml"/>
+				<ResourceInclude Source="/Assets/Resources/Theme.axaml"/>
+				<ResourceInclude Source="/Assets/Resources/Fonts.axaml"/>
+				<ResourceInclude Source="/Controls/IconButton.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>

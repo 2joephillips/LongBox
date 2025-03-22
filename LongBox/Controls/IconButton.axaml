@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				x:ClassModifier="internal">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<StackPanel Spacing="20">
+				<IconButton IconText="&#xE270;" Classes="icon-only" Background="Red"/>
+				<IconButton Content="Click Me!" IconText="&#xE270;"/>
+				<IconButton Content="Click Me!"/>
+			</StackPanel>
+		</Border>
+	</Design.PreviewWith>
+	
+	<ControlTheme x:Key="{x:Type IconButton}" TargetType="IconButton">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<ContentPresenter Name="PART_ContentPresenter"
+								  Padding="{TemplateBinding Padding}"
+								  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+								  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+								  Background="{TemplateBinding Background}"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="{TemplateBinding BorderThickness}"
+								  Content="{TemplateBinding Content}"
+								  CornerRadius="{TemplateBinding CornerRadius}"
+								  RecognizesAccessKey="True"
+								  TextElement.Foreground="{TemplateBinding Foreground}">
+
+					<ContentPresenter.ContentTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+								<Label Content="{Binding $parent[IconButton].IconText}" FontFamily="{DynamicResource IconFont}" VerticalAlignment="Center" Margin="0,3,0,0"/>
+								<ContentPresenter DataContext="{Binding $parent[IconButton].DataContext}" 
+												  Content="{Binding $parent[IconButton].Content}" 
+												  VerticalAlignment="Center"/>
+							</StackPanel>
+							</DataTemplate>
+					</ContentPresenter.ContentTemplate>
+				</ContentPresenter>
+			</ControlTemplate>
+		</Setter>
+	</ControlTheme>
+</ResourceDictionary>
