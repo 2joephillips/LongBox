@@ -11,6 +11,16 @@
 				<TextBlock Text="TextBlock: Warning" Classes="warning" />
 				<TextBlock Text="TextBlock: Error" Classes="error" />
 
+				<TextBlock
+						   VerticalAlignment="Center"
+						   HorizontalAlignment="Center" Classes="h1">
+					<Run Text="Normal " />
+					<Run Text="Primary "  Classes="primary"/>
+					<Run Text="Secondary "  Classes="secondary"/>
+					<Run Text="Warning " Classes="warning"/>
+					<Run Text="Error" Classes="error"/>
+				</TextBlock>
+
 				<Label Content="Label: Normal" />
 				<Label Content="Label: Primary" Classes="primary" />
 				<Label Content="Label: Secondary" Classes="secondary" />
@@ -62,6 +72,10 @@
 			<Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
 		</Style>
 		
+		<Style Selector="Run.primary">
+			<Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
+		</Style>
+		
 		<Style Selector="Label.primary">
 			<Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
 		</Style>
@@ -69,6 +83,9 @@
 
 		<!--Secondary-->
 		<Style Selector="TextBlock.secondary">
+			<Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
+		</Style>
+		<Style Selector="Run.secondary">
 			<Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
 		</Style>
 
@@ -81,6 +98,9 @@
 		<Style Selector="TextBlock.warning">
 			<Setter Property="Foreground" Value="{DynamicResource WarningTextBrush}" />
 		</Style>
+		<Style Selector="Run.warning">
+			<Setter Property="Foreground" Value="{DynamicResource WarningTextBrush}" />
+		</Style>
 
 		<Style Selector="Label.warning">
 			<Setter Property="Foreground" Value="{DynamicResource WarningTextBrush}"/>
@@ -88,6 +108,9 @@
 
 		<!--Error-->
 		<Style Selector="TextBlock.error">
+			<Setter Property="Foreground" Value="{DynamicResource ErrorTextBrush}" />
+		</Style>
+		<Style Selector="Run.error">
 			<Setter Property="Foreground" Value="{DynamicResource ErrorTextBrush}" />
 		</Style>
 

@@ -19,13 +19,13 @@
 	</UserControl.Resources>
 
 	<Grid
-        RowDefinitions="45, Auto, *">
+        RowDefinitions="Auto, Auto, *">
 		<!--Header-->
 		<TextBlock
                    VerticalAlignment="Center"
 				   HorizontalAlignment="Center" Classes="h1">
 			<Run Text="LongBox helps to manage your "/>
-			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" Foreground="{DynamicResource Brand}" FontSize="52"  BaselineAlignment="Bottom" />
+			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom" Classes="primary"/>
 			<Run Text="effortlessly."/>
 		</TextBlock>
 
@@ -137,7 +137,8 @@
 							CornerRadius="10"
 							ClipToBounds="True"
 							Grid.Column="2">
-							<ProgressBar
+							<StackPanel Orientation="">
+								<ProgressBar
 								VerticalAlignment="Stretch"
 								HorizontalAlignment="Stretch"
 								Minimum="0"
@@ -146,6 +147,8 @@
 								Value="{Binding ScanningProgress.Current}"
 								IsVisible="{Binding ScanningProgress.InProgress}"
 								ShowProgressText="True"/>
+							</StackPanel>
+							
 						</Border>
 					</Grid>
 

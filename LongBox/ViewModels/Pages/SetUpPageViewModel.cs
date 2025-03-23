@@ -127,17 +127,19 @@ namespace LongBox.ViewModels.Pages;
     this.WhenAnyValue(X => X.SelectedComic).InvokeCommand(UpdateCurrentImageCommand);
   }
 
-  private async Task ShowDetails(Comic comic)
+  private Task ShowDetails(Comic comic)
   {
 
     Console.WriteLine("Show Details");
+     return Task.CompletedTask;
 
   }
 
-  private async Task UpdateCurrentImage(Comic comic)
+  private Task UpdateCurrentImage(Comic comic)
   {
-    if (comic == null) return;
+    if (comic == null) return Task.CompletedTask;
     CurrentImagePath = new Bitmap(comic.GetHighResImagePath);
+    return Task.CompletedTask;
   }
 
   private async Task ScanFolder()
@@ -148,12 +150,14 @@ namespace LongBox.ViewModels.Pages;
       var files = await _folderHandler.ScanFolder(RootFolder).ConfigureAwait(false);
       if (!files.Any()) return;
 
-      var zipFiles = files.Select(file => new CBZFile(file)).ToList();
+      var tasks = files.Select(file => Task.Run(() => new CBZFile(file)));
+      var zipFiles = await Task.WhenAll(tasks);
+
       // Show message box on the UI thread
       var result = await Dispatcher.UIThread.InvokeAsync(async () =>
       {
         var box = MessageBoxManager
-                    .GetMessageBoxStandard("Comics Found", "Found " + zipFiles.Count + " comics. Do you want to start scanning?",
+                    .GetMessageBoxStandard("Comics Found", "Found " + zipFiles.Length + " comics. Do you want to start scanning?",
                         ButtonEnum.YesNo);
         return await box.ShowAsync();
       });
@@ -166,7 +170,7 @@ namespace LongBox.ViewModels.Pages;
       }
 
       var index = 0;
-      ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Count, ProgressText(index, zipFiles));
+      ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Length, ProgressText(index, zipFiles));
       foreach (var zip in zipFiles)
       {
         await Task.Run(async () =>
@@ -176,7 +180,7 @@ namespace LongBox.ViewModels.Pages;
           await Dispatcher.UIThread.InvokeAsync(async () =>
           {
             // Fetch metadata for the comic on a background thread
-            ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Count, ProgressText(index, zipFiles));
+            ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Length, ProgressText(index, zipFiles));
             if (comic.GetHighResImagePath != null)
               await UpdateCurrentImage(comic);
 
@@ -189,7 +193,7 @@ namespace LongBox.ViewModels.Pages;
       await Dispatcher.UIThread.InvokeAsync(async () =>
       {
         // Fetch metadata for the comic on a background thread
-        ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Count, ProgressText(index, zipFiles));
+        ScanningProgress = new FolderScanningProgress(true, index, zipFiles.Length, ProgressText(index, zipFiles));
       });
     }
     catch (Exception)
@@ -218,7 +222,7 @@ namespace LongBox.ViewModels.Pages;
 
   }
 
-  private string ProgressText(int index, List<CBZFile> zipFiles)
+  private string ProgressText(int index, CBZFile[] zipFiles)
   {
     if (index <= zipFiles.Count() - 1)
       return $" Scanning: {zipFiles[index].FileName}";
