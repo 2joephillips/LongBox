@@ -25,7 +25,7 @@
                    VerticalAlignment="Center"
 				   HorizontalAlignment="Center" Classes="h1">
 			<Run Text="LongBox helps to manage your "/>
-			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom" Foreground="{DynamicResource PrimaryTextBrush}"/>
+			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom" Classes="primary"/>
 			<Run Text="effortlessly."/>
 		</TextBlock>
 
