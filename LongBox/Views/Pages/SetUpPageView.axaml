@@ -137,7 +137,8 @@
 							CornerRadius="10"
 							ClipToBounds="True"
 							Grid.Column="2">
-							<ProgressBar
+							<StackPanel Orientation="">
+								<ProgressBar
 								VerticalAlignment="Stretch"
 								HorizontalAlignment="Stretch"
 								Minimum="0"
@@ -146,6 +147,8 @@
 								Value="{Binding ScanningProgress.Current}"
 								IsVisible="{Binding ScanningProgress.InProgress}"
 								ShowProgressText="True"/>
+							</StackPanel>
+							
 						</Border>
 					</Grid>
 
