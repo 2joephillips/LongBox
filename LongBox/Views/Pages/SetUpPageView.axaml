@@ -19,13 +19,13 @@
 	</UserControl.Resources>
 
 	<Grid
-        RowDefinitions="45, Auto, *">
+        RowDefinitions="Auto, Auto, *">
 		<!--Header-->
 		<TextBlock
                    VerticalAlignment="Center"
 				   HorizontalAlignment="Center" Classes="h1">
 			<Run Text="LongBox helps to manage your "/>
-			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" Foreground="{DynamicResource Brand}" FontSize="52"  BaselineAlignment="Bottom" />
+			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom" Foreground="{DynamicResource PrimaryTextBrush}"/>
 			<Run Text="effortlessly."/>
 		</TextBlock>
 

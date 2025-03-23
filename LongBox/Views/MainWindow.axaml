@@ -23,13 +23,13 @@
 
 
 	<Border Background="{DynamicResource BackgroundBrush}">
-		<Grid RowDefinitions="60,1*"  ColumnDefinitions="1*, 100" Margin="10">
-			<StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="50" VerticalAlignment="Center" Margin="50,0">
+		<Grid RowDefinitions="75,1*"  ColumnDefinitions="1*, 100" Margin="10">
+			<StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="50" VerticalAlignment="Center" Margin="0,0">
 				<TextBlock Text="LongBox" 
-						   Foreground="{DynamicResource Brand}" 
+						   Padding="10"
 						   FontFamily="{DynamicResource ComicFont}" 
-						   FontSize="62"
 						   Classes="primary"
+						   FontSize="62"
 						   HorizontalAlignment="Left"/>
 
 				<StackPanel Spacing="15" Orientation="Horizontal">

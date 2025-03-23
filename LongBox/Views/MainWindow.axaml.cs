@@ -11,8 +11,8 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
   public MainWindow()
   {
     InitializeComponent();
-    this.WhenActivated(action =>
-         action(ViewModel!.ShowReaderDialog.RegisterHandler(DoShowReaderDialogAsync)));
+    //this.WhenActivated(action =>
+    //     action(ViewModel!.ShowReaderDialog.RegisterHandler(DoShowReaderDialogAsync)));
   }
 
   private async Task DoShowReaderDialogAsync(IInteractionContext<ReaderViewModel,
