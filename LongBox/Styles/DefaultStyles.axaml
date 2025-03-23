@@ -1,0 +1,146 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+
+		<Border Padding="30" Height="1000" Width="800" Background="{DynamicResource BackgroundBrush}">
+			<StackPanel Spacing="10" Background="{DynamicResource SurfaceBrush}">
+				<!--Normal button-->
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<IconButton Classes="icon-only small primary" IconText="&#xE270;"/>
+					<IconButton Classes="icon-only secondary" IconText="&#xE270;"/>
+					<IconButton Classes="icon-only large accent" IconText="&#xE270;"/>
+					<IconButton Classes="icon-only xlarge" IconText="&#xE270;"/>
+				</StackPanel>
+				<Label Content="Normal Button" Classes="h1"/>
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<Button Content="Click Me!" Classes="small primary" />
+					<Button Content="Click Me!" />
+					<Button Content="Click Me!" Classes="large" />
+					<Button Content="Click Me!" Classes="xlarge" />
+				</StackPanel>
+				<Label Content="Icon Button"/>
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<IconButton Content="Click Me!" IconText="&#xE270;"/>
+					<IconButton Classes="small" Content="Click Me!" IconText="&#xE270;"/>
+					<IconButton Classes="large" Content="Click Me!" IconText="&#xE270;"/>
+					<IconButton Classes="xlarge" Content="Click Me!" IconText="&#xE270;"/>
+				</StackPanel>
+
+				<IconButton  IconText="&#xE270;" Classes="nav" Content="Home Nav" />
+
+				<CheckBox Content="Check Me!" />
+				<ToggleButton Content="Toggle Me!" />
+
+				<!--Disabled button-->
+				
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<IconButton IconText="&#xE270;" IsEnabled="False"/>
+					<IconButton Content="Click Me!" IconText="&#xE270;" IsEnabled="False"/>
+					<Button Content="Click Me!" IsEnabled="False"/>
+					<CheckBox Content="Check Me!" IsEnabled="False"/>
+					<ToggleButton Content="Toggle Me!" IsEnabled="False"/>
+				</StackPanel>
+			</StackPanel>
+
+		</Border>
+	</Design.PreviewWith>
+
+
+
+
+	<!-- Add Styles Here -->
+	<Style Selector="Window">
+		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+		<Setter Property="CornerRadius" Value="20"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+		<Setter Property="FontFamily" Value="{DynamicResource BodyFont}" />
+	</Style>
+
+	<Style Selector=":is(Button)">
+		<Setter Property="RenderTransform" Value="scale(1)"/>
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="Height" Value="45"/>
+		<Setter Property="Background" Value="{DynamicResource SurfaceBrush2}"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+		<Setter Property="FontSize" Value="18"/>
+		<Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
+		<Setter Property="CornerRadius" Value="10"/>
+		<Setter	Property="Padding" Value="10"/>
+		<Setter Property="Transitions">
+			<Transitions>
+				<BrushTransition Property="Background" Duration="0:0:0.5"></BrushTransition>
+				<TransformOperationsTransition Property="RenderTransform" Duration="0:0:.075" />
+			</Transitions>
+		</Setter>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource Primary}"/>
+		<Setter Property="Foreground" Value="{DynamicResource Black}"/>
+	</Style>
+
+
+	<Style Selector=":is(Button).icon-only">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover.icon-only /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+		<Setter Property="RenderTransform" Value="scale(1.2)"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover.icon-only.primary /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="{DynamicResource Primary}"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover.icon-only.secondary /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="{DynamicResource Secondary}"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover.icon-only.accent /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="{DynamicResource Accent}"/>
+	</Style>
+	
+
+	<Style Selector=":is(Button).nav /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+	</Style>
+
+
+	<Style Selector=":is(Button).small">
+		<Setter Property="FontSize" Value="14"/>
+	</Style>
+
+	<Style Selector=":is(Button).small /template/ ContentPresenter">
+		<Setter Property="FontSize" Value="14"/>
+	</Style>
+
+	<Style Selector=":is(Button).large">
+		<Setter Property="Height" Value="55"/>
+		<Setter Property="FontSize" Value="22"/>
+	</Style>
+
+	<Style Selector=":is(Button).xlarge">
+		<Setter Property="FontSize" Value="32"/>
+		<Setter Property="Height" Value="65"/>
+	</Style>
+
+	<Style Selector=":is(Button):disabled">
+		<Setter Property="Background" Value="{DynamicResource SurfaceBrush2}"/>
+	</Style>
+
+	<Style Selector=":is(Button):disabled /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="{DynamicResource SurfaceBrush4}"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover.nav /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="{DynamicResource White}"/>
+		<Setter Property="RenderTransform" Value="scale(1.1)"/>
+	</Style>
+	
+</Styles>

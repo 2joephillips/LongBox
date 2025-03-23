@@ -1,0 +1,245 @@
+<UserControl
+    x:Class="LongBox.Views.Pages.SetUpPageView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LongBox.ViewModels.Pages"
+    xmlns:domain="clr-namespace:LongBox.Domain"
+    mc:Ignorable="d"
+    d:DesignWidth="1400"
+    d:DesignHeight="1120">
+	<Design.DataContext>
+		<vm:SetUpPageViewModel />
+	</Design.DataContext>
+
+	<UserControl.Resources>
+		<Bitmap x:Key="DefaultImage">avares://LongBox/Assets/default_highres.jpg</Bitmap>
+		<Bitmap x:Key="DefaultThumbnailImage">avares://LongBox/Assets/default_thumbnail.jpg</Bitmap>
+	</UserControl.Resources>
+
+	<Grid
+        RowDefinitions="45, Auto, *">
+		<!--Header-->
+		<TextBlock
+                   VerticalAlignment="Center"
+				   HorizontalAlignment="Center" Classes="h1">
+			<Run Text="LongBox helps to manage your "/>
+			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" Foreground="{DynamicResource Brand}" FontSize="52"  BaselineAlignment="Bottom" />
+			<Run Text="effortlessly."/>
+		</TextBlock>
+
+		<!--Configuration -->
+		<Border Grid.Row="1"
+                CornerRadius="15"
+                Background="{DynamicResource SurfaceBrush}"
+                BorderThickness="0"
+                Padding="20,10"
+				
+                Margin="25,25">
+			<StackPanel>
+				<TextBlock Classes="h3" Text="Configuration" VerticalAlignment="Bottom"></TextBlock>
+
+				<Grid ColumnDefinitions="1*, 250" RowDefinitions="Auto, Auto, Auto">
+
+					<!--Label, pick button and save button for Root Folder-->
+					<StackPanel Orientation="Vertical"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Margin="5">
+						<ToolTip.Tip>
+							<TextBlock>This folder will serve as the central location for organizing and managing your comic collection. All subfolders and files within this root will be scanned.</TextBlock>
+						</ToolTip.Tip>
+						<TextBlock Margin="0 5" Classes="label">Root Folder for Comics:</TextBlock>
+						<Border BorderThickness="0,0,0,2" BorderBrush="{DynamicResource TextBrush}">
+							<TextBlock x:Name="RootFolder"
+									   Margin="0,0,0,0"
+										Classes="h5"
+										Text="{Binding RootFolder}">
+							</TextBlock>
+						</Border>
+					</StackPanel>
+					<StackPanel Grid.Row="0"
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+						<ToolTip.Tip>
+							<TextBlock>Select Root Comic Folder</TextBlock>
+						</ToolTip.Tip>
+						<IconButton
+							IconText="&#xE256;"
+							Content="Select Folder"
+							Command="{Binding SelectFolderCommand}"
+							Margin="0,20,0,0"/>
+					</StackPanel>
+
+
+					<!--Configure ComicVine API-->
+					<StackPanel Grid.Row="1" Grid.Column="0"
+                                Orientation="Vertical"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Margin="5">
+
+
+						<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Orientation="Horizontal">
+							<TextBlock VerticalAlignment="Center"  Classes="label" HorizontalAlignment="Left">ComicVine Api:</TextBlock>
+							<IconButton IconText="&#xE3E8;" 
+							            Classes="icon-only" 
+							            Command="{Binding OpenComicVineSiteCommand}" FontSize="10" ToolTip.Tip="Click for more info"/>
+						</StackPanel>
+
+
+						<TextBox
+                            Text="{Binding ComicVineApiKey, Mode=TwoWay}"
+							FontSize="16"
+							Foreground="{DynamicResource TextBrush}"
+                            Watermark="example-api-key"
+							CornerRadius="10"
+							Padding="10,5,10,5">
+							<ToolTip.Tip>
+								<TextBlock>Paste your ComicVine Api.</TextBlock>
+							</ToolTip.Tip>
+						</TextBox>
+						<TextBlock
+								   Classes.caption-warning="{Binding !ApiKeyStatus.IsValid }"
+									Classes.caption="{Binding ApiKeyStatus.IsValid }">
+							<Run Text="API Key Status: "/>
+							<Run Text="{Binding ApiKeyStatus.Message}" />
+						</TextBlock>
+					</StackPanel>
+
+					<IconButton
+						Grid.Row="1"
+						VerticalAlignment="Center"
+						HorizontalAlignment="Left"
+						Grid.Column="1"
+						IconText="&#xE2D6;"
+						Command="{Binding VerifyApiKeyCommand}"
+						ToolTip.Tip="Confirm API Key works"
+						Content="Verify Api"
+						Margin="0,20,0,0"/>
+
+
+					<!--Progress Bar and start scanning -->
+					<Grid
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Margin="10" ColumnDefinitions="900,*">
+						<TextBlock
+							Grid.Column="0"
+							 Text="{Binding ScanningProgress.Message}"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Center">
+							<TextBlock.Classes>label</TextBlock.Classes>
+						</TextBlock>
+						<Border
+							CornerRadius="10"
+							ClipToBounds="True"
+							Grid.Column="2">
+							<ProgressBar
+								VerticalAlignment="Stretch"
+								HorizontalAlignment="Stretch"
+								Minimum="0"
+								CornerRadius="20"
+								Maximum="{Binding ScanningProgress.Total}"
+								Value="{Binding ScanningProgress.Current}"
+								IsVisible="{Binding ScanningProgress.InProgress}"
+								ShowProgressText="True"/>
+						</Border>
+					</Grid>
+
+					<IconButton
+						Grid.Row="2"
+                        Grid.Column="1"
+						HorizontalAlignment="Left"
+						Command="{Binding ScanFolderCommand}"
+						Content="Start Scanning Files"/>
+				</Grid>
+			</StackPanel>
+		</Border>
+
+		<!-- Scanning UI-->
+		<UniformGrid
+            Columns="2"
+            Grid.Row="2"
+            Background="Transparent"
+            IsVisible="{Binding ScanningProgress.InProgress}"
+			Margin="25,5">
+			<Border ClipToBounds="True"
+                    CornerRadius="10"
+					VerticalAlignment="Top"
+                    Margin="10">
+				<Image
+                    Stretch="UniformToFill"
+                    Grid.Column="0"
+					MinHeight="600"
+                    MaxHeight="600"
+                    Source="{Binding CurrentImagePath, FallbackValue={StaticResource DefaultImage}}">
+				</Image>
+			</Border>
+			<Border  ClipToBounds="True" CornerRadius="10" Margin="10">
+				<ListBox
+					x:Name="ComicList"
+					ItemsSource="{Binding ComicCollection}"
+					SelectedItem="{Binding SelectedComic, Mode=TwoWay}"
+					SelectionMode="Single"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Top"
+					BorderThickness="0"
+					MinHeight="600"
+					MaxHeight="600">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="domain:Comic">
+							<Grid Margin="8,0">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="50" />
+									<ColumnDefinition Width="350" />
+									<ColumnDefinition Width="1*" />
+								</Grid.ColumnDefinitions>
+								<Border
+									Grid.RowSpan="2"
+									Width="40"
+									Height="40"
+									Background="Gainsboro"
+									CornerRadius="10"
+									ClipToBounds="True"
+								>
+									<Image Stretch="UniformToFill"
+										   VerticalAlignment="Stretch"
+										   HorizontalAlignment="Stretch"
+										   Source="{Binding ThumbNailImage, FallbackValue={StaticResource DefaultThumbnailImage}}" />
+								</Border>
+
+								<TextBlock Grid.Row="0"
+										   Grid.Column="1"
+										   Margin="12,6,0,0"
+										   FontWeight="Bold"
+										   Text="{Binding Title, Mode=OneWay, FallbackValue='Comic Title'}" />
+								<TextBlock Grid.Row="1"
+										   Grid.Column="1"
+										   Margin="12,0,0,6"
+										   Text="{Binding Publisher, Mode=OneWay, FallbackValue='Unknown'}" />
+								<IconButton
+										Grid.RowSpan="2"
+										Grid.ColumnSpan="2"
+										Grid.Column="2"
+										HorizontalAlignment="Right"
+										CommandParameter="{Binding}"
+										Command="{Binding DataContext.ShowDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+										Content="Details"
+									/>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</Border>
+		</UniformGrid>
+
+	</Grid>
+
+</UserControl>

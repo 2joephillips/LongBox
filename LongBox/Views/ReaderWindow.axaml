@@ -1,0 +1,58 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="LongBox.ReaderWindow"
+        Title="ReaderWindow"
+		xmlns:vm="using:LongBox.ViewModels"
+		Width="750"
+        MinWidth="750"
+        Height="1024"
+        MinHeight="1024"
+		WindowStartupLocation="CenterScreen"
+		Background="Black"
+		CornerRadius="20">
+	<Design.DataContext>
+		<vm:ReaderViewModel />
+	</Design.DataContext>
+
+	<Window.Styles>
+		<Style Selector=":pointerover > Grid > StackPanel > Button">
+			<Setter Property="IsVisible" Value="True" />
+		</Style>
+		<Style Selector="Grid > StackPanel > Button">
+			<Setter Property="IsVisible" Value="False" />
+		</Style>
+	</Window.Styles>
+	<Grid RowDefinitions="*,100">
+		<Image Stretch="Uniform"
+			   VerticalAlignment="Center"
+			   HorizontalAlignment="Center"
+			   Source="{Binding SourceImage}"/>
+		<StackPanel Grid.Row="1"
+					Orientation="Horizontal"
+					HorizontalAlignment="Center"
+					Background="Transparent"
+					Width="750"
+					Height="100" 
+					Spacing="10">
+			<Button Name="PrevButton"
+					Content="Previous"
+					Width="100"
+					Height="40"
+					Margin="10" />
+			<Button Name="NextButton"
+					Content="Next"
+					Width="100"
+					Height="40"
+					Margin="10" />
+			<Button Name="CloseButton"
+					Content="Close"
+					Width="100"
+					Height="40"
+					Margin="10" 
+					Command="{Binding CloseComicCommand}"/>
+		</StackPanel>
+	</Grid>
+</Window>

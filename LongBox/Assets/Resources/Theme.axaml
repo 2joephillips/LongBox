@@ -1,0 +1,45 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith >
+		<StackPanel Orientation="Vertical" Grid.Row="2">
+			<TextBlock Text="LongBox" FontSize="32" FontWeight="Bold"  Margin="5" Foreground="{DynamicResource Primary}"/>
+			<TextBlock Text="Theme Colors" FontSize="26" FontWeight="Bold"  Margin="5" Foreground="{DynamicResource Secondary}"/>
+			<TextBlock Text="Theme Colors" FontSize="18" FontWeight="Bold"  Margin="5" Foreground="{DynamicResource Accent}"/>
+			<StackPanel Orientation="Horizontal">
+				<Rectangle Fill="{DynamicResource TextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource HeaderBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource ErrorTextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource WarningTextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SuccessTextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource AccentTextBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource ErrorBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SurfaceBrush}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SurfaceBrush2}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SurfaceBrush3}" Width="30" Height="100"/>
+				<Rectangle Fill="{DynamicResource SurfaceBrush4}" Width="30" Height="100"/>
+				
+			</StackPanel>
+		</StackPanel>
+	</Design.PreviewWith>
+
+	<!-- Add Resources Here -->
+	<SolidColorBrush x:Key="Primary" Color="{StaticResource Blue}" />
+	<SolidColorBrush x:Key="Secondary" Color="{StaticResource Green}" />
+	<SolidColorBrush x:Key="Accent" Color="{StaticResource Purple}" />
+	<SolidColorBrush x:Key="TextBrush" Color="{StaticResource White}" />
+	<SolidColorBrush x:Key="HeaderBrush" Color="{StaticResource Neutral}" />
+	<SolidColorBrush x:Key="ErrorTextBrush" Color="{StaticResource 700_Light_Red}" />
+	<SolidColorBrush x:Key="WarningTextBrush" Color="{StaticResource 700_Light_Orange}" />
+	<SolidColorBrush x:Key="SuccessTextBrush" Color="{StaticResource 700_Light_Green}" />
+	<SolidColorBrush x:Key="PrimaryTextBrush" Color="{StaticResource 700_Light_Blue}" />
+	<SolidColorBrush x:Key="AccentTextBrush" Color="{StaticResource 700_Light_Purple}" />
+	
+	<SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Black}" />
+	<SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource 900_Dark_Neutral}" />
+	<SolidColorBrush x:Key="SurfaceBrush2" Color="{StaticResource 800_Dark_Neutral}" />
+	<SolidColorBrush x:Key="SurfaceBrush3" Color="{StaticResource 700_Dark_Neutral}" />
+	<SolidColorBrush x:Key="SurfaceBrush4" Color="{StaticResource 600_Dark_Neutral}" />
+	
+	
+	
+</ResourceDictionary>
