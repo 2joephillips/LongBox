@@ -11,12 +11,14 @@
 					<IconButton Classes="icon-only large accent" IconText="&#xE270;"/>
 					<IconButton Classes="icon-only xlarge" IconText="&#xE270;"/>
 				</StackPanel>
+				<Label Content="Normal Button" Classes="h1"/>
 				<StackPanel Orientation="Horizontal" Spacing="5">
 					<Button Content="Click Me!" Classes="small primary" />
 					<Button Content="Click Me!" />
 					<Button Content="Click Me!" Classes="large" />
 					<Button Content="Click Me!" Classes="xlarge" />
 				</StackPanel>
+				<Label Content="Icon Button"/>
 				<StackPanel Orientation="Horizontal" Spacing="5">
 					<IconButton Content="Click Me!" IconText="&#xE270;"/>
 					<IconButton Classes="small" Content="Click Me!" IconText="&#xE270;"/>
@@ -75,35 +77,10 @@
 	</Style>
 
 	<Style Selector=":is(Button):pointerover /template/ ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource Brand}"/>
+		<Setter Property="Background" Value="{DynamicResource Primary}"/>
 		<Setter Property="Foreground" Value="{DynamicResource Black}"/>
 	</Style>
 
-	<Style Selector=":is(Button).small">
-		<Setter Property="FontSize" Value="14"/>
-	</Style>
-
-	<Style Selector=":is(Button).small /template/ ContentPresenter">
-		<Setter Property="FontSize" Value="14"/>
-	</Style>
-
-	<Style Selector=":is(Button).large">
-		<Setter Property="Height" Value="55"/>
-		<Setter Property="FontSize" Value="22"/>
-	</Style>
-
-	<Style Selector=":is(Button).xlarge">
-		<Setter Property="FontSize" Value="32"/>
-		<Setter Property="Height" Value="65"/>
-	</Style>
-
-	<Style Selector=":is(Button):disabled">
-		<Setter Property="Background" Value="{DynamicResource SurfaceBrush2}"/>
-	</Style>
-
-	<Style Selector=":is(Button):disabled /template/ ContentPresenter">
-		<Setter Property="Foreground" Value="{DynamicResource SurfaceBrush4}"/>
-	</Style>
 
 	<Style Selector=":is(Button).icon-only">
 		<Setter Property="Background" Value="Transparent"/>
@@ -134,8 +111,36 @@
 		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
 	</Style>
 
+
+	<Style Selector=":is(Button).small">
+		<Setter Property="FontSize" Value="14"/>
+	</Style>
+
+	<Style Selector=":is(Button).small /template/ ContentPresenter">
+		<Setter Property="FontSize" Value="14"/>
+	</Style>
+
+	<Style Selector=":is(Button).large">
+		<Setter Property="Height" Value="55"/>
+		<Setter Property="FontSize" Value="22"/>
+	</Style>
+
+	<Style Selector=":is(Button).xlarge">
+		<Setter Property="FontSize" Value="32"/>
+		<Setter Property="Height" Value="65"/>
+	</Style>
+
+	<Style Selector=":is(Button):disabled">
+		<Setter Property="Background" Value="{DynamicResource SurfaceBrush2}"/>
+	</Style>
+
+	<Style Selector=":is(Button):disabled /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="{DynamicResource SurfaceBrush4}"/>
+	</Style>
+
 	<Style Selector=":is(Button):pointerover.nav /template/ ContentPresenter">
 		<Setter Property="Foreground" Value="{DynamicResource White}"/>
 		<Setter Property="RenderTransform" Value="scale(1.1)"/>
 	</Style>
+	
 </Styles>

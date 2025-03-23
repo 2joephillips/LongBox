@@ -4,9 +4,8 @@
 	<Design.PreviewWith>
 		<Border Padding="20">
 			<StackPanel Spacing="20">
-				<IconButton IconText="&#xE270;" Classes="icon-only" Background="Red"/>
+				<IconButton IconText="&#xE270;" Classes="icon-only"/>
 				<IconButton Content="Click Me!" IconText="&#xE270;"/>
-				<IconButton Content="Click Me!"/>
 			</StackPanel>
 		</Border>
 	</Design.PreviewWith>
@@ -29,7 +28,7 @@
 					<ContentPresenter.ContentTemplate>
 						<DataTemplate>
 							<StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-								<Label Content="{Binding $parent[IconButton].IconText}" FontFamily="{DynamicResource IconFont}" VerticalAlignment="Center" Margin="0,3,0,0"/>
+								<Label Content="{Binding $parent[IconButton].IconText}" FontFamily="{DynamicResource IconFont}" VerticalAlignment="Center" Margin="0, 3, 0, 0"/>
 								<ContentPresenter DataContext="{Binding $parent[IconButton].DataContext}" 
 												  Content="{Binding $parent[IconButton].Content}" 
 												  VerticalAlignment="Center"/>
