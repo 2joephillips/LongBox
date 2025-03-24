@@ -3,7 +3,6 @@ using Avalonia.Threading;
 using LongBox.Services;
 using MsBox.Avalonia.Enums;
 using ReactiveUI;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -12,10 +11,14 @@ using MsBox.Avalonia;
 using System.Linq;
 using System.Reactive.Linq;
 using LongBox.Domain;
+using LongBox.Extensions;
+using static LongBox.Extensions.ServiceCollectionExtensions;
+using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 
 namespace LongBox.ViewModels.Pages;
 
-  public class SetUpPageViewModel : ViewModelBase
+public class SetUpPageViewModel : PageViewModel
 {
   private readonly IComicMetadataExtractor _extractor;
   private readonly IApiKeyHandler _apiKeyHandler;
@@ -82,8 +85,11 @@ namespace LongBox.ViewModels.Pages;
   public ICommand ScanFolderCommand { get; }
   public ICommand ShowDetailsCommand { get; }
   public ICommand UpdateCurrentImageCommand { get; }
+  public ICommand OpenReaderCommand { get; }
 
-  public SetUpPageViewModel()
+  public Interaction<ReaderViewModel, ComicViewModel?> ShowReaderDialog { get; }
+
+  public SetUpPageViewModel() : base(ApplicationPageNames.SetUp)
   {
     var folderHandler = new FolderHandler();
     RootFolder = ApplicationSettings.RootFolder ?? folderHandler.FolderNotSelected;
@@ -102,7 +108,7 @@ namespace LongBox.ViewModels.Pages;
 
   }
 
-  public SetUpPageViewModel(IComicMetadataExtractor comicMetadataExtractor, IApiKeyHandler apiKeyHandler, IFolderHandler folderHandler)
+  public SetUpPageViewModel(IComicMetadataExtractor comicMetadataExtractor, IApiKeyHandler apiKeyHandler, IFolderHandler folderHandler, PageFactory pageFactory) : base(ApplicationPageNames.SetUp)
   {
     _extractor = comicMetadataExtractor;
     _apiKeyHandler = apiKeyHandler;
@@ -120,6 +126,17 @@ namespace LongBox.ViewModels.Pages;
     OpenComicVineSiteCommand = ReactiveCommand.Create(_apiKeyHandler.OpenComicVineSite);
     ShowDetailsCommand = ReactiveCommand.CreateFromTask<Comic>(ShowDetails);
     UpdateCurrentImageCommand = ReactiveCommand.CreateFromTask<Comic>(UpdateCurrentImage);
+    ShowReaderDialog = new Interaction<ReaderViewModel, ComicViewModel?>();
+    OpenReaderCommand = ReactiveCommand.CreateFromTask(async () =>
+      {
+        var toplevel = TopLevel.GetTopLevel(new ReaderWindow());
+        var pickedComic = await toplevel?.StorageProvider?.OpenFilePickerAsync(new FilePickerOpenOptions())!;
+        var comicPath = pickedComic.FirstOrDefault()?.TryGetLocalPath() ?? string.Empty;
+        var comic = new Comic(new CBZFile(comicPath), comicMetadataExtractor);
+        var readerViewModel = new ReaderViewModel(comicMetadataExtractor, comic);
+        var comicViewModel = await ShowReaderDialog.Handle(readerViewModel);
+      });
+
 
     if (RootFolder != _folderHandler.FolderNotSelected)
       Dispatcher.UIThread.InvokeAsync(async () => { ScanningProgress = await _folderHandler.ScanFolderResults(RootFolder).ConfigureAwait(false); });
@@ -131,7 +148,7 @@ namespace LongBox.ViewModels.Pages;
   {
 
     Console.WriteLine("Show Details");
-     return Task.CompletedTask;
+    return Task.CompletedTask;
 
   }
 
@@ -229,5 +246,7 @@ namespace LongBox.ViewModels.Pages;
     else
       return $" Total scanned: {zipFiles.Count()} | Unable To open: {zipFiles.Count(s => s.UnableToOpen)} Needs Metadata : {zipFiles.Count(s => s.NeedsMetaData)} ";
   }
+
+
 
 }

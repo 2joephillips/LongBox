@@ -23,7 +23,7 @@
 
 
 	<Border Background="{DynamicResource BackgroundBrush}">
-		<Grid RowDefinitions="75,1*"  ColumnDefinitions="1*, 100" Margin="10">
+			<Grid RowDefinitions="75,1*"  ColumnDefinitions="1*, 100" Margin="10">
 			<StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="50" VerticalAlignment="Center" Margin="0,0">
 				<TextBlock Text="LongBox" 
 						   Padding="10"
