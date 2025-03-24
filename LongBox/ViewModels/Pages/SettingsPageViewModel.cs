@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using LongBox.Extensions;
+using ReactiveUI;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,9 +8,9 @@ namespace LongBox.ViewModels.Pages;
 /// <summary>
 ///  This is our ViewModel for the second page
 /// </summary>
-public class SettingsPageViewModel : ViewModelBase
+public class SettingsPageViewModel : PageViewModel
 {
-  public SettingsPageViewModel()
+  public SettingsPageViewModel(): base(ApplicationPageNames.Settings)
   {
     // Listen to changes of MailAddress and Password and update CanNavigateNext accordingly
     //this.WhenAnyValue(x => x.MailAddress, x => x.Password)

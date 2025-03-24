@@ -2,6 +2,7 @@ using Avalonia.ReactiveUI;
 using ReactiveUI;
 using System.Threading.Tasks;
 using LongBox.ViewModels;
+using Avalonia.Controls;
 
 namespace LongBox.Views;
 
@@ -11,8 +12,10 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
   public MainWindow()
   {
     InitializeComponent();
-    //this.WhenActivated(action =>
-    //     action(ViewModel!.ShowReaderDialog.RegisterHandler(DoShowReaderDialogAsync)));
+    if (Design.IsDesignMode) return;
+
+    this.WhenActivated(action =>
+         action(ViewModel!.ShowReaderDialog.RegisterHandler(DoShowReaderDialogAsync)));
   }
 
   private async Task DoShowReaderDialogAsync(IInteractionContext<ReaderViewModel,

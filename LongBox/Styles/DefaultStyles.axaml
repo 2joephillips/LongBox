@@ -81,6 +81,14 @@
 		<Setter Property="Foreground" Value="{DynamicResource Black}"/>
 	</Style>
 
+	<Style Selector=":is(Button).primary">
+		<Setter Property="Background" Value="{DynamicResource Primary}"/>
+	</Style>
+
+	<Style Selector=":is(Button):pointerover.primary /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource SurfaceBrush2}"/>
+		<Setter Property="Foreground" Value="{DynamicResource Primary}"/>
+	</Style>
 
 	<Style Selector=":is(Button).icon-only">
 		<Setter Property="Background" Value="Transparent"/>

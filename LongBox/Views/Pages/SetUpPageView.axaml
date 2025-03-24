@@ -21,13 +21,17 @@
 	<Grid
         RowDefinitions="Auto, Auto, *">
 		<!--Header-->
-		<TextBlock
-                   VerticalAlignment="Center"
-				   HorizontalAlignment="Center" Classes="h1">
-			<Run Text="LongBox helps to manage your "/>
-			<Run Text="comics " FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom" Classes="primary"/>
-			<Run Text="effortlessly."/>
-		</TextBlock>
+		<StackPanel Orientation="Vertical" Margin="25,0">
+			<TextBlock
+					   VerticalAlignment="Center"
+					   HorizontalAlignment="Left" Classes="h1">
+				<Run Text="LongBox helps to manage your "/>
+				<Run Text="comics " FontFamily="{DynamicResource ComicFont}" FontSize="52"  BaselineAlignment="Bottom" Classes="primary"/>
+				<Run Text="effortlessly."/>
+			</TextBlock>
+			<TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Classes="h2">Lets configure LongBox below, or skip to just reading your favorite Comic.</TextBlock>
+			<Button HorizontalAlignment="Right" Content="Read Now" Command="{Binding OpenReaderCommand}" Classes="primary"/>
+		</StackPanel>
 
 		<!--Configuration -->
 		<Border Grid.Row="1"
@@ -84,8 +88,8 @@
 
 						<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Orientation="Horizontal">
 							<TextBlock VerticalAlignment="Center"  Classes="label" HorizontalAlignment="Left">ComicVine Api:</TextBlock>
-							<IconButton IconText="&#xE3E8;" 
-							            Classes="icon-only" 
+							<IconButton IconText="&#xE3E8;"
+							            Classes="icon-only"
 							            Command="{Binding OpenComicVineSiteCommand}" FontSize="10" ToolTip.Tip="Click for more info"/>
 						</StackPanel>
 
@@ -137,18 +141,15 @@
 							CornerRadius="10"
 							ClipToBounds="True"
 							Grid.Column="2">
-							<StackPanel Orientation="">
-								<ProgressBar
-								VerticalAlignment="Stretch"
-								HorizontalAlignment="Stretch"
-								Minimum="0"
-								CornerRadius="20"
-								Maximum="{Binding ScanningProgress.Total}"
-								Value="{Binding ScanningProgress.Current}"
-								IsVisible="{Binding ScanningProgress.InProgress}"
-								ShowProgressText="True"/>
-							</StackPanel>
-							
+							<ProgressBar
+							VerticalAlignment="Stretch"
+							HorizontalAlignment="Stretch"
+							Minimum="0"
+							CornerRadius="20"
+							Maximum="{Binding ScanningProgress.Total}"
+							Value="{Binding ScanningProgress.Current}"
+							IsVisible="{Binding ScanningProgress.InProgress}"
+							ShowProgressText="True"/>
 						</Border>
 					</Grid>
 

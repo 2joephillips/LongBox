@@ -1,12 +1,17 @@
-﻿using System;
+﻿using LongBox.Extensions;
+using System;
 
 namespace LongBox.ViewModels.Pages;
 
 /// <summary>
 ///  This is our ViewModel for the first page
 /// </summary>
-public class HomePageViewModel : ViewModelBase
+public class HomePageViewModel : PageViewModel
 {
+  protected HomePageViewModel() : base(ApplicationPageNames.Home)
+  {
+  }
+
   /// <summary>
   /// The Title of this page
   /// </summary>
