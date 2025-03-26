@@ -18,41 +18,31 @@
 	</Design.DataContext>
 
 	<Window.Styles>
-		<Style Selector=":pointerover > Grid > StackPanel > Button">
+		<Style Selector="Grid:pointerover > StackPanel > Button">
 			<Setter Property="IsVisible" Value="True" />
 		</Style>
 		<Style Selector="Grid > StackPanel > Button">
 			<Setter Property="IsVisible" Value="False" />
 		</Style>
 	</Window.Styles>
-	<Grid RowDefinitions="*,100">
-		<Image Stretch="Uniform"
-			   VerticalAlignment="Center"
+	<Grid RowDefinitions="1*" Background="Beige">
+		<Image VerticalAlignment="Center"
 			   HorizontalAlignment="Center"
-			   Source="{Binding SourceImage}"/>
-		<StackPanel Grid.Row="1"
-					Orientation="Horizontal"
+			   Source="{Binding CurrentImage}"/>
+		<StackPanel Orientation="Horizontal"
+					VerticalAlignment="Bottom"
 					HorizontalAlignment="Center"
-					Background="Transparent"
-					Width="750"
-					Height="100" 
-					Spacing="10">
+					ZIndex="1">
 			<Button Name="PrevButton"
 					Content="Previous"
 					Width="100"
-					Height="40"
-					Margin="10" />
+					Margin="10"
+					Command="{Binding PreviousPage}"/>
 			<Button Name="NextButton"
 					Content="Next"
 					Width="100"
-					Height="40"
-					Margin="10" />
-			<Button Name="CloseButton"
-					Content="Close"
-					Width="100"
-					Height="40"
-					Margin="10" 
-					Command="{Binding CloseComicCommand}"/>
+					Margin="10"
+					Command="{Binding NextPage}"/>
 		</StackPanel>
 	</Grid>
 </Window>

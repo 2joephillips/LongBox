@@ -5,6 +5,7 @@ using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System;
+using System.IO;
 using System.IO.Compression;
 
 
@@ -66,9 +67,14 @@ public static class ImageHandler
     thumbnail.Dispose();
 
   }
-  public static Image<Rgba32> GetImageFromZipArchiveEntry(ZipArchiveEntry entry)
+  public static Bitmap GetBitmapFromZipArchiveEntry(ZipArchiveEntry entry)
   {
+    using var memoryStream = new MemoryStream();
     using var entryStream = entry.Open();
-    return Image.Load<Rgba32>(entryStream); // Load the image into memory
+    var image = Image.Load<Rgba32>(entryStream); // Load the image into memory
+    image.SaveAsBmp(memoryStream);
+    memoryStream.Seek(0, SeekOrigin.Begin);
+    return new Bitmap(memoryStream);
   }
 }
+
