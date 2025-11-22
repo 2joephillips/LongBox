@@ -1,4 +1,5 @@
 using System.Numerics;
+using LiteDB;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,21 @@ var databasePath = builder.Configuration.GetValue<string>("DatabasePath");
 
 Console.WriteLine($"Using comics path: {comicsPath}");
 Console.WriteLine($"Using database path: {databasePath}");
+
+builder.Services.AddSingleton(sp =>
+{
+
+    // Ensure folder exists
+    var filePath = databasePath ?? "data/db/litedb.db";
+    if (!Directory.Exists(filePath))
+        Directory.CreateDirectory(filePath);
+
+    return new LiteDatabase(new ConnectionString
+    {
+        Filename = filePath,
+        Connection = ConnectionType.Shared   // <– important
+    });
+});
 
 var app = builder.Build();
 
