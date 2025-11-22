@@ -11,7 +11,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
     volumes:
-      - ./local-data:/app/data
+      - 'D:/Comics:/app/data'
     networks:
       - app-network
 
