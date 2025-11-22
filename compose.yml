@@ -10,9 +10,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
-    #volumes:
-    # Mount local folder to container - change these paths as needed
-    #- ./local-data:/app/data
+    volumes:
+      - ./local-data:/app/data
     networks:
       - app-network
 
