@@ -3,7 +3,27 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": ".NET Backend",
+      "name": ".NET Backend (Local)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/backend/bin/Debug/net8.0/longbox.backend.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/backend",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Local"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "name": ".NET Backend (Docker)",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
@@ -66,7 +86,7 @@
   "compounds": [
     {
       "name": "Full Stack (Local)",
-      "configurations": [".NET Backend", "Svelte Frontend"],
+      "configurations": [".NET Backend (Docker)", "Svelte Frontend"],
       "stopAll": true,
       "presentation": {
         "hidden": false,
@@ -76,7 +96,11 @@
     },
     {
       "name": "Full Stack + Browser",
-      "configurations": [".NET Backend", "Svelte Frontend", "Chrome: Svelte"],
+      "configurations": [
+        ".NET Backend (Docker)",
+        "Svelte Frontend",
+        "Chrome: Svelte"
+      ],
       "stopAll": true,
       "presentation": {
         "hidden": false,

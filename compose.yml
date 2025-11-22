@@ -12,6 +12,7 @@ services:
       - ASPNETCORE_URLS=http://+:8080
     volumes:
       - 'D:/Comics:/app/data'
+      - 'D:/Comics/db:/app/data/db'
     networks:
       - app-network
 
