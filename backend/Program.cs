@@ -1,3 +1,5 @@
+using System.Numerics;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -9,16 +11,12 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
                      .AddEnvironmentVariables();
 
 // get filepath from configuration
-var filePath = builder.Configuration.GetValue<string>("FilePath");
-Console.WriteLine($"Using file path: {filePath}");
-if (Directory.Exists(filePath))
-{
-    Console.WriteLine("Directory exists.");
-}
-else
-{
-    Console.WriteLine("Directory does not exist.");
-}
+var comicsPath = builder.Configuration.GetValue<string>("ComicsPath");
+var databasePath = builder.Configuration.GetValue<string>("DatabasePath");
+
+Console.WriteLine($"Using comics path: {comicsPath}");
+Console.WriteLine($"Using database path: {databasePath}");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
