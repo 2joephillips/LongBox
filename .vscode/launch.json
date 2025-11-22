@@ -1,0 +1,88 @@
+// Root .vscode/launch.json (for debugging both projects)
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Backend",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/backend/bin/Debug/net8.0/longbox.backend.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/backend",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "name": "Svelte Frontend",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}/frontend",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "serverReadyAction": {
+        "pattern": "Local:.*(https?://[^\\s]+)",
+        "uriFormat": "%s",
+        "action": "openExternally"
+      }
+    },
+    {
+      "name": "Chrome: Svelte",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "sourceMapPathOverrides": {
+        "/./*": "${webRoot}/*"
+      }
+    },
+    {
+      "name": "Docker: Attach to Backend",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickRemoteProcess}",
+      "pipeTransport": {
+        "pipeProgram": "docker",
+        "pipeArgs": ["exec", "-i", "your-project-backend-1"],
+        "debuggerPath": "/vsdbg/vsdbg",
+        "pipeCwd": "${workspaceFolder}"
+      },
+      "sourceFileMap": {
+        "/app": "${workspaceFolder}/backend"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack (Local)",
+      "configurations": [".NET Backend", "Svelte Frontend"],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "local",
+        "order": 1
+      }
+    },
+    {
+      "name": "Full Stack + Browser",
+      "configurations": [".NET Backend", "Svelte Frontend", "Chrome: Svelte"],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "local",
+        "order": 2
+      }
+    }
+  ]
+}
