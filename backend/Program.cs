@@ -1,5 +1,14 @@
 using System.Numerics;
+using System.IO;
 using LiteDB;
+using Serilog;
+using Serilog.Events;
+using Serilog.Templates;
+using Serilog.Templates.Themes;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +24,11 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 var comicsPath = builder.Configuration.GetValue<string>("ComicsPath");
 var databasePath = builder.Configuration.GetValue<string>("DatabasePath");
 
-Console.WriteLine($"Using comics path: {comicsPath}");
-Console.WriteLine($"Using database path: {databasePath}");
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
+Log.Information("Comics path: {ComicsPath}", comicsPath);
+Log.Information("Database path: {DatabasePath}", databasePath);
 
 builder.Services.AddSingleton(sp =>
 {
@@ -33,17 +45,20 @@ builder.Services.AddSingleton(sp =>
     });
 });
 
+builder.Services.Configure<WatcherOptions>(builder.Configuration.GetSection("Watcher"));
+builder.Services.AddSingleton<FileEventChannel>();
+builder.Services.AddSingleton<FileWatcher>();
+builder.Services.AddMemoryCache();
+builder.Services.AddHostedService<FileWatcherService>();
+builder.Services.AddTransient<IFileProcessor, ComicFileProcessor>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
-
+app.UseSerilogRequestLogging();
 
 app.Run();
-
